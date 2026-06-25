@@ -1,0 +1,9 @@
+[build]
+builder = "RAILPACK"
+
+[deploy]
+preDeployCommand = ["POSTGRES_STATEMENT_TIMEOUT=600s bundle exec rails db:chatwoot_prepare"]
+startCommand = "bundle exec rails ip_lookup:setup && bin/rails server -p $PORT -e $RAILS_ENV"
+healthcheckPath = "/"
+healthcheckTimeout = 300
+restartPolicyType = "ON_FAILURE"
