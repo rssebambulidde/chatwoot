@@ -11,6 +11,7 @@ import App from '../v3/App.vue';
 import router, { initalizeRouter } from '../v3/views/index';
 import store from '../v3/store';
 import FluentIcon from 'shared/components/FluentIcon/DashboardIcon.vue';
+import { applyBrandingToI18n } from 'shared/helpers/i18nBranding';
 // import { emitter } from '../shared/helpers/mitt';
 
 // [VITE] This was added in https://github.com/chatwoot/chatwoot/commit/b57063a8b83c86819bd285f481298d7cd38ad50e
@@ -22,6 +23,8 @@ const i18n = createI18n({
   locale: 'en',
   messages: i18nMessages,
 });
+
+applyBrandingToI18n(i18n);
 
 const app = createApp(App);
 app.use(i18n);

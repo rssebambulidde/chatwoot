@@ -30,6 +30,7 @@ import { domPurifyConfig } from 'shared/helpers/HTMLSanitizer.js';
 
 import { vResizeObserver } from '@vueuse/components';
 import { directive as onClickaway } from 'vue3-click-away';
+import { applyBrandingToI18n } from 'shared/helpers/i18nBranding';
 
 import 'floating-vue/dist/style.css';
 
@@ -38,6 +39,8 @@ const i18n = createI18n({
   locale: 'en',
   messages: i18nMessages,
 });
+
+applyBrandingToI18n(i18n);
 
 sync(store, router);
 

@@ -15,12 +15,15 @@ import {
   startsWithPlus,
   isPhoneNumberValidWithDialCode,
 } from 'shared/helpers/Validators';
+import { applyBrandingToI18n } from 'shared/helpers/i18nBranding';
 
 const i18n = createI18n({
   legacy: false, // https://github.com/intlify/vue-i18n/issues/1902
   locale: 'en',
   messages: i18nMessages,
 });
+
+applyBrandingToI18n(i18n);
 
 const app = createApp(App);
 app.use(i18n);

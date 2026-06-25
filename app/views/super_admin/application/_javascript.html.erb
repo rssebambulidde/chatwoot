@@ -25,6 +25,7 @@ window.chatwootSettings = {
   hideMessageBubble: true,
 };
 
+<% unless custom_branded_instance? %>
 (function(d,t) {
   var BASE_URL = '';
   var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
@@ -47,4 +48,5 @@ window.addEventListener('chatwoot:ready', function() {
   });
 })
 
+<% end %>
 </script>

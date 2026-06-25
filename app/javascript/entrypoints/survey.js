@@ -5,12 +5,15 @@ import store from '../survey/store';
 import i18nMessages from '../survey/i18n';
 import App from '../survey/App.vue';
 import { domPurifyConfig } from '../shared/helpers/HTMLSanitizer';
+import { applyBrandingToI18n } from 'shared/helpers/i18nBranding';
 
 const app = createApp(App);
 const i18n = createI18n({
   locale: 'en',
   messages: i18nMessages,
 });
+
+applyBrandingToI18n(i18n);
 
 app.use(i18n);
 app.use(store);
