@@ -48,6 +48,20 @@ Rails.application.configure do
   # You can use letter opener for your local development by setting the environment variable
   config.action_mailer.delivery_method = :letter_opener if Rails.env.development? && ENV['LETTER_OPENER']
 
+  # Re-apply after full boot so Railway-injected env vars are visible to Sidekiq workers.
+  config.after_initialize do
+    next if Rails.env.test?
+    next if Rails.env.development? && ENV['LETTER_OPENER'].present?
+
+    if ENV['BREVO_API_KEY'].present?
+      ActionMailer::Base.delivery_method = :brevo_api
+      ActionMailer::Base.brevo_api_settings = { api_key: ENV['BREVO_API_KEY'] }
+      Rails.logger.info '[Mailer] Using Brevo API delivery'
+    else
+      Rails.logger.warn "[Mailer] BREVO_API_KEY missing; using #{ActionMailer::Base.delivery_method}"
+    end
+  end
+
   #########################################
   # Configuration Related to Action MailBox
   #########################################
