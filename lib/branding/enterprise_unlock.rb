@@ -42,8 +42,10 @@ module Branding
       return if ChatwootApp.chatwoot_cloud?
 
       set_installation_plan!
+      enable_saas_mode!
       enable_features_on_all_accounts!
       clear_premium_warning!
+      GlobalConfig.clear_cache
     end
 
     def set_installation_plan!
@@ -51,11 +53,21 @@ module Branding
       upsert_config('INSTALLATION_PRICING_PLAN_QUANTITY', PLAN_QUANTITY)
     end
 
+    def enable_saas_mode!
+      upsert_config('ENABLE_ACCOUNT_SIGNUP', true)
+      upsert_config('CREATE_NEW_ACCOUNT_FROM_DASHBOARD', false)
+    end
+
     def enable_features_on_all_accounts!
-      Account.find_each do |account|
-        account.enable_features!(*ENTERPRISE_FEATURES)
-        account.save!
-      end
+      Account.find_each { |account| enable_features_for_account!(account) }
+    end
+
+    def enable_features_for_account!(account)
+      return unless ChatwootApp.enterprise?
+      return if ChatwootApp.chatwoot_cloud?
+
+      account.enable_features!(*ENTERPRISE_FEATURES)
+      account.save!
     end
 
     def clear_premium_warning!

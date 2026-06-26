@@ -8,6 +8,8 @@ class AccountBuilder
     if @user.nil?
       validate_email
       validate_user
+    else
+      validate_existing_user_account_limit
     end
     ActiveRecord::Base.transaction do
       @account = create_account
@@ -41,6 +43,12 @@ class AccountBuilder
     else
       true
     end
+  end
+
+  def validate_existing_user_account_limit
+    return unless @user.accounts.exists?
+
+    raise UserExists.new(email: @user.email)
   end
 
   def create_account

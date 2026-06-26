@@ -12,5 +12,6 @@ namespace :branding do
 
     Branding::EnterpriseUnlock.apply!
     puts 'Enterprise features unlocked for self-hosted install.' if ChatwootApp.enterprise? && !ChatwootApp.chatwoot_cloud?
+    puts 'SaaS signup enabled — one workspace per client at /app/auth/signup; agents invited from Settings → Agents.'
   end
 end
