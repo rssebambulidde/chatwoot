@@ -3,7 +3,8 @@ builder = "RAILPACK"
 
 [deploy]
 preDeployCommand = ["POSTGRES_STATEMENT_TIMEOUT=600s bundle exec rails db:chatwoot_prepare && bundle exec rails branding:apply"]
-startCommand = "POSTGRES_STATEMENT_TIMEOUT=600s bundle exec rails db:chatwoot_prepare && bundle exec rails branding:apply && bundle exec rails ip_lookup:setup && bin/rails server -p $PORT -e $RAILS_ENV"
+# sidekiq service: set health check path to empty in Railway service settings
+startCommand = "POSTGRES_STATEMENT_TIMEOUT=600s bundle exec rails ip_lookup:setup && if [ \"$RAILWAY_SERVICE_NAME\" = \"sidekiq\" ] || [ \"$RAILWAY_SERVICE_NAME\" = \"converra-worker\" ]; then bundle exec sidekiq -C config/sidekiq.yml; else bundle exec rails db:chatwoot_prepare && bundle exec rails branding:apply && bundle exec rails ip_lookup:setup && bin/rails server -p $PORT -e $RAILS_ENV; fi"
 healthcheckPath = "/health"
 healthcheckTimeout = 300
 restartPolicyType = "ON_FAILURE"
