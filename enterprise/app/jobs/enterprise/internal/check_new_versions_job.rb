@@ -8,6 +8,7 @@ module Enterprise::Internal::CheckNewVersionsJob
   private
 
   def update_plan_info
+    return unless ChatwootApp.chatwoot_cloud?
     return if @instance_info.blank?
 
     update_installation_config(key: 'INSTALLATION_PRICING_PLAN', value: @instance_info['plan'])
