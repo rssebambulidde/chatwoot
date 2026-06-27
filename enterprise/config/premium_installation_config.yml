@@ -8,15 +8,15 @@
 - name: LOGO_DARK
   value: '/brand-assets/logo_dark.png'
 - name: BRAND_URL
-  value: 'https://converra.com'
+  value: 'https://converra.samabrains.com'
 - name: WIDGET_BRAND_URL
-  value: 'https://converra.com'
+  value: 'https://converra.samabrains.com'
 - name: BRAND_NAME
   value: 'Converra'
 - name: TERMS_URL
-  value: 'https://converra.com/terms'
+  value: 'https://converra.samabrains.com/terms'
 - name: PRIVACY_URL
-  value: 'https://converra.com/privacy'
+  value: 'https://converra.samabrains.com/privacy'
 - name: DISPLAY_MANIFEST
   value: false
 # ------- End of Branding Related Config ------- #
