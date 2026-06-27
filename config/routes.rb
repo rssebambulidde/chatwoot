@@ -39,6 +39,9 @@ Rails.application.routes.draw do
   end
 
   get '/health', to: 'health#show'
+  get '/privacy', to: 'legal#privacy'
+  get '/privacy-policy', to: redirect('/privacy')
+  get '/terms', to: 'legal#terms'
   get '/api', to: 'api#index'
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
