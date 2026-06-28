@@ -92,4 +92,11 @@ class Instagram::BaseSendService < Base::SendOnChannelService
   def merge_human_agent_tag(params)
     raise NotImplementedError, 'Subclasses must implement merge_human_agent_tag'
   end
+
+  def outside_standard_messaging_window?
+    last_incoming = conversation.messages.incoming.last
+    return false if last_incoming.nil?
+
+    Time.current >= last_incoming.created_at + 24.hours
+  end
 end
