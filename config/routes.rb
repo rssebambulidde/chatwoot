@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   end
 
   get '/health', to: 'health#show'
+  get '/about', to: 'legal#about'
   get '/privacy', to: 'legal#privacy'
   get '/privacy-policy', to: redirect('/privacy')
   get '/terms', to: 'legal#terms'

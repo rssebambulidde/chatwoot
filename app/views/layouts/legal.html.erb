@@ -4,6 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><%= content_for?(:title) ? yield(:title) : installation_brand_name %></title>
+    <% if content_for?(:meta_description) %>
+      <meta name="description" content="<%= yield(:meta_description).squish %>">
+    <% end %>
     <style>
       *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
       body {
@@ -54,7 +57,7 @@
   </head>
   <body>
     <header class="header">
-      <a href="/app/login">
+      <a href="/about">
         <img src="<%= installation_logo_url %>" alt="<%= installation_brand_name %>">
       </a>
     </header>

@@ -1,0 +1,69 @@
+<% content_for :title do %>About | <%= installation_brand_name %><% end %>
+<% content_for :meta_description do %>
+  <%= installation_brand_name %> is a customer support platform by SamaBrains Solutions. Connect Gmail, social messaging,
+  and website chat so your team can manage customer conversations in one workspace.
+<% end %>
+
+<h1>About <%= installation_brand_name %></h1>
+<p class="updated">Customer support platform by <strong>SamaBrains Solutions</strong></p>
+
+<p>
+  <strong><%= installation_brand_name %></strong> is a cloud-based customer support and shared inbox platform.
+  Businesses use it to read and reply to customer messages from connected channels in a single workspace,
+  assign conversations to agents, and deliver faster, more organized support.
+</p>
+
+<h2>Who it is for</h2>
+<p>
+  <%= installation_brand_name %> is built for <strong>businesses and their support teams</strong>—not for individual
+  consumers signing up for personal use. Workspace owners connect their communication channels; agents and
+  administrators collaborate inside the product to respond to customers.
+</p>
+
+<h2>What you can do</h2>
+<ul>
+  <li>Manage customer conversations from one dashboard</li>
+  <li>Connect <strong>Gmail</strong> inboxes to receive and send support email</li>
+  <li>Connect <strong>Facebook Messenger</strong> and <strong>Instagram</strong> direct messages</li>
+  <li>Embed <strong>live chat</strong> on your website</li>
+  <li>Assign conversations to team members and track response activity</li>
+  <li>Use help center and automation features where enabled on your plan</li>
+</ul>
+
+<h2>How Gmail and Google sign-in work</h2>
+<p>
+  When you choose to connect a <strong>Gmail inbox</strong>, <%= installation_brand_name %> requests access through
+  Google OAuth so agents can read incoming support mail and send replies on your behalf. We use Gmail access only
+  for the inbox you connect—not for advertising or unrelated purposes. You can revoke access at any time in your
+  <a href="https://myaccount.google.com/permissions" rel="noopener noreferrer">Google Account permissions</a>.
+</p>
+<p>
+  Optional <strong>Sign in with Google</strong> lets workspace users authenticate with their Google account instead
+  of a password, using standard email and profile scopes only.
+</p>
+
+<h2>Data and privacy</h2>
+<p>
+  Conversation data stays within your workspace. We process information as described in our
+  <a href="/privacy">Privacy Policy</a>. Third-party channels (Google, Meta, and others) process data under their
+  own policies when you enable those integrations.
+</p>
+
+<h2>Get started</h2>
+<p>
+  Existing users can <a href="/app/login">sign in</a>. New organizations can
+  <a href="/app/auth/signup">create a workspace</a> if signup is enabled on this installation.
+</p>
+
+<h2>Contact</h2>
+<p>
+  <strong>SamaBrains Solutions</strong><br>
+  Email: <a href="mailto:info@samabrains.com">info@samabrains.com</a><br>
+  Website: <a href="<%= legal_site_url %>"><%= legal_site_url.sub(%r{^https?://}, '') %></a>
+</p>
+
+<div class="footer">
+  <a href="/privacy">Privacy Policy</a>
+  <a href="/terms">Terms of Service</a>
+  <a href="/app/login">Sign in</a>
+</div>

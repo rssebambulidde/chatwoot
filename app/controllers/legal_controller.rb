@@ -3,6 +3,8 @@ class LegalController < ApplicationController
 
   helper_method :legal_site_url
 
+  def about; end
+
   def privacy; end
 
   def terms; end
