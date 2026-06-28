@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   if ActiveModel::Type::Boolean.new.cast(ENV.fetch('CW_API_ONLY_SERVER', false))
     root to: 'api#index'
   else
-    root to: 'legal#about'
+    root to: 'legal#home'
 
     get '/app', to: 'dashboard#index'
     get '/app/*params', to: 'dashboard#index'
@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   end
 
   get '/health', to: 'health#show'
-  get '/about', to: 'legal#about'
+  get '/about', to: redirect('/', status: 301)
   get '/privacy', to: 'legal#privacy'
   get '/privacy-policy', to: redirect('/privacy')
   get '/terms', to: 'legal#terms'

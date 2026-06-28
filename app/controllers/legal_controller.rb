@@ -3,7 +3,11 @@ class LegalController < ApplicationController
 
   helper_method :legal_site_url
 
-  def about; end
+  def home; end
+
+  def about
+    redirect_to '/', status: :moved_permanently
+  end
 
   def privacy; end
 

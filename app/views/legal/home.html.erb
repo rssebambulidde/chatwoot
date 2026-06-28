@@ -1,0 +1,89 @@
+<% content_for :title do %><%= installation_brand_name %> — Customer Support Platform<% end %>
+<% content_for :meta_description do %>
+  <%= installation_brand_name %> is a business customer support application by SamaBrains Solutions. Teams connect Gmail,
+  social messaging, and website chat to manage customer conversations in one workspace.
+<% end %>
+
+<section class="hero">
+  <p class="eyebrow">Customer support application</p>
+  <h1><%= installation_brand_name %></h1>
+  <p class="lead">
+    <strong><%= installation_brand_name %></strong> is a software application that helps businesses and support teams
+    manage customer conversations from email, live chat, and social messaging channels in one shared workspace.
+  </p>
+</section>
+
+<section>
+  <h2>What this application does</h2>
+  <p>
+    <%= installation_brand_name %> lets organizations connect communication channels—such as
+    <strong>Gmail</strong>, <strong>Facebook Messenger</strong>, <strong>Instagram</strong>, and
+    <strong>website chat</strong>—so agents can read incoming customer messages, assign conversations,
+    collaborate with teammates, and send replies without switching between tools.
+  </p>
+  <p>
+    This application is intended for <strong>businesses and their authorized staff</strong>. It is not a consumer
+    social network or personal email client.
+  </p>
+</section>
+
+<section>
+  <h2>How <%= installation_brand_name %> uses Google user data</h2>
+  <p>
+    When a workspace administrator chooses to connect a <strong>Gmail inbox</strong>, <%= installation_brand_name %>
+    requests permission through Google OAuth to access that mailbox so agents can:
+  </p>
+  <ul>
+    <li>Read incoming customer support emails through the connected Gmail inbox</li>
+    <li>Send email replies to customers on behalf of the connected inbox</li>
+    <li>Display message content inside the <%= installation_brand_name %> workspace for support workflows</li>
+  </ul>
+  <p>
+    We use Google user data <strong>only</strong> to provide these inbox features for the account that authorized
+    access. We do not use Gmail data for advertising, sell it to third parties, or use it for purposes unrelated to
+    customer support. Users can revoke <%= installation_brand_name %>'s access at any time in
+    <a href="https://myaccount.google.com/permissions" rel="noopener noreferrer">Google Account permissions</a>.
+  </p>
+  <p>
+  Optional <strong>Sign in with Google</strong> uses Google only to authenticate workspace users (email and basic
+  profile). It does not grant mailbox access unless the user separately connects a Gmail inbox.
+  </p>
+</section>
+
+<section>
+  <h2>Key features</h2>
+  <ul>
+    <li>Unified inbox for customer conversations across channels</li>
+    <li>Team assignment, notes, and conversation history</li>
+    <li>Gmail inbox connection for inbound and outbound support email</li>
+    <li>Social messaging integrations (e.g. Messenger, Instagram) where enabled</li>
+    <li>Embeddable website chat widget for your visitors</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Privacy and terms</h2>
+  <p>
+    We describe how we collect, use, and protect data in our
+    <a href="<%= "#{legal_site_url}/privacy" %>">Privacy Policy</a>
+    and <a href="<%= "#{legal_site_url}/terms" %>">Terms of Service</a>.
+    The privacy policy URL configured for this application matches the link on this page.
+  </p>
+</section>
+
+<section>
+  <h2>Get started</h2>
+  <p>
+    <a href="/app/login">Sign in</a> to an existing workspace or
+    <a href="/app/auth/signup">create a new workspace</a> if registration is enabled on this installation.
+  </p>
+</section>
+
+<section>
+  <h2>Contact</h2>
+  <p>
+    <strong>SamaBrains Solutions</strong> (operator of <%= installation_brand_name %>)<br>
+    Email: <a href="mailto:info@samabrains.com">info@samabrains.com</a><br>
+    Website: <a href="<%= legal_site_url %>"><%= legal_site_url.sub(%r{^https?://}, '') %></a>
+  </p>
+</section>
