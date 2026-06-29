@@ -1,0 +1,87 @@
+<% content_for :title do %>Captain AI | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>
+  Set up Captain assistants, documents, FAQs, and Copilot in <%= installation_brand_name %> for AI-assisted customer support.
+<% end %>
+
+<h1>Captain AI</h1>
+<p class="lead">
+  Captain helps your team answer customers faster using AI trained on your documents and conversation history.
+  Admins configure Captain; agents use <strong>Copilot</strong> inside conversations.
+</p>
+
+<h2>Is Captain available?</h2>
+<p>
+  Captain may not appear on every installation or plan. If you do not see <strong>Captain</strong> in the left sidebar,
+  contact your workspace operator or upgrade if Captain is limited to paid tiers on your host.
+</p>
+
+<h2>Captain vs Copilot vs bots</h2>
+<ul>
+  <li><strong>Captain</strong> — AI layer with assistants, documents, FAQs, and scenarios (admin-managed)</li>
+  <li><strong>Copilot</strong> — sidebar inside a conversation that drafts replies for agents to review and send</li>
+  <li><strong>Agent bots</strong> — webhook integrations under <strong>Settings → Bots</strong> that POST events to your own server (separate from Captain)</li>
+</ul>
+
+<h2>Admin setup overview</h2>
+<ol>
+  <li>Open <strong>Captain</strong> in the sidebar.</li>
+  <li>Create or select an <strong>assistant</strong> for your workspace.</li>
+  <li>Add <strong>Documents</strong> (help articles, PDFs, URLs) the assistant can learn from.</li>
+  <li>Review <strong>FAQs</strong> Captain suggests from past conversations; approve useful ones.</li>
+  <li>Attach the assistant to inboxes under <strong>Captain → Inboxes</strong>.</li>
+  <li>Test in <strong>Playground</strong> before going live with customers.</li>
+</ol>
+
+<h2>Documents</h2>
+<p>
+  Documents are your knowledge source. Connect your help center, upload files, or add URLs Captain should use when answering.
+  Better documents produce better suggestions. Keep content up to date when products or policies change.
+</p>
+
+<h2>FAQs (responses)</h2>
+<p>
+  Captain can surface frequently asked questions from real conversations.
+  Admins review pending FAQs and approve or reject them so only accurate answers are used.
+</p>
+
+<h2>Scenarios and guidelines</h2>
+<p>
+  Under <strong>Captain → Settings</strong> you can define guidelines and guardrails: tone, topics to avoid,
+  when to hand off to a human, and scenario-specific behavior. Use these to keep replies on-brand and safe.
+</p>
+
+<h2>Tools (if enabled)</h2>
+<p>
+  Captain Tools let the assistant call approved actions (for example looking up order status) during a conversation.
+  Availability depends on your plan and installation configuration.
+</p>
+
+<h2>Using Copilot as an agent</h2>
+<ol>
+  <li>Open a customer conversation.</li>
+  <li>Open the <strong>Copilot</strong> panel in the sidebar.</li>
+  <li>Ask for a draft reply or summary based on the thread.</li>
+  <li><strong>Always review</strong> the suggestion before sending — edit or discard as needed.</li>
+</ol>
+<p>
+  Copilot assists agents; it does not replace human judgment for sensitive, legal, or high-stakes cases.
+</p>
+
+<h2>Captain credits and limits</h2>
+<p>
+  Some hosts meter Captain usage (responses, documents, or credits). If you see limit warnings in the app,
+  reduce automated usage, upgrade your plan, or contact your operator.
+</p>
+
+<h2>Best practices</h2>
+<ul>
+  <li>Start with one inbox and a small document set, then expand</li>
+  <li>Approve FAQs only when answers are verified</li>
+  <li>Set clear handoff rules for billing, refunds, and complaints</li>
+  <li>Re-test in Playground after changing documents or guidelines</li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Related:</strong> <a href="<%= guide_page_path('agents') %>">For agents</a> ·
+  <a href="<%= guide_page_path('admin') %>">For admins</a></p>
+</div>

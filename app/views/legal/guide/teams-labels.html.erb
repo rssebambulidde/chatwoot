@@ -1,0 +1,65 @@
+<% content_for :title do %>Teams & labels | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Teams, labels, and custom attributes in <%= installation_brand_name %> for routing and organizing support work.<% end %>
+
+<h1>Teams & labels</h1>
+<p class="lead">
+  <strong>Teams</strong> group agents for assignment and reporting.
+  <strong>Labels</strong> tag conversations (and contacts) for filtering and automation.
+  <strong>Custom attributes</strong> add structured data fields.
+</p>
+
+<h2>Teams</h2>
+<h3>Create a team</h3>
+<ol>
+  <li><strong>Settings → Teams → Create team</strong></li>
+  <li>Name the team (e.g. Billing, Technical, Sales)</li>
+  <li>Add agents as members</li>
+</ol>
+<h3>Use teams</h3>
+<ul>
+  <li>Assign conversations to a team from the conversation header</li>
+  <li>Filter sidebar under <strong>Conversations → Teams</strong></li>
+  <li>Automations can route by team — see <a href="<%= guide_page_path('automations-bots') %>">Automations</a></li>
+  <li>Team reports under <strong>Reports → Team</strong></li>
+</ul>
+
+<h2>Labels</h2>
+<h3>Conversation labels</h3>
+<ol>
+  <li><strong>Settings → Labels → Add label</strong></li>
+  <li>Set name and color</li>
+  <li>Agents apply labels in conversations; filter via sidebar <strong>Labels</strong></li>
+</ol>
+<h3>Contact labels</h3>
+<p>Apply from contact profile for segmentation. Filter contacts via <strong>Tagged with</strong>.</p>
+<h3>Labels in automation</h3>
+<p>Automations and macros can add/remove labels automatically (e.g. “urgent” on keyword match).</p>
+
+<h2>Custom attributes</h2>
+<p><strong>Settings → Custom attributes</strong></p>
+<ul>
+  <li><strong>Contact</strong> — plan tier, account ID, country</li>
+  <li><strong>Company</strong> — industry, ARR, contract date</li>
+  <li><strong>Conversation</strong> — ticket type, order number</li>
+</ul>
+<p>Types include text, number, list, date, checkbox, and link. Attributes appear in sidebar and are usable in automation conditions.</p>
+
+<h2>Custom views (folders & segments)</h2>
+<ul>
+  <li><strong>Conversation folders</strong> — saved filters in Conversations sidebar</li>
+  <li><strong>Contact segments</strong> — saved contact filters</li>
+</ul>
+<p>Create from the respective list pages when filters are applied.</p>
+
+<h2>Best practices</h2>
+<ul>
+  <li>Keep label names short and consistent; document meanings for agents</li>
+  <li>Align teams with real org structure or skill groups</li>
+  <li>Use custom attributes for data you report on — not free-text notes</li>
+  <li>Avoid too many labels; start with 5–10 core categories</li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Related:</strong> <a href="<%= guide_page_path('conversations') %>">Conversations</a> ·
+  <a href="<%= guide_page_path('contacts-companies') %>">Contacts & companies</a></p>
+</div>

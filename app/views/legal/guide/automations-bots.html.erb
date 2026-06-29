@@ -1,0 +1,89 @@
+<% content_for :title do %>Automations & bots | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Automations, webhook agent bots, and API channel in <%= installation_brand_name %> for event-driven support workflows.<% end %>
+
+<h1>Automations & bots</h1>
+<p class="lead">
+  <strong>Automations</strong> run rules when events occur inside <%= installation_brand_name %>.
+  <strong>Agent bots</strong> send conversation events to your external server.
+  The <strong>API channel</strong> integrates custom messaging backends.
+</p>
+
+<h2>Automations</h2>
+<h3>Events (examples)</h3>
+<ul>
+  <li>Conversation created</li>
+  <li>Message created</li>
+  <li>Conversation updated (status, assignee)</li>
+  <li>Conversation opened / resolved</li>
+</ul>
+<h3>Conditions</h3>
+<ul>
+  <li>Inbox equals …</li>
+  <li>Message content contains …</li>
+  <li>Assignee is …</li>
+  <li>Custom attribute values</li>
+</ul>
+<h3>Actions</h3>
+<ul>
+  <li>Assign agent or team</li>
+  <li>Add label</li>
+  <li>Send email to team</li>
+  <li>Send message (customer or private note)</li>
+  <li>Send webhook event</li>
+  <li>Send attachment</li>
+  <li>Mute / resolve conversation</li>
+</ul>
+<h3>Create automation</h3>
+<ol>
+  <li><strong>Settings → Automation → Add automation</strong></li>
+  <li>Name and select event</li>
+  <li>Add conditions (AND logic)</li>
+  <li>Add one or more actions</li>
+  <li>Activate and test with a sample conversation</li>
+</ol>
+
+<h2>Agent bots (webhook)</h2>
+<p>Unlike Captain AI, agent bots POST JSON to <strong>your URL</strong> for custom logic (Dialogflow, Rasa, internal CRM, etc.).</p>
+<ol>
+  <li><strong>Settings → Bots → Add bot</strong></li>
+  <li>Name and <strong>Outgoing URL</strong> (HTTPS endpoint)</li>
+  <li>Optional: access token for authentication</li>
+  <li>Attach bot to inbox: <strong>Inbox → Configuration → Bot</strong></li>
+</ol>
+<h3>Bot events sent to your server</h3>
+<ul>
+  <li><code>message_created</code> — new customer or agent message</li>
+  <li><code>widget_triggered</code> — visitor opened chat</li>
+  <li>Other events per API documentation</li>
+</ul>
+<p>Your server responds with messages to send back to the customer via API.</p>
+
+<h2>API channel</h2>
+<p>For fully custom channels (mobile app chat, proprietary messenger):</p>
+<ol>
+  <li><strong>Add inbox → API</strong></li>
+  <li>Use inbox identifier and agent API tokens</li>
+  <li>Create/update contacts and conversations via REST API</li>
+  <li>Receive webhooks for agent replies to your system</li>
+</ol>
+<p>See developer API docs on your installation for endpoint details.</p>
+
+<h2>Captain vs automation vs bot</h2>
+<ul>
+  <li><strong>Captain</strong> — built-in AI, documents, Copilot — <a href="<%= guide_page_path('captain') %>">Captain guide</a></li>
+  <li><strong>Automation</strong> — if-this-then-that inside <%= installation_brand_name %></li>
+  <li><strong>Agent bot</strong> — your code handles intelligence via webhook</li>
+</ul>
+
+<h2>Best practices</h2>
+<ul>
+  <li>Start with one simple automation (e.g. label “spam” on keyword)</li>
+  <li>Log webhook bot responses for debugging</li>
+  <li>Hand off to human when bot confidence is low</li>
+  <li>Test automations in a test inbox before production</li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Related:</strong> <a href="<%= guide_page_path('macros-canned') %>">Macros & canned responses</a> ·
+  <a href="<%= guide_page_path('integrations') %>">Integrations</a></p>
+</div>

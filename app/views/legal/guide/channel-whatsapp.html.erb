@@ -1,0 +1,59 @@
+<% content_for :title do %>WhatsApp | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Connect WhatsApp Business to <%= installation_brand_name %> via embedded signup, templates, and webhooks.<% end %>
+
+<h1>WhatsApp Business</h1>
+<p class="lead">
+  WhatsApp inboxes use Meta’s WhatsApp Cloud API. Customers message your business number; agents reply from <%= installation_brand_name %>.
+</p>
+
+<h2>Prerequisites</h2>
+<ul>
+  <li>Meta Business account with permission to manage WhatsApp assets</li>
+  <li>WhatsApp embedded signup configured on this installation (operator / Super Admin)</li>
+  <li>Phone number not active on consumer WhatsApp app (or migrated properly)</li>
+</ul>
+
+<h2>Embedded signup (recommended)</h2>
+<ol>
+  <li><strong>Settings → Inboxes → Add inbox → WhatsApp</strong></li>
+  <li>Click <strong>Connect with WhatsApp Business</strong></li>
+  <li>Log in to Meta and select or create WhatsApp Business Account (WABA)</li>
+  <li>Grant <code>whatsapp_business_management</code>, <code>whatsapp_business_messaging</code>, <code>business_management</code></li>
+  <li>Verify phone number via SMS or voice code</li>
+  <li>Add agents as collaborators</li>
+  <li>Send test message from a personal phone to your business number</li>
+</ol>
+<p>Webhooks are configured automatically for embedded signup on supported installations.</p>
+
+<h2>360dialog / Cloud API (manual)</h2>
+<p>Some installations support alternate providers (360dialog, manual Cloud API tokens). Follow the provider-specific fields in the inbox setup wizard if embedded signup is unavailable.</p>
+
+<h2>Message templates</h2>
+<p>Outside the 24-hour customer service window, outbound messages often require <strong>approved templates</strong> in Meta WhatsApp Manager. Create templates for:</p>
+<ul>
+  <li>Order updates</li>
+  <li>Appointment reminders</li>
+  <li>Follow-ups after resolved tickets</li>
+</ul>
+<p>Use <a href="<%= guide_page_path('campaigns') %>">WhatsApp campaigns</a> for template-based outbound sends.</p>
+
+<h2>Session window</h2>
+<p>When a customer messages you, a 24-hour session opens where free-form replies are allowed. After it closes, use templates for proactive outreach.</p>
+
+<h2>Inbox configuration</h2>
+<ul>
+  <li>Reauthorize when Meta tokens expire</li>
+  <li>Attach Captain assistant or webhook bot in Configuration</li>
+  <li>Enable CSAT on resolve if desired</li>
+</ul>
+
+<h2>Quality rating & limits</h2>
+<p>Meta rates message quality from user feedback. Low ratings reduce daily send limits. Respond quickly and honor opt-in practices.</p>
+
+<h2>Errors</h2>
+<p>See the dedicated <a href="<%= guide_page_path('whatsapp-errors') %>">WhatsApp errors</a> guide for restriction #2655121, OAuth failures, and delivery issues.</p>
+
+<div class="cta-box">
+  <p><strong>Related:</strong> <a href="<%= guide_page_path('channels') %>">Channels overview</a> ·
+  <a href="<%= guide_page_path('campaigns') %>">Campaigns</a></p>
+</div>

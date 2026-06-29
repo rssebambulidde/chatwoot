@@ -1,0 +1,114 @@
+<% content_for :title do %>For agents | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>
+  Agent guide for <%= installation_brand_name %>: inbox, replies, notes, assignment, macros, Copilot, search, and profile settings.
+<% end %>
+
+<h1>For support agents</h1>
+<p class="lead">
+  Agents handle customer conversations assigned to them. This guide covers daily work inside <%= installation_brand_name %>.
+  For conversation views and filters, see <a href="<%= guide_page_path('conversations') %>">Conversations</a>.
+</p>
+
+<h2>Your main views</h2>
+<ul>
+  <li><strong>Inbox</strong> — notifications and items needing attention</li>
+  <li><strong>My Inbox / assigned</strong> — conversations assigned to you</li>
+  <li><strong>All conversations</strong> — broader list (permissions apply)</li>
+  <li><strong>Mentions</strong> — private notes where someone @mentioned you</li>
+  <li><strong>Participating</strong> — threads you contributed to</li>
+  <li><strong>Unattended</strong> — unassigned open conversations (if shown)</li>
+</ul>
+
+<h2>Reply to a customer</h2>
+<ol>
+  <li>Open a conversation from the list.</li>
+  <li>Read the thread and any <strong>private notes</strong> from teammates.</li>
+  <li>Choose <strong>Reply</strong> (customer-visible) in the composer.</li>
+  <li>Add text, attachments, or canned responses.</li>
+  <li>Send — for email, set CC/BCC if needed.</li>
+</ol>
+<p>Private notes are internal only. Use @name to notify a teammate in a note.</p>
+
+<h2>Assignment & status</h2>
+<ul>
+  <li><strong>Assignee</strong> — who owns the ticket; take ownership with assign to me</li>
+  <li><strong>Team</strong> — group responsible for the conversation</li>
+  <li><strong>Status</strong> — open, pending (waiting on customer), resolved</li>
+  <li><strong>Labels</strong> — categorize for reporting — <a href="<%= guide_page_path('teams-labels') %>">Labels guide</a></li>
+  <li><strong>Priority</strong> — if your workspace uses priority levels</li>
+</ul>
+
+<h2>SLA indicators</h2>
+<p>When SLA policies apply, clocks show time until first response or resolution breach. Prioritize red / overdue threads. Details: <a href="<%= guide_page_path('sla-workflow') %>">SLA & workflow</a>.</p>
+
+<h2>Canned responses</h2>
+<ol>
+  <li>In the composer, type <code>/</code> or open the insert menu.</li>
+  <li>Search canned responses by shortcut or title.</li>
+  <li>Insert, personalize, send.</li>
+</ol>
+<p>Full reference: <a href="<%= guide_page_path('macros-canned') %>">Macros & canned responses</a>.</p>
+
+<h2>Run a macro</h2>
+<ol>
+  <li>Open the conversation.</li>
+  <li>Right sidebar → <strong>Macros</strong> → select → run.</li>
+</ol>
+<p>Macros may assign, label, message, and resolve in one action.</p>
+
+<h2>Copilot (Captain)</h2>
+<p>
+  If enabled, open <strong>Copilot</strong> in the sidebar for draft replies or summaries from your admin’s knowledge base.
+  Always review before sending. <a href="<%= guide_page_path('captain') %>">Captain AI guide</a>.
+</p>
+
+<h2>Contacts sidebar</h2>
+<ul>
+  <li>Customer name, email, phone, social IDs</li>
+  <li>Past conversations with this contact</li>
+  <li>Custom attributes (plan, account ID, etc.)</li>
+  <li>Edit contact details when allowed</li>
+</ul>
+<p>More: <a href="<%= guide_page_path('contacts-companies') %>">Contacts & companies</a>.</p>
+
+<h2>Search</h2>
+<p>Use the top <strong>search</strong> bar to find conversations, contacts, or messages across the workspace. Faster than scrolling old lists.</p>
+
+<h2>Compose outbound</h2>
+<p>Click the pen icon to start a new conversation on channels that support outbound (email, some SMS/messaging).</p>
+
+<h2>Notifications</h2>
+<ul>
+  <li>Enable browser notifications when prompted</li>
+  <li><strong>Profile → Notification settings</strong> — email alerts for assignments and mentions</li>
+  <li>Set availability (online / busy / offline) so auto-assignment respects your status</li>
+</ul>
+
+<h2>Profile & security</h2>
+<ul>
+  <li>Update display name and avatar</li>
+  <li>Change password</li>
+  <li>Enable <strong>MFA</strong> for extra security — <a href="<%= guide_page_path('security-roles') %>">Security guide</a></li>
+</ul>
+
+<h2>What agents typically cannot do</h2>
+<ul>
+  <li>Add or remove inboxes and channels (admin)</li>
+  <li>Create global macros or automations (admin)</li>
+  <li>Manage billing and agent invites (admin)</li>
+  <li>Edit Help Center articles (admin or custom role)</li>
+</ul>
+<p>Your permissions may differ with custom roles.</p>
+
+<h2>Agent tips</h2>
+<ul>
+  <li>Resolve when done — triggers CSAT and clears your queue</li>
+  <li>Use private notes for handoffs</li>
+  <li>Apply correct labels for accurate reports</li>
+  <li>Snooze or set pending when waiting on customer</li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Stuck?</strong> <a href="<%= guide_page_path('troubleshooting') %>">Troubleshooting</a> ·
+  Ask your workspace admin</p>
+</div>

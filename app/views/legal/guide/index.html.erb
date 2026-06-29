@@ -1,0 +1,137 @@
+<% content_for :title do %>User Guide | <%= installation_brand_name %><% end %>
+<% content_for :meta_description do %>
+  Complete <%= installation_brand_name %> documentation: signup, conversations, channels, automation, Captain AI, reports, and troubleshooting.
+<% end %>
+
+<h1><%= installation_brand_name %> User Guide</h1>
+<p class="lead">
+  Full documentation for signing up, administering workspaces, connecting every channel type, and using
+  <%= installation_brand_name %> as an agent. No login required.
+</p>
+
+<h2>Getting started</h2>
+<div class="guide-card-grid">
+  <a class="guide-card" href="<%= guide_page_path('workspace-setup') %>">
+    <strong>Workspace setup</strong>
+    <span>Sign up, first login, invite agents, Google sign-in.</span>
+  </a>
+</div>
+
+<h2>Daily use</h2>
+<div class="guide-card-grid">
+  <a class="guide-card" href="<%= guide_page_path('conversations') %>">
+    <strong>Conversations</strong>
+    <span>Inbox views, assignment, status, labels, folders, search, compose.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('agents') %>">
+    <strong>For agents</strong>
+    <span>Replies, notes, macros, Copilot, notifications, profile.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('contacts-companies') %>">
+    <strong>Contacts & companies</strong>
+    <span>CRM records, segments, merge, custom attributes.</span>
+  </a>
+</div>
+
+<h2>Administration</h2>
+<div class="guide-card-grid">
+  <a class="guide-card" href="<%= guide_page_path('admin') %>">
+    <strong>Admin overview</strong>
+    <span>Account settings, agents, inboxes, audit logs, billing.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('teams-labels') %>">
+    <strong>Teams & labels</strong>
+    <span>Team routing, labels, custom attributes.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('sla-workflow') %>">
+    <strong>SLA & workflow</strong>
+    <span>SLA policies, conversation workflow, assignment rules.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('security-roles') %>">
+    <strong>Security & roles</strong>
+    <span>MFA, custom roles, permissions, audit.</span>
+  </a>
+</div>
+
+<h2>Channels</h2>
+<div class="guide-card-grid">
+  <a class="guide-card" href="<%= guide_page_path('channels') %>">
+    <strong>Channels overview</strong>
+    <span>How inboxes work and what you can connect.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('channel-website') %>">
+    <strong>Website chat</strong>
+    <span>Live chat widget, pre-chat form, business hours.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('channel-email') %>">
+    <strong>Email</strong>
+    <span>Gmail, Microsoft, IMAP, forwarding.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('channel-whatsapp') %>">
+    <strong>WhatsApp</strong>
+    <span>Embedded signup, templates, webhooks.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('channel-social') %>">
+    <strong>Social messaging</strong>
+    <span>Facebook, Instagram, Twitter, TikTok, Telegram, Line.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('channel-sms') %>">
+    <strong>SMS & voice</strong>
+    <span>Twilio SMS, Bandwidth, voice calls.</span>
+  </a>
+</div>
+
+<h2>Automation & AI</h2>
+<div class="guide-card-grid">
+  <a class="guide-card" href="<%= guide_page_path('captain') %>">
+    <strong>Captain AI</strong>
+    <span>Assistants, documents, FAQs, Copilot, tools.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('macros-canned') %>">
+    <strong>Macros & canned responses</strong>
+    <span>Reusable actions and reply snippets.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('automations-bots') %>">
+    <strong>Automations & bots</strong>
+    <span>Rules, webhook agent bots, API channel.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('campaigns') %>">
+    <strong>Campaigns</strong>
+    <span>Proactive live chat, SMS, and WhatsApp campaigns.</span>
+  </a>
+</div>
+
+<h2>Insights & content</h2>
+<div class="guide-card-grid">
+  <a class="guide-card" href="<%= guide_page_path('reports') %>">
+    <strong>Reports</strong>
+    <span>Overview, agents, teams, CSAT, SLA, bots.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('help-center') %>">
+    <strong>Help Center</strong>
+    <span>Public knowledge base for your customers.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('integrations') %>">
+    <strong>Integrations</strong>
+    <span>Slack, webhooks, Linear, Notion, Shopify, dashboard apps.</span>
+  </a>
+</div>
+
+<h2>Support</h2>
+<div class="guide-card-grid">
+  <a class="guide-card" href="<%= guide_page_path('whatsapp-errors') %>">
+    <strong>WhatsApp errors</strong>
+    <span>Meta restrictions, OAuth, delivery issues.</span>
+  </a>
+  <a class="guide-card" href="<%= guide_page_path('troubleshooting') %>">
+    <strong>Troubleshooting</strong>
+    <span>Login, email sync, widget, and common fixes.</span>
+  </a>
+</div>
+
+<div class="cta-box">
+  <p><strong>Ready to start?</strong>
+  <a href="/app/auth/signup">Create a workspace</a> ·
+  <a href="/app/login">Sign in</a> ·
+  <a href="mailto:info@samabrains.com">info@samabrains.com</a></p>
+</div>

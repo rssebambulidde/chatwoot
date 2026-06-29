@@ -1,0 +1,75 @@
+<% content_for :title do %>Social messaging | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Connect Facebook Messenger, Instagram, Twitter/X, TikTok, Telegram, and Line to <%= installation_brand_name %>.<% end %>
+
+<h1>Social messaging channels</h1>
+<p class="lead">
+  Connect social platforms so DMs and page messages arrive in the same inbox as email and chat.
+  Each network requires operator-level app credentials on your installation.
+</p>
+
+<h2>Facebook Messenger</h2>
+<ol>
+  <li><strong>Settings → Inboxes → Add inbox → Facebook</strong></li>
+  <li>Authenticate with Meta and select the Facebook Page</li>
+  <li>Grant messaging permissions for the Page</li>
+  <li>Test by messaging the Page from a personal Facebook account</li>
+</ol>
+<p>Operator configures Meta app (App ID, secret, webhook verify token) on the server.</p>
+
+<h2>Instagram Direct</h2>
+<ol>
+  <li><strong>Add inbox → Instagram</strong></li>
+  <li>Connect Instagram Professional account linked to a Facebook Page</li>
+  <li>Authorize messaging permissions</li>
+</ol>
+<p>Instagram must be a Business or Creator account connected to the Page.</p>
+
+<h2>Twitter / X</h2>
+<ol>
+  <li><strong>Add inbox → Twitter</strong></li>
+  <li>Authorize the Twitter app configured by your operator</li>
+  <li>Direct messages to the connected account appear as conversations</li>
+</ol>
+<p>Availability depends on X API access tier configured for your installation.</p>
+
+<h2>TikTok</h2>
+<ol>
+  <li><strong>Add inbox → TikTok</strong></li>
+  <li>Complete TikTok business messaging authorization</li>
+</ol>
+<p>Requires TikTok developer app setup by the installation operator.</p>
+
+<h2>Telegram</h2>
+<ol>
+  <li><strong>Add inbox → Telegram</strong></li>
+  <li>Create a bot via <a href="https://t.me/BotFather" rel="noopener noreferrer">@BotFather</a></li>
+  <li>Paste the bot token into <%= installation_brand_name %></li>
+  <li>Customers message your bot; conversations appear in the inbox</li>
+</ol>
+
+<h2>Line</h2>
+<ol>
+  <li><strong>Add inbox → Line</strong></li>
+  <li>Create a Line Messaging API channel in Line Developers Console</li>
+  <li>Enter Channel ID, secret, and token as prompted</li>
+  <li>Set webhook URL from inbox settings in Line console</li>
+</ol>
+
+<h2>Common setup steps (all social)</h2>
+<ul>
+  <li>Add agents as inbox collaborators after connection</li>
+  <li>Configure business hours and away message if needed</li>
+  <li>Attach bot or Captain for first-line automation</li>
+  <li>Reauthorize when platform tokens expire</li>
+</ul>
+
+<h2>Limitations</h2>
+<ul>
+  <li>Each platform has its own messaging window and template rules (similar to WhatsApp for some)</li>
+  <li>Media types supported vary by channel</li>
+  <li>Some features (story replies, comments) may not sync — only configured message types</li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Back to:</strong> <a href="<%= guide_page_path('channels') %>">Channels overview</a></p>
+</div>

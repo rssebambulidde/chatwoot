@@ -1,0 +1,69 @@
+<aside class="guide-sidebar">
+  <h2>User Guide</h2>
+
+  <div class="guide-nav-group">
+    <h3>Getting started</h3>
+    <nav aria-label="Getting started">
+      <%= link_to 'Overview', guide_path, class: ('is-active' if guide_page_active?('index')) %>
+      <%= link_to 'Workspace setup', guide_page_path('workspace-setup'), class: ('is-active' if guide_page_active?('workspace-setup')) %>
+    </nav>
+  </div>
+
+  <div class="guide-nav-group">
+    <h3>Daily use</h3>
+    <nav aria-label="Daily use">
+      <%= link_to 'Conversations', guide_page_path('conversations'), class: ('is-active' if guide_page_active?('conversations')) %>
+      <%= link_to 'For agents', guide_page_path('agents'), class: ('is-active' if guide_page_active?('agents')) %>
+      <%= link_to 'Contacts & companies', guide_page_path('contacts-companies'), class: ('is-active' if guide_page_active?('contacts-companies')) %>
+    </nav>
+  </div>
+
+  <div class="guide-nav-group">
+    <h3>Administration</h3>
+    <nav aria-label="Administration">
+      <%= link_to 'Admin overview', guide_page_path('admin'), class: ('is-active' if guide_page_active?('admin')) %>
+      <%= link_to 'Teams & labels', guide_page_path('teams-labels'), class: ('is-active' if guide_page_active?('teams-labels')) %>
+      <%= link_to 'SLA & workflow', guide_page_path('sla-workflow'), class: ('is-active' if guide_page_active?('sla-workflow')) %>
+      <%= link_to 'Security & roles', guide_page_path('security-roles'), class: ('is-active' if guide_page_active?('security-roles')) %>
+    </nav>
+  </div>
+
+  <div class="guide-nav-group">
+    <h3>Channels</h3>
+    <nav aria-label="Channels">
+      <%= link_to 'Channels overview', guide_page_path('channels'), class: ('is-active' if guide_page_active?('channels')) %>
+      <%= link_to 'Website chat', guide_page_path('channel-website'), class: ('is-active' if guide_page_active?('channel-website')) %>
+      <%= link_to 'Email', guide_page_path('channel-email'), class: ('is-active' if guide_page_active?('channel-email')) %>
+      <%= link_to 'WhatsApp', guide_page_path('channel-whatsapp'), class: ('is-active' if guide_page_active?('channel-whatsapp')) %>
+      <%= link_to 'Social messaging', guide_page_path('channel-social'), class: ('is-active' if guide_page_active?('channel-social')) %>
+      <%= link_to 'SMS & voice', guide_page_path('channel-sms'), class: ('is-active' if guide_page_active?('channel-sms')) %>
+    </nav>
+  </div>
+
+  <div class="guide-nav-group">
+    <h3>Automation & AI</h3>
+    <nav aria-label="Automation and AI">
+      <%= link_to 'Captain AI', guide_page_path('captain'), class: ('is-active' if guide_page_active?('captain')) %>
+      <%= link_to 'Macros & canned responses', guide_page_path('macros-canned'), class: ('is-active' if guide_page_active?('macros-canned')) %>
+      <%= link_to 'Automations & bots', guide_page_path('automations-bots'), class: ('is-active' if guide_page_active?('automations-bots')) %>
+      <%= link_to 'Campaigns', guide_page_path('campaigns'), class: ('is-active' if guide_page_active?('campaigns')) %>
+    </nav>
+  </div>
+
+  <div class="guide-nav-group">
+    <h3>Insights & content</h3>
+    <nav aria-label="Insights and content">
+      <%= link_to 'Reports', guide_page_path('reports'), class: ('is-active' if guide_page_active?('reports')) %>
+      <%= link_to 'Help Center', guide_page_path('help-center'), class: ('is-active' if guide_page_active?('help-center')) %>
+      <%= link_to 'Integrations', guide_page_path('integrations'), class: ('is-active' if guide_page_active?('integrations')) %>
+    </nav>
+  </div>
+
+  <div class="guide-nav-group">
+    <h3>Support</h3>
+    <nav aria-label="Support">
+      <%= link_to 'WhatsApp errors', guide_page_path('whatsapp-errors'), class: ('is-active' if guide_page_active?('whatsapp-errors')) %>
+      <%= link_to 'Troubleshooting', guide_page_path('troubleshooting'), class: ('is-active' if guide_page_active?('troubleshooting')) %>
+    </nav>
+  </div>
+</aside>

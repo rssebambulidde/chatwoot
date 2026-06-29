@@ -1,0 +1,61 @@
+<% content_for :title do %>Campaigns | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Proactive live chat, SMS, and WhatsApp campaigns in <%= installation_brand_name %>.<% end %>
+
+<h1>Campaigns</h1>
+<p class="lead">
+  Campaigns let you reach customers proactively — on your website, via SMS, or WhatsApp templates —
+  instead of waiting for inbound messages.
+</p>
+
+<h2>Campaign types</h2>
+<ul>
+  <li><strong>Live chat</strong> — pop-up or targeted message on your website</li>
+  <li><strong>SMS</strong> — outbound text to contact lists (Twilio/Bandwidth inbox required)</li>
+  <li><strong>WhatsApp</strong> — template-based outbound via connected WhatsApp inbox</li>
+</ul>
+
+<h2>Live chat campaigns</h2>
+<ol>
+  <li><strong>Campaigns → Live chat → Create</strong></li>
+  <li>Select website inbox</li>
+  <li>Define trigger: URL contains, time on page, exit intent (options vary)</li>
+  <li>Write message and optional sender</li>
+  <li>Set schedule and audience rules</li>
+  <li>Enable and test on staging site first</li>
+</ol>
+<p>Use for onboarding help, promo offers, or “need assistance?” prompts on checkout pages.</p>
+
+<h2>SMS campaigns</h2>
+<ol>
+  <li>Connect <a href="<%= guide_page_path('channel-sms') %>">SMS inbox</a> first</li>
+  <li><strong>Campaigns → SMS → Create</strong></li>
+  <li>Select inbox and audience (labels/segments)</li>
+  <li>Compose message; comply with opt-in laws</li>
+  <li>Schedule send</li>
+</ol>
+
+<h2>WhatsApp campaigns</h2>
+<ol>
+  <li>Connect <a href="<%= guide_page_path('channel-whatsapp') %>">WhatsApp inbox</a></li>
+  <li>Ensure message <strong>template is approved</strong> in Meta WhatsApp Manager</li>
+  <li><strong>Campaigns → WhatsApp → Create</strong></li>
+  <li>Map template variables and audience</li>
+  <li>Schedule within Meta send limits and quality rating</li>
+</ol>
+
+<h2>Compliance</h2>
+<ul>
+  <li>Only message users who opted in</li>
+  <li>Honor unsubscribe / STOP requests for SMS</li>
+  <li>Follow WhatsApp commerce and template policies</li>
+  <li>Document consent in your privacy policy</li>
+</ul>
+
+<h2>Measuring results</h2>
+<p>Track conversation volume from campaign URLs or labels applied by linked automations. Use <a href="<%= guide_page_path('reports') %>">Reports</a> for broader metrics.</p>
+
+<div class="cta-box">
+  <p><strong>Channels:</strong> <a href="<%= guide_page_path('channel-website') %>">Website</a> ·
+  <a href="<%= guide_page_path('channel-sms') %>">SMS</a> ·
+  <a href="<%= guide_page_path('channel-whatsapp') %>">WhatsApp</a></p>
+</div>

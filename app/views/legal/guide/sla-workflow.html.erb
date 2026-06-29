@@ -1,0 +1,67 @@
+<% content_for :title do %>SLA & workflow | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>SLA policies, conversation workflow, and agent assignment in <%= installation_brand_name %>.<% end %>
+
+<h1>SLA & workflow</h1>
+<p class="lead">
+  Control how conversations move through your team: who can resolve, how work is assigned, and how response deadlines are tracked.
+</p>
+
+<h2>Conversation workflow</h2>
+<p><strong>Settings → Conversation workflow</strong></p>
+<ul>
+  <li><strong>Auto-resolve</strong> — close inactive conversations after N days (account setting)</li>
+  <li><strong>Agent permissions</strong> — whether agents can resolve, reopen, or delete</li>
+  <li><strong>Auto-assignment</strong> — assign new conversations to online agents in inbox</li>
+  <li><strong>Conversation continuity</strong> — prefer same agent for returning customer</li>
+  <li><strong>Email collect</strong> — prompt for email on website chat when missing</li>
+</ul>
+
+<h2>SLA policies</h2>
+<p><strong>Settings → SLA → Add SLA policy</strong></p>
+<h3>Metrics tracked</h3>
+<ul>
+  <li><strong>First response time</strong> — time until first agent reply</li>
+  <li><strong>Next response time</strong> — time until reply after customer message</li>
+  <li><strong>Resolution time</strong> — time until conversation resolved</li>
+</ul>
+<h3>Setup</h3>
+<ol>
+  <li>Name the policy (e.g. “Standard support”)</li>
+  <li>Set thresholds (e.g. first response within 1 hour)</li>
+  <li>Apply to inboxes, labels, or priority levels</li>
+  <li>Business hours only vs calendar hours (configuration-dependent)</li>
+</ol>
+<h3>In conversations</h3>
+<p>SLA clocks and breach warnings appear in conversation UI. Agents prioritize threads near breach.</p>
+<h3>Reporting</h3>
+<p>Review hits and misses in <a href="<%= guide_page_path('reports') %>">Reports → SLA</a>.</p>
+
+<h2>Agent assignment policies</h2>
+<p>When <strong>advanced assignment</strong> is enabled:</p>
+<ul>
+  <li><strong>Assignment policy</strong> — round-robin, load-based routing rules</li>
+  <li><strong>Capacity policy</strong> — max open conversations per agent</li>
+  <li>Link policies to inboxes under inbox settings</li>
+</ul>
+
+<h2>Priority</h2>
+<p>Some installations support conversation priority (low / medium / high / urgent) for SLA ordering and views.</p>
+
+<h2>Snooze & pending</h2>
+<ul>
+  <li><strong>Pending</strong> — waiting on customer; pauses SLA in some configs</li>
+  <li><strong>Snooze</strong> — hide until later datetime</li>
+</ul>
+
+<h2>Best practices</h2>
+<ul>
+  <li>Start with one SLA policy on your busiest inbox</li>
+  <li>Align thresholds with real staffing, not aspirational goals</li>
+  <li>Review SLA report weekly with team leads</li>
+  <li>Combine with labels to exclude spam from SLA</li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Related:</strong> <a href="<%= guide_page_path('conversations') %>">Conversations</a> ·
+  <a href="<%= guide_page_path('teams-labels') %>">Teams & labels</a></p>
+</div>

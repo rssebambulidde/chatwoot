@@ -1,0 +1,57 @@
+<% content_for :title do %>SMS & voice | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Connect SMS and voice channels in <%= installation_brand_name %> via Twilio, Bandwidth, and voice inboxes.<% end %>
+
+<h1>SMS & voice</h1>
+<p class="lead">
+  Text and call customers through telephony providers integrated as <%= installation_brand_name %> inboxes.
+</p>
+
+<h2>Twilio SMS</h2>
+<ol>
+  <li><strong>Settings → Inboxes → Add inbox → SMS → Twilio</strong></li>
+  <li>Enter Twilio Account SID and Auth Token</li>
+  <li>Select or enter the Twilio phone number</li>
+  <li>Configure webhook URL in Twilio console if not auto-set</li>
+  <li>Send test SMS to the number; reply from dashboard</li>
+</ol>
+
+<h2>Bandwidth SMS</h2>
+<ol>
+  <li><strong>Add inbox → SMS → Bandwidth</strong></li>
+  <li>Enter Bandwidth API credentials and application ID</li>
+  <li>Map phone number and webhook</li>
+</ol>
+
+<h2>Voice calls</h2>
+<p>Voice inboxes (Twilio voice) allow inbound/outbound phone support:</p>
+<ol>
+  <li><strong>Add inbox → Voice</strong></li>
+  <li>Connect Twilio voice credentials and number</li>
+  <li>Configure call flow (ring agents, voicemail, etc.) per inbox settings</li>
+</ol>
+<p>Agent experience and availability depend on your plan and installation configuration.</p>
+
+<h2>WhatsApp via Twilio</h2>
+<p>Some setups use Twilio as WhatsApp BSP instead of embedded Meta signup. Follow the WhatsApp + Twilio option in inbox creation if shown.</p>
+
+<h2>SMS campaigns</h2>
+<p>Send proactive SMS via <a href="<%= guide_page_path('campaigns') %>">SMS campaigns</a>. Respect opt-in and local telecom regulations (TCPA, GDPR, etc.).</p>
+
+<h2>Compliance</h2>
+<ul>
+  <li>Obtain consent before marketing SMS</li>
+  <li>Include opt-out instructions where required</li>
+  <li>Do not send sensitive data over SMS unless policy allows</li>
+</ul>
+
+<h2>Troubleshooting</h2>
+<ul>
+  <li>Inbound SMS missing — verify webhook URL and Twilio/Bandwidth number config</li>
+  <li>Outbound fails — check account balance, number capabilities, geographic permissions</li>
+  <li><a href="<%= guide_page_path('troubleshooting') %>">General troubleshooting</a></li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Related:</strong> <a href="<%= guide_page_path('channel-whatsapp') %>">WhatsApp</a> ·
+  <a href="<%= guide_page_path('channels') %>">Channels overview</a></p>
+</div>

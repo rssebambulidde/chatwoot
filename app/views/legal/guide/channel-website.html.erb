@@ -1,0 +1,63 @@
+<% content_for :title do %>Website chat | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Set up the <%= installation_brand_name %> website live chat widget: embed script, pre-chat form, business hours, and CSAT.<% end %>
+
+<h1>Website live chat</h1>
+<p class="lead">
+  The website channel adds a chat widget to your site so visitors can message your team in real time.
+</p>
+
+<h2>Setup</h2>
+<ol>
+  <li><strong>Settings → Inboxes → Add inbox → Website</strong></li>
+  <li>Name the inbox (e.g. “Website support”)</li>
+  <li>Add agents on the collaborators step</li>
+  <li>Copy the <strong>widget script</strong> from inbox settings</li>
+  <li>Paste before <code>&lt;/body&gt;</code> on every page where chat should appear</li>
+  <li>Open your live site (not only localhost unless configured) and send a test message</li>
+</ol>
+
+<h2>Widget builder</h2>
+<p>Customize from inbox settings:</p>
+<ul>
+  <li>Widget color and launcher position (left/right)</li>
+  <li>Welcome heading and tagline</li>
+  <li>Reply time expectation</li>
+  <li>Widget avatar / logo</li>
+  <li>Dark mode behavior (if supported)</li>
+</ul>
+
+<h2>Pre-chat form</h2>
+<p>Collect visitor name and email before the first message. Enable under inbox <strong>Configuration → Pre-chat form</strong>. Useful for follow-up when they leave the site.</p>
+
+<h2>Business hours</h2>
+<ul>
+  <li>Set timezone and weekly schedule</li>
+  <li>Configure offline message when outside hours</li>
+  <li>Optionally hide widget or show “we’ll be back” state</li>
+</ul>
+
+<h2>CSAT survey</h2>
+<p>Enable customer satisfaction survey when conversations resolve. Configure under inbox CSAT settings. Results appear in <a href="<%= guide_page_path('reports') %>">Reports → CSAT</a>.</p>
+
+<h2>Captain & bots on website chat</h2>
+<ul>
+  <li>Attach a <strong>webhook agent bot</strong> in inbox Configuration for scripted flows</li>
+  <li>Attach <strong>Captain</strong> assistant under Captain → Inboxes for AI replies</li>
+</ul>
+
+<h2>Proactive campaigns</h2>
+<p>Trigger chat messages based on URL or time on site via <a href="<%= guide_page_path('campaigns') %>">Live chat campaigns</a>.</p>
+
+<h2>Identity & continuity</h2>
+<p>Returning visitors are recognized via browser token when cookies are allowed. Logged-in users on your app can pass identity via the SDK <code>setUser</code> API for richer context (developer integration).</p>
+
+<h2>Troubleshooting</h2>
+<ul>
+  <li>Widget missing — script not on production page, ad blocker, or JS error on site</li>
+  <li>Messages not in dashboard — wrong website token, agents not collaborators</li>
+  <li>See <a href="<%= guide_page_path('troubleshooting') %>">Troubleshooting</a></li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Back to:</strong> <a href="<%= guide_page_path('channels') %>">Channels overview</a></p>
+</div>

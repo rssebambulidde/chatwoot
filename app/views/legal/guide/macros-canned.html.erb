@@ -1,0 +1,82 @@
+<% content_for :title do %>Macros & canned responses | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Create and use macros and canned responses in <%= installation_brand_name %> to speed up support replies.<% end %>
+
+<h1>Macros & canned responses</h1>
+<p class="lead">
+  <strong>Canned responses</strong> are quick text snippets.
+  <strong>Macros</strong> are multi-step actions agents run with one click.
+  Admins create both; agents consume them in conversations.
+</p>
+
+<h2>Canned responses</h2>
+<h3>Admin: create</h3>
+<ol>
+  <li><strong>Settings → Canned responses → Add</strong></li>
+  <li>Short code (e.g. <code>/refund</code>) and full message body</li>
+  <li>Shared (all agents) or private (creator only) depending on settings</li>
+</ol>
+<h3>Agent: use</h3>
+<ol>
+  <li>Open conversation reply composer</li>
+  <li>Type <code>/</code> or open insert menu → canned responses</li>
+  <li>Search by short code or title</li>
+  <li>Insert, edit if needed, send</li>
+</ol>
+
+<h2>Macros</h2>
+<h3>What macros can do</h3>
+<ul>
+  <li>Send a message to the customer</li>
+  <li>Add a private note</li>
+  <li>Assign agent or team</li>
+  <li>Add or remove labels</li>
+  <li>Change conversation status (resolve, snooze)</li>
+  <li>Mute conversation</li>
+</ul>
+<h3>Admin: create</h3>
+<ol>
+  <li><strong>Settings → Macros → Add macro</strong></li>
+  <li>Name and optional visibility (personal vs global)</li>
+  <li>Add ordered actions (each step runs in sequence)</li>
+  <li>Save and share with agents</li>
+</ol>
+<h3>Agent: run</h3>
+<ol>
+  <li>Open conversation</li>
+  <li>Right sidebar → <strong>Macros</strong></li>
+  <li>Select macro → click run (▶)</li>
+  <li>Review results (sent messages, new assignee, labels)</li>
+</ol>
+
+<h2>When to use which</h2>
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem; margin:1rem 0;">
+  <thead>
+    <tr style="border-bottom:1px solid #e2e8f0; text-align:left;">
+      <th style="padding:0.5rem;">Tool</th>
+      <th style="padding:0.5rem;">Best for</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom:1px solid #f1f5f9;">
+      <td style="padding:0.5rem;"><strong>Canned response</strong></td>
+      <td style="padding:0.5rem;">Standard reply text you still send manually</td>
+    </tr>
+    <tr>
+      <td style="padding:0.5rem;"><strong>Macro</strong></td>
+      <td style="padding:0.5rem;">Repeatable workflow: label + assign + message + resolve</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Best practices</h2>
+<ul>
+  <li>Name macros clearly (“Refund approved – billing team”)</li>
+  <li>Avoid macros that send without agent review on sensitive topics</li>
+  <li>Keep canned responses updated when policies change</li>
+  <li>Train agents on which macro applies to which scenario</li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Also see:</strong> <a href="<%= guide_page_path('automations-bots') %>">Automations & bots</a> ·
+  <a href="<%= guide_page_path('agents') %>">For agents</a></p>
+</div>

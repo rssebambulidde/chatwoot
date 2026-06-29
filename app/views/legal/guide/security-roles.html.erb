@@ -1,0 +1,73 @@
+<% content_for :title do %>Security & roles | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Security settings, MFA, custom roles, and permissions in <%= installation_brand_name %>.<% end %>
+
+<h1>Security & roles</h1>
+<p class="lead">
+  Protect workspace access with authentication policies, custom roles, and audit visibility.
+</p>
+
+<h2>Default roles</h2>
+<ul>
+  <li><strong>Administrator</strong> — full settings, billing, user management, all conversations</li>
+  <li><strong>Agent</strong> — handle assigned conversations; limited or no settings access</li>
+</ul>
+
+<h2>Custom roles (Enterprise)</h2>
+<p><strong>Settings → Custom roles</strong></p>
+<ul>
+  <li>Create roles with granular permissions (e.g. manage knowledge base, view reports only)</li>
+  <li>Assign custom role when inviting agents</li>
+  <li>Examples: <code>knowledge_base_manage</code>, conversation manage, settings view</li>
+</ul>
+<p>Use custom roles to let senior agents edit Help Center without full admin access.</p>
+
+<h2>Security settings</h2>
+<p><strong>Settings → Security</strong> (availability varies)</p>
+<ul>
+  <li>Password requirements</li>
+  <li>Session timeout</li>
+  <li>Allowed login methods</li>
+  <li>SSO / SAML on Enterprise deployments</li>
+</ul>
+
+<h2>Multi-factor authentication (MFA)</h2>
+<ol>
+  <li>User opens <strong>Profile settings</strong></li>
+  <li>Enable MFA / authenticator app</li>
+  <li>Scan QR code and save backup codes</li>
+</ol>
+<p>Admins may enforce MFA org-wide on some plans.</p>
+
+<h2>Sign in with Google</h2>
+<p>Optional OAuth login for agents. Does not grant mailbox access unless Gmail inbox is separately connected. See <a href="<%= guide_page_path('workspace-setup') %>">Workspace setup</a>.</p>
+
+<h2>API tokens</h2>
+<ul>
+  <li>Personal access tokens for API scripts — rotate regularly</li>
+  <li>Bot tokens for agent bots — keep secret on your server only</li>
+  <li>Revoke tokens when integrations decommissioned</li>
+</ul>
+
+<h2>Audit logs</h2>
+<p><strong>Settings → Audit logs</strong> records:</p>
+<ul>
+  <li>Settings changes</li>
+  <li>User login/logout</li>
+  <li>Account configuration updates</li>
+</ul>
+<p>Use for compliance reviews and investigating unauthorized changes.</p>
+
+<h2>Data access principles</h2>
+<ul>
+  <li>Agents see conversations only for inboxes they collaborate on</li>
+  <li>Export customer data only with policy approval</li>
+  <li>Remove agent access promptly when staff leave — disable or delete user</li>
+</ul>
+
+<h2>Reporting security issues</h2>
+<p>Contact your operator at <a href="mailto:info@samabrains.com">info@samabrains.com</a> for vulnerability reports affecting your hosted installation.</p>
+
+<div class="cta-box">
+  <p><strong>Related:</strong> <a href="<%= guide_page_path('admin') %>">Admin overview</a> ·
+  <a href="<%= guide_page_path('integrations') %>">Integrations</a></p>
+</div>

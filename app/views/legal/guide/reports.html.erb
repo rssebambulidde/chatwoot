@@ -1,0 +1,72 @@
+<% content_for :title do %>Reports | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Analytics and reports in <%= installation_brand_name %>: overview, agents, teams, inboxes, CSAT, SLA, and bots.<% end %>
+
+<h1>Reports</h1>
+<p class="lead">
+  Reports show how your team performs: volume, response times, satisfaction, and SLA compliance.
+  Access from the <strong>Reports</strong> section in the sidebar.
+</p>
+
+<h2>Report overview</h2>
+<p>High-level account metrics for a selected date range:</p>
+<ul>
+  <li>Total conversations and messages</li>
+  <li>Incoming vs outgoing volume</li>
+  <li>Resolution counts and trends</li>
+</ul>
+
+<h2>Conversation reports</h2>
+<ul>
+  <li>Traffic over time</li>
+  <li>Conversations by channel (inbox)</li>
+  <li>Peak hours and day-of-week patterns</li>
+</ul>
+
+<h2>Agent reports</h2>
+<ul>
+  <li>Conversations handled per agent</li>
+  <li>Response and resolution times</li>
+  <li>Compare agents for coaching</li>
+</ul>
+<p>Open an agent for detailed drill-down.</p>
+
+<h2>Team reports</h2>
+<p>Same metrics aggregated by <a href="<%= guide_page_path('teams-labels') %>">team</a> — useful for department leads.</p>
+
+<h2>Inbox reports</h2>
+<p>Volume and performance per channel (website vs email vs WhatsApp). Helps justify staffing per channel.</p>
+
+<h2>Label reports</h2>
+<p>Distribution of conversations by label — understand issue categories (billing, bugs, sales).</p>
+
+<h2>CSAT reports</h2>
+<p>Customer satisfaction scores from post-resolution surveys. Requires CSAT enabled on inboxes. Track:</p>
+<ul>
+  <li>Average rating</li>
+  <li>Response rate</li>
+  <li>Comments from customers</li>
+</ul>
+
+<h2>SLA reports</h2>
+<p>How often you meet <a href="<%= guide_page_path('sla-workflow') %>">SLA policies</a>:</p>
+<ul>
+  <li>First response time breaches</li>
+  <li>Next response and resolution breaches</li>
+  <li>Missed vs hit rate by inbox or agent</li>
+</ul>
+
+<h2>Bot reports</h2>
+<p>Volume handled by webhook bots vs agents — measure deflection and handoff rate.</p>
+
+<h2>Using reports effectively</h2>
+<ul>
+  <li>Pick consistent date ranges (week vs week)</li>
+  <li>Combine CSAT with response time to avoid “fast but unhelpful”</li>
+  <li>Review inbox report before adding headcount</li>
+  <li>Export or share screenshots in team meetings (export features vary by plan)</li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Configure:</strong> <a href="<%= guide_page_path('sla-workflow') %>">SLA policies</a> ·
+  <a href="<%= guide_page_path('channel-website') %>">Enable CSAT on inboxes</a></p>
+</div>

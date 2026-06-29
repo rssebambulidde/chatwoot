@@ -1,0 +1,220 @@
+<% content_for :title do %>Troubleshooting | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>
+  Fix common <%= installation_brand_name %> issues: missing messages, email sync, login, invitations, and widget problems.
+<% end %>
+
+<h1>Troubleshooting</h1>
+<p class="lead">
+  Quick fixes for the most common problems when signing up, connecting channels, or working in <%= installation_brand_name %>.
+  For WhatsApp-specific Meta errors, see <a href="<%= guide_page_path('whatsapp-errors') %>">WhatsApp errors</a>.
+</p>
+
+<h2>Cannot create a workspace / sign up disabled</h2>
+<p><strong>Symptom:</strong> Sign up link missing or registration fails.</p>
+<p><strong>Fix:</strong></p>
+<ul>
+  <li>Self-service signup may be turned off on this installation — ask the operator to enable account signup</li>
+  <li>Use an invite link from an existing workspace admin instead</li>
+  <li>Check spam for the confirmation email if email verification is required</li>
+</ul>
+
+<h2>Cannot sign in</h2>
+<ul>
+  <li>Confirm you are using the correct email and password</li>
+  <li>Use <strong>Forgot password</strong> if needed</li>
+  <li>If you use <strong>Sign in with Google</strong>, ensure you pick the same Google account your admin invited</li>
+  <li>Clear browser cache or try a private window</li>
+  <li>Verify you were added to the workspace (check invite email from your admin)</li>
+</ul>
+
+<h2>Invited agent cannot access inbox</h2>
+<ol>
+  <li>Admin: <strong>Settings → Agents</strong> — confirm the user accepted the invite</li>
+  <li>Admin: <strong>Settings → Inboxes → [inbox] → Collaborators</strong> — add the agent to that inbox</li>
+  <li>Agent: refresh the page and check <strong>My Inbox</strong> and inbox filters</li>
+</ol>
+
+<h2>Email messages not appearing</h2>
+<h3>Gmail (Google OAuth)</h3>
+<ul>
+  <li>Reconnect the inbox under <strong>Settings → Inboxes → [inbox] → Settings</strong></li>
+  <li>Confirm Google access was not revoked at <a href="https://myaccount.google.com/permissions" rel="noopener noreferrer">Google Account permissions</a></li>
+  <li>Send a new test email to the connected address (not only an old thread)</li>
+  <li>Check Gmail labels/filters that might skip the inbox</li>
+</ul>
+<h3>Microsoft 365</h3>
+<ul>
+  <li>Reconnect OAuth if the Microsoft password or MFA changed</li>
+  <li>Ensure the mailbox is licensed and active in Microsoft admin center</li>
+</ul>
+<h3>IMAP / other providers</h3>
+<ul>
+  <li>Confirm IMAP is enabled in the mail provider (some free plans disable it)</li>
+  <li>Verify host, port, username, and app password if 2FA is on</li>
+  <li>Some cloud hosts block SMTP ports — outbound replies may fail even when inbound works; ask your operator about SMTP connectivity</li>
+</ul>
+<h3>Forwarding setups</h3>
+<ul>
+  <li>Confirm forwarding is enabled in the source provider (some free tiers block forwarding)</li>
+  <li>Forward to a mailbox you connected via Google OAuth in <%= installation_brand_name %></li>
+  <li>Allow a few minutes for propagation after changing DNS or forwarding rules</li>
+</ul>
+
+<h2>Can read email but cannot send replies</h2>
+<ul>
+  <li>IMAP-only misconfiguration — SMTP host, port, or credentials may be wrong</li>
+  <li>Gmail or Microsoft OAuth token expired — reconnect the inbox</li>
+  <li>Provider daily sending limits reached</li>
+  <li>Hosting firewall blocking ports 587 or 465 on self-hosted deployments</li>
+</ul>
+
+<h2>Website chat widget not showing</h2>
+<ol>
+  <li>Confirm the widget script is on the live site (not only a staging copy)</li>
+  <li>Place the script before <code>&lt;/body&gt;</code></li>
+  <li>Disable ad blockers when testing</li>
+  <li>Check browser console for JavaScript errors on your site</li>
+  <li>Verify the inbox is active and has agents assigned</li>
+</ol>
+
+<h2>Website chat messages not in the dashboard</h2>
+<ul>
+  <li>Confirm the website token in the script matches the inbox in <%= installation_brand_name %></li>
+  <li>Check conversation filters (status, assignee, inbox)</li>
+  <li>Ensure agents are collaborators on that website inbox</li>
+</ul>
+
+<h2>Conversations missing or empty list</h2>
+<ul>
+  <li>Clear sidebar filters (assignee, status, label, date)</li>
+  <li>Switch from <strong>My Inbox</strong> to <strong>All conversations</strong></li>
+  <li>Confirm you have access to the relevant inbox</li>
+  <li>Resolved conversations may be hidden depending on view settings</li>
+</ul>
+
+<h2>Macros or canned responses not visible</h2>
+<ul>
+  <li><strong>Macros</strong> — admin must create and publish them; run from conversation sidebar → Macros</li>
+  <li><strong>Canned responses</strong> — may be private to creator unless shared; check Settings → Canned responses</li>
+  <li>Your role may not have permission for certain settings items</li>
+</ul>
+
+<h2>Captain / Copilot not available</h2>
+<ul>
+  <li>Feature may be disabled or plan-limited — see <a href="<%= guide_page_path('captain') %>">Captain AI</a></li>
+  <li>Admin must attach an assistant to the inbox under Captain → Inboxes</li>
+  <li>Document limits or credit limits may block new AI actions</li>
+</ul>
+
+<h2>Notifications not working</h2>
+<ul>
+  <li>Enable browser notifications when prompted</li>
+  <li>Check <strong>Profile settings → Notifications</strong> for email and push preferences</li>
+  <li>Corporate email filters may block alert messages</li>
+</ul>
+
+<h2>Slow performance or errors after login</h2>
+<ul>
+  <li>Hard refresh the app (<kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> or <kbd>Cmd</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd>)</li>
+  <li>Try another browser to rule out extensions</li>
+  <li>Large attachment uploads may time out on slow networks</li>
+</ul>
+
+<h2>Social channels (Facebook, Instagram, etc.)</h2>
+<ul>
+  <li>Reauthorize inbox after Meta password or Page role change</li>
+  <li>Confirm your Facebook user still has Admin on the Page</li>
+  <li>Instagram must stay linked to the Facebook Page</li>
+  <li>See <a href="<%= guide_page_path('channel-social') %>">Social messaging guide</a></li>
+</ul>
+
+<h2>SMS / voice not working</h2>
+<ul>
+  <li>Verify Twilio/Bandwidth webhook URL and credentials</li>
+  <li>Check provider account balance and number capabilities</li>
+  <li>See <a href="<%= guide_page_path('channel-sms') %>">SMS & voice guide</a></li>
+</ul>
+
+<h2>Automations not firing</h2>
+<ul>
+  <li>Confirm automation is <strong>active</strong></li>
+  <li>Check event type matches (e.g. message_created vs conversation_created)</li>
+  <li>Conditions may be too strict — test with one condition removed</li>
+  <li>See <a href="<%= guide_page_path('automations-bots') %>">Automations guide</a></li>
+</ul>
+
+<h2>Webhook bot not replying</h2>
+<ul>
+  <li>Outgoing URL must be HTTPS and return valid API responses</li>
+  <li>Check server logs for incoming POST from <%= installation_brand_name %></li>
+  <li>Confirm bot is attached in inbox Configuration</li>
+</ul>
+
+<h2>Slack / integrations</h2>
+<ul>
+  <li>Reinstall Slack app if workspace was revoked</li>
+  <li>Webhook integrations: verify URL returns 200 and events are subscribed</li>
+  <li>See <a href="<%= guide_page_path('integrations') %>">Integrations guide</a></li>
+</ul>
+
+<h2>SLA clocks wrong</h2>
+<ul>
+  <li>Check account timezone under account settings</li>
+  <li>Verify business hours on inbox vs SLA policy</li>
+  <li>See <a href="<%= guide_page_path('sla-workflow') %>">SLA & workflow guide</a></li>
+</ul>
+
+<h2>Help Center not public</h2>
+<ul>
+  <li>Articles must be <strong>Published</strong>, not draft</li>
+  <li>Portal must be enabled; check slug and locale in URL</li>
+  <li>See <a href="<%= guide_page_path('help-center') %>">Help Center guide</a></li>
+</ul>
+
+<h2>Campaign not sending</h2>
+<ul>
+  <li>Live chat: verify URL trigger matches live site</li>
+  <li>WhatsApp: template must be approved in Meta</li>
+  <li>SMS: audience must have valid phone numbers and opt-in</li>
+  <li>See <a href="<%= guide_page_path('campaigns') %>">Campaigns guide</a></li>
+</ul>
+
+<h2>Topic index</h2>
+<p>Full documentation by area:</p>
+<ul>
+  <li><a href="<%= guide_page_path('workspace-setup') %>">Workspace setup</a> ·
+      <a href="<%= guide_page_path('conversations') %>">Conversations</a> ·
+      <a href="<%= guide_page_path('agents') %>">Agents</a> ·
+      <a href="<%= guide_page_path('contacts-companies') %>">Contacts</a></li>
+  <li><a href="<%= guide_page_path('admin') %>">Admin</a> ·
+      <a href="<%= guide_page_path('teams-labels') %>">Teams & labels</a> ·
+      <a href="<%= guide_page_path('sla-workflow') %>">SLA</a> ·
+      <a href="<%= guide_page_path('security-roles') %>">Security</a></li>
+  <li><a href="<%= guide_page_path('channels') %>">Channels</a> ·
+      <a href="<%= guide_page_path('channel-email') %>">Email</a> ·
+      <a href="<%= guide_page_path('channel-website') %>">Website</a> ·
+      <a href="<%= guide_page_path('channel-whatsapp') %>">WhatsApp</a></li>
+  <li><a href="<%= guide_page_path('captain') %>">Captain</a> ·
+      <a href="<%= guide_page_path('macros-canned') %>">Macros</a> ·
+      <a href="<%= guide_page_path('automations-bots') %>">Automations</a> ·
+      <a href="<%= guide_page_path('campaigns') %>">Campaigns</a></li>
+  <li><a href="<%= guide_page_path('reports') %>">Reports</a> ·
+      <a href="<%= guide_page_path('help-center') %>">Help Center</a> ·
+      <a href="<%= guide_page_path('integrations') %>">Integrations</a></li>
+</ul>
+
+<h2>Still stuck?</h2>
+<p>Email <a href="mailto:info@samabrains.com">info@samabrains.com</a> with:</p>
+<ul>
+  <li>Workspace name and your role (admin or agent)</li>
+  <li>Inbox type (email, website, WhatsApp, etc.)</li>
+  <li>What you expected vs what happened</li>
+  <li>Screenshots and approximate time of the issue</li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Related guides:</strong>
+  <a href="<%= guide_page_path('channels') %>">Connect channels</a> ·
+  <a href="<%= guide_page_path('whatsapp-errors') %>">WhatsApp errors</a> ·
+  <a href="<%= guide_page_path('workspace-setup') %>">Workspace setup</a></p>
+</div>

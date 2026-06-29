@@ -43,6 +43,9 @@ Rails.application.routes.draw do
   get '/privacy', to: 'legal#privacy'
   get '/privacy-policy', to: redirect('/privacy')
   get '/terms', to: 'legal#terms'
+  get '/guide', to: 'legal#guide', as: :guide
+  get '/guide/:page', to: 'legal#guide_page', as: :guide_page
+  get '/docs', to: redirect('/guide')
   get '/api', to: 'api#index'
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do

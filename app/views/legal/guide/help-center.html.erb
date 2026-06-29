@@ -1,0 +1,74 @@
+<% content_for :title do %>Help Center | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Publish a public Help Center knowledge base for your customers in <%= installation_brand_name %>.<% end %>
+
+<h1>Help Center</h1>
+<p class="lead">
+  The <strong>Help Center</strong> is a public knowledge base <em>your business</em> publishes for <em>your customers</em>
+  (e.g. FAQs, how-to articles). It is separate from this <%= installation_brand_name %> User Guide on the homepage.
+</p>
+
+<h2>Public URL</h2>
+<p>After creating a portal, customers access articles at:</p>
+<p><code>https://your-domain.com/hc/your-portal-slug/en</code></p>
+<p>No login required for readers. You control slug, locale, and branding.</p>
+
+<h2>Create a portal</h2>
+<ol>
+  <li><strong>Help Center</strong> in sidebar → create portal</li>
+  <li>Name and <strong>slug</strong> (URL segment)</li>
+  <li>Choose layout: <strong>Classic</strong> (help site) or <strong>Documentation</strong> (docs-style sidebar)</li>
+  <li>Configure logo, colors, custom domain (optional)</li>
+</ol>
+
+<h2>Articles & categories</h2>
+<ul>
+  <li><strong>Articles</strong> — write content in the built-in editor; set status to Published</li>
+  <li><strong>Categories</strong> — organize articles; appear in portal navigation</li>
+  <li><strong>Locales</strong> — add languages; community translations may apply on cloud</li>
+</ul>
+
+<h2>Who can edit</h2>
+<ul>
+  <li><strong>Administrators</strong> — full create/edit by default</li>
+  <li><strong>Agents</strong> — usually read-only unless custom role grants <code>knowledge_base_manage</code> (Enterprise)</li>
+</ul>
+
+<h2>Link from chat widget</h2>
+<p>Point website widget or auto-replies to Help Center URLs so customers self-serve before chatting.</p>
+
+<h2>Captain integration</h2>
+<p>Connect Help Center articles as <a href="<%= guide_page_path('captain') %>">Captain documents</a> so AI answers align with published content.</p>
+
+<h2>SEO & discovery</h2>
+<ul>
+  <li>Set meta title and description per article</li>
+  <li>Use clear titles customers actually search for</li>
+  <li>Submit sitemap to search engines if custom domain is configured</li>
+</ul>
+
+<h2>Help Center vs this User Guide</h2>
+<table style="width:100%; border-collapse:collapse; font-size:0.875rem; margin:1rem 0;">
+  <thead>
+    <tr style="border-bottom:1px solid #e2e8f0; text-align:left;">
+      <th style="padding:0.5rem;">Resource</th>
+      <th style="padding:0.5rem;">Audience</th>
+      <th style="padding:0.5rem;">URL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="border-bottom:1px solid #f1f5f9;">
+      <td style="padding:0.5rem;"><strong>User Guide</strong></td>
+      <td style="padding:0.5rem;">Teams using <%= installation_brand_name %></td>
+      <td style="padding:0.5rem;"><code>/guide</code></td>
+    </tr>
+    <tr>
+      <td style="padding:0.5rem;"><strong>Help Center</strong></td>
+      <td style="padding:0.5rem;">Your end customers</td>
+      <td style="padding:0.5rem;"><code>/hc/your-slug</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="cta-box">
+  <p><strong>Platform docs you are reading now:</strong> <a href="<%= guide_path %>">User Guide home</a></p>
+</div>

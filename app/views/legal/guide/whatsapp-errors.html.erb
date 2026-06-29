@@ -1,0 +1,93 @@
+<% content_for :title do %>WhatsApp errors | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>
+  Resolve common WhatsApp Business and Meta errors when connecting WhatsApp to <%= installation_brand_name %>.
+<% end %>
+
+<h1>WhatsApp errors</h1>
+<p class="lead">
+  WhatsApp in <%= installation_brand_name %> uses Meta’s WhatsApp Cloud API.
+  Most connection problems come from Meta Business account status, permissions, or phone number setup — not from your inbox settings alone.
+</p>
+
+<h2>Before you troubleshoot</h2>
+<ul>
+  <li>You need a <strong>Meta Business account</strong> and permission to manage WhatsApp assets</li>
+  <li>Embedded signup must be configured on this installation (operator sets app ID, secret, and configuration ID)</li>
+  <li>The phone number should not already be active on WhatsApp personal app or another BSP without migration</li>
+</ul>
+<p>Setup steps: <a href="<%= guide_page_path('channels') %>">Connect channels → WhatsApp Business</a>.</p>
+
+<h2>Error: WhatsApp Business account is restricted (#2655121)</h2>
+<p><strong>What it means:</strong> Meta has limited your WhatsApp Business Account (WABA). New connections or messaging may fail until resolved.</p>
+<p><strong>What to do:</strong></p>
+<ol>
+  <li>Open <a href="https://business.facebook.com/business-support-home" rel="noopener noreferrer">Meta Business Support Home</a>.</li>
+  <li>Find the restriction notice and follow Meta’s requested steps (verify business, appeal, or submit documents).</li>
+  <li>Wait for Meta to lift the restriction — this can take hours or days.</li>
+  <li>Retry <strong>Connect with WhatsApp Business</strong> in <%= installation_brand_name %> after Meta confirms the account is active.</li>
+</ol>
+<p>
+  If the account cannot be restored, create a new WABA with a different verified business profile or phone number during embedded signup.
+</p>
+
+<h2>Error: Embedded signup does not appear</h2>
+<p><strong>Possible causes:</strong></p>
+<ul>
+  <li>WhatsApp embedded signup is not configured in Super Admin on self-hosted installations</li>
+  <li>The feature flag for your account is off</li>
+  <li>Your user role cannot add inboxes</li>
+</ul>
+<p><strong>What to do:</strong> Ask your installation operator to verify WhatsApp app credentials and that your workspace may use embedded signup. Then go to <strong>Settings → Inboxes → Add inbox → WhatsApp</strong>.</p>
+
+<h2>Error: Permission or OAuth denied during connect</h2>
+<p><strong>What to do:</strong></p>
+<ol>
+  <li>Complete Meta login with a user who has <strong>Manage</strong> access to the WhatsApp account and business assets.</li>
+  <li>Grant <code>whatsapp_business_management</code>, <code>whatsapp_business_messaging</code>, and <code>business_management</code> when prompted.</li>
+  <li>If you denied permissions, remove the app from Meta Business integrations and connect again.</li>
+</ol>
+
+<h2>Error: Phone number already in use</h2>
+<p><strong>What it means:</strong> The number is registered on WhatsApp (consumer app) or another provider.</p>
+<p><strong>What to do:</strong></p>
+<ul>
+  <li>Delete the number from WhatsApp on the phone, or use Meta’s number migration flow if moving from another BSP</li>
+  <li>Use a dedicated business number not tied to a personal WhatsApp account</li>
+  <li>After migration, wait a few minutes and retry embedded signup</li>
+</ul>
+
+<h2>Messages not delivered to customers</h2>
+<ul>
+  <li><strong>24-hour session window</strong> — Outside the customer service window you may need an approved message template for outbound messages</li>
+  <li><strong>Template not approved</strong> — Check template status in Meta WhatsApp Manager</li>
+  <li><strong>Country restriction</strong> — Meta may block messaging in certain regions; check Business Support for policy notices</li>
+  <li><strong>Webhook issues</strong> — Inbox should auto-configure webhooks; if inbound messages never arrive, ask your operator to confirm the public webhook URL is reachable</li>
+</ul>
+
+<h2>Inbound messages not appearing in <%= installation_brand_name %></h2>
+<ol>
+  <li>Send a test message <em>to</em> your connected WhatsApp business number from a personal phone.</li>
+  <li>Confirm the conversation is not filtered (wrong inbox, status, or assignee filter).</li>
+  <li>Verify the installation’s public URL (<code>FRONTEND_URL</code>) matches the domain Meta can reach for webhooks.</li>
+  <li>Reconnect the inbox if the token expired after a Meta password or security change.</li>
+</ol>
+
+<h2>Quality rating and messaging limits</h2>
+<p>
+  Meta assigns quality ratings based on customer blocks and reports. Low quality reduces daily messaging limits.
+  Improve opt-in practices, respond quickly, and avoid spammy templates. Monitor limits in WhatsApp Manager.
+</p>
+
+<h2>When to contact support</h2>
+<p>Contact <a href="mailto:info@samabrains.com">info@samabrains.com</a> with:</p>
+<ul>
+  <li>Workspace name and inbox name</li>
+  <li>Exact Meta error code and screenshot</li>
+  <li>Time the error occurred and steps you already tried</li>
+</ul>
+<p>For account restrictions, Meta — not <%= installation_brand_name %> — must clear the WABA status.</p>
+
+<div class="cta-box">
+  <p><strong>Related:</strong> <a href="<%= guide_page_path('channels') %>">Connect channels</a> ·
+  <a href="<%= guide_page_path('troubleshooting') %>">General troubleshooting</a></p>
+</div>

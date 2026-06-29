@@ -1,0 +1,85 @@
+<% content_for :title do %>Conversations | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Manage conversations in <%= installation_brand_name %>: views, assignment, status, labels, folders, teams, and search.<% end %>
+
+<h1>Conversations</h1>
+<p class="lead">
+  Conversations are customer threads across all connected channels. Use the sidebar to filter by assignee, team, inbox, label, or custom folder.
+</p>
+
+<h2>Main views</h2>
+<ul>
+  <li><strong>Inbox</strong> — notifications and @mentions assigned to you</li>
+  <li><strong>All conversations</strong> — every conversation you can access</li>
+  <li><strong>Mentions</strong> — threads where a teammate @mentioned you in a private note</li>
+  <li><strong>Participating</strong> — conversations you joined or replied in</li>
+  <li><strong>Unattended</strong> — open conversations with no assignee (if enabled)</li>
+</ul>
+
+<h2>Filter by team, channel, or label</h2>
+<p>Under <strong>Conversations</strong> in the sidebar:</p>
+<ul>
+  <li><strong>Teams</strong> — conversations assigned to a team</li>
+  <li><strong>Channels</strong> — filter by inbox (website, email, WhatsApp, etc.)</li>
+  <li><strong>Labels</strong> — filter by conversation label</li>
+  <li><strong>Folders</strong> — saved custom views (filters you define)</li>
+</ul>
+
+<h2>Conversation list controls</h2>
+<ul>
+  <li><strong>Status</strong> — open, resolved, pending, snoozed (availability varies by settings)</li>
+  <li><strong>Sort</strong> — latest activity, created date, priority</li>
+  <li><strong>Search</strong> — global search (top bar) for conversations, contacts, messages</li>
+  <li><strong>Bulk actions</strong> — select multiple conversations to assign, label, or resolve (admin/agent permissions apply)</li>
+</ul>
+
+<h2>Inside a conversation</h2>
+<h3>Header</h3>
+<ul>
+  <li>Assignee and team</li>
+  <li>Status (open / resolved / pending)</li>
+  <li>Priority (if enabled)</li>
+  <li>SLA indicators (if SLA policies apply)</li>
+</ul>
+<h3>Composer</h3>
+<ul>
+  <li><strong>Reply</strong> — message visible to the customer</li>
+  <li><strong>Private note</strong> — internal only; use @name to mention teammates</li>
+  <li>Attachments, emoji, canned responses, voice notes (channel-dependent)</li>
+  <li><strong>Email</strong> — CC/BCC when channel is email</li>
+</ul>
+<h3>Right sidebar</h3>
+<ul>
+  <li>Contact profile and conversation history</li>
+  <li>Labels, participants, macros</li>
+  <li>Copilot (Captain) when enabled</li>
+  <li>Contact custom attributes</li>
+</ul>
+
+<h2>Assignment</h2>
+<ul>
+  <li>Manual assign from conversation header</li>
+  <li>Auto-assignment via inbox settings or <a href="<%= guide_page_path('sla-workflow') %>">assignment policies</a></li>
+  <li>Team assignment for group ownership</li>
+  <li>Round-robin and capacity rules (if advanced assignment is enabled)</li>
+</ul>
+
+<h2>Resolve, reopen, snooze</h2>
+<ul>
+  <li><strong>Resolve</strong> when the issue is complete — may trigger CSAT survey</li>
+  <li><strong>Reopen</strong> if the customer replies or you need to continue</li>
+  <li><strong>Snooze</strong> — hide until a later time (if enabled)</li>
+</ul>
+
+<h2>Compose new conversation</h2>
+<p>Click the <strong>compose</strong> (pen) icon in the sidebar to start an outbound conversation where the channel supports it (email, SMS, some messaging channels).</p>
+
+<h2>Keyboard & productivity</h2>
+<ul>
+  <li>Use global search to jump to contacts or messages quickly</li>
+  <li>Macros for repetitive multi-step actions — see <a href="<%= guide_page_path('macros-canned') %>">Macros & canned responses</a></li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Agents:</strong> <a href="<%= guide_page_path('agents') %>">For agents</a> ·
+  <strong>Admins:</strong> <a href="<%= guide_page_path('teams-labels') %>">Teams & labels</a></p>
+</div>

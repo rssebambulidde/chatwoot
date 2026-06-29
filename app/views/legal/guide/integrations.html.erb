@@ -1,0 +1,65 @@
+<% content_for :title do %>Integrations | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Integrate <%= installation_brand_name %> with Slack, webhooks, Linear, Notion, Shopify, and dashboard apps.<% end %>
+
+<h1>Integrations</h1>
+<p class="lead">
+  Connect <%= installation_brand_name %> to other tools your team already uses.
+  Manage from <strong>Settings → Integrations</strong>.
+</p>
+
+<h2>Slack</h2>
+<ul>
+  <li>Receive notifications for new conversations and assignments in Slack channels</li>
+  <li>Reply to some conversation types from Slack (configuration-dependent)</li>
+  <li>Install from Integrations → Slack and authorize workspace</li>
+</ul>
+
+<h2>Webhooks</h2>
+<p>Send account events to your HTTPS endpoint:</p>
+<ul>
+  <li>Conversation created / updated / resolved</li>
+  <li>Message created</li>
+  <li>Contact created / updated</li>
+</ul>
+<ol>
+  <li><strong>Integrations → Webhooks → Add</strong></li>
+  <li>URL and subscribed events</li>
+  <li>Validate signature if your consumer supports it</li>
+</ol>
+<p>Distinct from <a href="<%= guide_page_path('automations-bots') %>">agent bot webhooks</a> which are per-inbox conversational bots.</p>
+
+<h2>Dashboard apps</h2>
+<p>Embed iframe apps in the conversation sidebar (CRM panels, order lookup). Developers register apps with URLs and permissions.</p>
+
+<h2>Linear</h2>
+<p>Link conversations to Linear issues for engineering handoff. Connect OAuth from Integrations → Linear.</p>
+
+<h2>Notion</h2>
+<p>Sync or link knowledge from Notion where integration is enabled on your plan.</p>
+
+<h2>Shopify</h2>
+<p>View customer orders in sidebar when Shopify store is connected. Requires Shopify app install and OAuth.</p>
+
+<h2>Open AI / translation / other apps</h2>
+<p>Additional apps appear based on installation features. Enable from Integrations and follow in-app prompts.</p>
+
+<h2>API access</h2>
+<p>Developers use:</p>
+<ul>
+  <li><strong>Account API</strong> — conversations, contacts, messages (Bearer agent token)</li>
+  <li><strong>Platform API</strong> — account-scoped REST under <code>/api/v1/accounts/:id/</code></li>
+  <li><strong>Client APIs</strong> — website widget SDK</li>
+</ul>
+<p>Refer to API documentation on your installation for authentication and rate limits.</p>
+
+<h2>Security</h2>
+<ul>
+  <li>Rotate API tokens when staff leave</li>
+  <li>Use HTTPS only for webhooks</li>
+  <li>Scope integrations to least privilege</li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Automation:</strong> <a href="<%= guide_page_path('automations-bots') %>">Automations & bots</a> ·
+  <a href="<%= guide_page_path('security-roles') %>">Security & roles</a></p>
+</div>

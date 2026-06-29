@@ -1,0 +1,78 @@
+<% content_for :title do %>Admin overview | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Workspace administration in <%= installation_brand_name %>: account settings, agents, inboxes, audit logs, and billing.<% end %>
+
+<h1>Admin overview</h1>
+<p class="lead">
+  Workspace <strong>administrators</strong> configure <%= installation_brand_name %> for the whole organization.
+  The first user in a new workspace is usually an admin.
+</p>
+
+<h2>Settings menu map</h2>
+<ul>
+  <li><strong>Account settings</strong> — workspace name, locale, domain, features</li>
+  <li><strong>Agents</strong> — invite users, roles, availability</li>
+  <li><strong>Teams</strong> — agent groups — <a href="<%= guide_page_path('teams-labels') %>">Teams & labels guide</a></li>
+  <li><strong>Agent assignment</strong> — round-robin, capacity (if enabled)</li>
+  <li><strong>Inboxes</strong> — all channel connections — <a href="<%= guide_page_path('channels') %>">Channels overview</a></li>
+  <li><strong>Labels</strong> — conversation tags</li>
+  <li><strong>Custom attributes</strong> — extra fields on contacts, companies, conversations</li>
+  <li><strong>Automation</strong> — event rules — <a href="<%= guide_page_path('automations-bots') %>">Automations guide</a></li>
+  <li><strong>Agent bots</strong> — webhook bots</li>
+  <li><strong>Macros</strong> — multi-step agent actions</li>
+  <li><strong>Canned responses</strong> — reply snippets</li>
+  <li><strong>Integrations</strong> — Slack, webhooks, apps — <a href="<%= guide_page_path('integrations') %>">Integrations guide</a></li>
+  <li><strong>Audit logs</strong> — who changed what (Enterprise / plan-dependent)</li>
+  <li><strong>Custom roles</strong> — fine-grained permissions — <a href="<%= guide_page_path('security-roles') %>">Security & roles</a></li>
+  <li><strong>SLA</strong> — response time policies — <a href="<%= guide_page_path('sla-workflow') %>">SLA & workflow</a></li>
+  <li><strong>Conversation workflow</strong> — resolve rules, auto-assignment</li>
+  <li><strong>Security</strong> — MFA, session policies</li>
+  <li><strong>Billing</strong> — plan and usage (cloud / hosted installs)</li>
+</ul>
+
+<h2>Account settings</h2>
+<ul>
+  <li>Workspace name and support email</li>
+  <li>Account locale and timezone</li>
+  <li>Auto-resolve duration (optional)</li>
+  <li>Feature flags visible to your plan</li>
+</ul>
+
+<h2>Manage agents</h2>
+<ol>
+  <li><strong>Settings → Agents → Add agent</strong></li>
+  <li>Enter email; user receives invite</li>
+  <li>Role: <strong>Administrator</strong> or <strong>Agent</strong></li>
+  <li>Custom roles override defaults when configured</li>
+  <li>Set agent availability (online / busy / offline) from profile</li>
+</ol>
+
+<h2>Manage inboxes</h2>
+<p>See <a href="<%= guide_page_path('channels') %>">Channels overview</a> for every channel type. After creating an inbox, always add collaborators and test inbound/outbound messages.</p>
+
+<h2>Captain (AI)</h2>
+<p>Configured from the <strong>Captain</strong> sidebar section, not only Settings. See <a href="<%= guide_page_path('captain') %>">Captain AI guide</a>.</p>
+
+<h2>Help Center (your customers’ docs)</h2>
+<p>Separate from this User Guide. Your workspace can publish a public KB at <code>/hc/your-slug</code>. See <a href="<%= guide_page_path('help-center') %>">Help Center guide</a>.</p>
+
+<h2>Audit logs</h2>
+<p>Review agent actions: settings changes, conversation exports, login events. Useful for compliance and debugging permission issues.</p>
+
+<h2>Billing</h2>
+<p>On hosted plans, <strong>Settings → Billing</strong> shows subscription, seats, and Captain credits. Self-hosted operators manage billing outside the app.</p>
+
+<h2>Admin onboarding checklist</h2>
+<ol>
+  <li>Complete account settings and timezone</li>
+  <li>Invite agents and create teams</li>
+  <li>Connect at least one inbox and test</li>
+  <li>Create labels and canned responses</li>
+  <li>Configure SLA and workflow if needed</li>
+  <li>Enable integrations (Slack, etc.)</li>
+  <li>Set up Captain or bots if using automation</li>
+  <li>Publish Help Center articles for end customers (optional)</li>
+</ol>
+
+<div class="cta-box">
+  <p><strong>New workspace?</strong> Start with <a href="<%= guide_page_path('workspace-setup') %>">Workspace setup</a>.</p>
+</div>

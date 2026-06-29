@@ -1,0 +1,71 @@
+<% content_for :title do %>Email channels | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Connect email to <%= installation_brand_name %>: Gmail OAuth, Microsoft 365, IMAP/SMTP, and forward-to-email.<% end %>
+
+<h1>Email channels</h1>
+<p class="lead">
+  Email inboxes let agents read and reply to customer support mail inside <%= installation_brand_name %>.
+  Choose the connection method that fits your mail provider.
+</p>
+
+<h2>Google (Gmail / Google Workspace)</h2>
+<p><strong>Recommended</strong> for Gmail and Google Workspace.</p>
+<ol>
+  <li><strong>Settings → Inboxes → Add inbox → Email → Google</strong></li>
+  <li>Sign in with the mailbox that receives support email</li>
+  <li>Grant OAuth permissions for read/send</li>
+  <li>Send a test email to that address; confirm it appears as a conversation</li>
+  <li>Reply from <%= installation_brand_name %> and verify delivery to the customer</li>
+</ol>
+<p>Revoke access anytime at <a href="https://myaccount.google.com/permissions" rel="noopener noreferrer">Google Account permissions</a>. Reauthorize from inbox settings if tokens expire.</p>
+
+<h2>Microsoft 365 / Outlook</h2>
+<ol>
+  <li><strong>Email → Microsoft</strong></li>
+  <li>Sign in with the support Microsoft account</li>
+  <li>Operator must configure Microsoft OAuth app credentials on the installation</li>
+</ol>
+
+<h2>Other providers (IMAP + SMTP)</h2>
+<p>For Zoho, cPanel, custom domains, or any host without OAuth:</p>
+<ol>
+  <li><strong>Email → Other providers</strong></li>
+  <li>Enter IMAP host, port, SSL, username, password</li>
+  <li>Enter SMTP host, port, and credentials for outbound mail</li>
+  <li>Enable IMAP in your mail provider admin (required on Zoho, etc.)</li>
+</ol>
+<p><strong>Note:</strong> Some cloud hosts block SMTP ports 587/465. Inbound may work while outbound fails — use OAuth or ask your host operator.</p>
+
+<h2>Forward to email</h2>
+<p>When supported by your mail provider:</p>
+<ol>
+  <li>Create inbox with <strong>Forward to email</strong> option</li>
+  <li><%= installation_brand_name %> provides a forwarding address</li>
+  <li>Set your support@domain to forward to that address</li>
+  <li>Configure SMTP separately for replies if required</li>
+</ol>
+<p>Many free mail plans restrict forwarding or IMAP.</p>
+
+<h2>Forwarding via Gmail (workaround)</h2>
+<ol>
+  <li>Forward support@yourdomain.com → a Gmail inbox you control</li>
+  <li>Connect that Gmail inbox with Google OAuth</li>
+</ol>
+
+<h2>Email-specific features</h2>
+<ul>
+  <li><strong>CC / BCC</strong> in reply composer</li>
+  <li><strong>HTML</strong> email rendering in thread</li>
+  <li><strong>Attachments</strong> inbound and outbound</li>
+  <li>Threading by subject and participants</li>
+</ul>
+
+<h2>Best practices</h2>
+<ul>
+  <li>Use a dedicated support@ address, not personal mail</li>
+  <li>Set SPF/DKIM on your domain for deliverability when using custom SMTP</li>
+  <li>Reconnect OAuth after password or MFA changes</li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Problems?</strong> <a href="<%= guide_page_path('troubleshooting') %>">Troubleshooting → Email</a></p>
+</div>

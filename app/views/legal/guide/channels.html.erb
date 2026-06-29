@@ -1,0 +1,60 @@
+<% content_for :title do %>Channels overview | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Overview of inbox channels in <%= installation_brand_name %>: website, email, WhatsApp, social, SMS, voice, and API.<% end %>
+
+<h1>Channels overview</h1>
+<p class="lead">
+  Every customer touchpoint in <%= installation_brand_name %> connects through an <strong>inbox</strong>.
+  Admins create inboxes under <strong>Settings → Inboxes → Add inbox</strong>.
+</p>
+
+<h2>How inboxes work</h2>
+<ul>
+  <li>One inbox = one channel connection (e.g. one Gmail address, one website widget, one WhatsApp number)</li>
+  <li>Agents must be added as <strong>collaborators</strong> on an inbox to see its conversations</li>
+  <li>Each inbox has its own configuration: business hours, CSAT, pre-chat form, bots, Captain attachment</li>
+  <li>Conversations are grouped by inbox in the sidebar under <strong>Channels</strong></li>
+</ul>
+
+<h2>Available channel types</h2>
+<ul>
+  <li><a href="<%= guide_page_path('channel-website') %>">Website live chat</a> — embeddable widget on your site</li>
+  <li><a href="<%= guide_page_path('channel-email') %>">Email</a> — Google, Microsoft, IMAP/SMTP, forward-to-email</li>
+  <li><a href="<%= guide_page_path('channel-whatsapp') %>">WhatsApp</a> — Meta Cloud API / embedded signup</li>
+  <li><a href="<%= guide_page_path('channel-social') %>">Social messaging</a> — Facebook, Instagram, Twitter/X, TikTok, Telegram, Line</li>
+  <li><a href="<%= guide_page_path('channel-sms') %>">SMS & voice</a> — Twilio, Bandwidth, voice calls</li>
+  <li><strong>API channel</strong> — custom integrations via REST API (see <a href="<%= guide_page_path('automations-bots') %>">Automations & bots</a>)</li>
+</ul>
+
+<h2>Standard setup flow</h2>
+<ol>
+  <li><strong>Settings → Inboxes → Add inbox</strong></li>
+  <li>Pick channel type and complete provider authorization</li>
+  <li>Name the inbox and add agents on the collaborators step</li>
+  <li>Open inbox settings: configuration, business hours, CSAT, widget/script</li>
+  <li>Send a test message from the customer side</li>
+</ol>
+
+<h2>Inbox settings reference</h2>
+<ul>
+  <li><strong>Collaborators</strong> — which agents access this inbox</li>
+  <li><strong>Configuration</strong> — channel-specific options, bot attachment, greeting</li>
+  <li><strong>Business hours</strong> — offline message and availability</li>
+  <li><strong>CSAT</strong> — post-conversation satisfaction survey</li>
+  <li><strong>Pre-chat form</strong> — collect name/email before chat (website)</li>
+  <li><strong>Widget builder</strong> — colors, position, launcher (website)</li>
+  <li><strong>Reauthorize</strong> — refresh OAuth when tokens expire</li>
+</ul>
+
+<h2>Choosing the right channel</h2>
+<ul>
+  <li><strong>B2C support on your site</strong> → Website chat</li>
+  <li><strong>support@company.com</strong> → Gmail or Microsoft OAuth; IMAP if OAuth unavailable</li>
+  <li><strong>WhatsApp-heavy markets</strong> → WhatsApp Business inbox</li>
+  <li><strong>Social DMs</strong> → Facebook / Instagram / TikTok inboxes</li>
+  <li><strong>Transactional SMS</strong> → Twilio or Bandwidth SMS inbox</li>
+</ul>
+
+<div class="cta-box">
+  <p><strong>Issues?</strong> <a href="<%= guide_page_path('troubleshooting') %>">Troubleshooting</a> ·
+  <a href="<%= guide_page_path('whatsapp-errors') %>">WhatsApp errors</a></p>
+</div>

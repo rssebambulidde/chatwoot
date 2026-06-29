@@ -1,0 +1,62 @@
+<% content_for :title do %>Contacts & companies | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>Manage contacts and companies in <%= installation_brand_name %>: profiles, segments, labels, merge, and custom attributes.<% end %>
+
+<h1>Contacts & companies</h1>
+<p class="lead">
+  <%= installation_brand_name %> stores a CRM-style record for each customer. Contacts link to conversations, labels, and custom data.
+  <strong>Companies</strong> group contacts by organization (B2B).
+</p>
+
+<h2>Contacts</h2>
+<h3>Views</h3>
+<ul>
+  <li><strong>All contacts</strong> — searchable directory</li>
+  <li><strong>Active</strong> — contacts with recent activity</li>
+  <li><strong>Segments</strong> — saved filter views (custom segments)</li>
+  <li><strong>Tagged with</strong> — filter by contact label</li>
+</ul>
+
+<h3>Contact profile</h3>
+<p>Open a contact to see:</p>
+<ul>
+  <li>Name, email, phone, social IDs (from channels)</li>
+  <li>Full conversation history across inboxes</li>
+  <li>Custom attributes (admin-defined fields)</li>
+  <li>Notes and labels on the contact</li>
+  <li>Linked company (if any)</li>
+</ul>
+
+<h3>Creating and editing contacts</h3>
+<ul>
+  <li>Contacts are often created automatically when a customer messages you</li>
+  <li>Agents can edit profile fields from the conversation sidebar or Contacts page</li>
+  <li>Admins define extra fields under <strong>Settings → Custom attributes → Contact</strong></li>
+</ul>
+
+<h3>Merge contacts</h3>
+<p>When duplicate records exist (same person, two emails), admins can merge contacts from the contact actions menu. Conversation history combines into one profile.</p>
+
+<h2>Companies</h2>
+<ul>
+  <li><strong>Companies</strong> in the sidebar lists all organizations</li>
+  <li>Link contacts to a company for B2B context</li>
+  <li>Company custom attributes are configured under <strong>Settings → Custom attributes → Company</strong></li>
+  <li>Filter and search companies from the Companies dashboard</li>
+</ul>
+
+<h2>Labels on contacts</h2>
+<p>Contact labels (separate from conversation labels) help segment marketing or support lists. Filter via <strong>Tagged with</strong> in the Contacts sidebar.</p>
+
+<h2>Segments</h2>
+<p>Saved segments are dynamic filters (e.g. “customers in Kenya with open conversations”). Create segments from the Contacts UI; access them under <strong>Segments</strong> in the sidebar.</p>
+
+<h2>Import & export</h2>
+<p>Contact import/export availability depends on your plan and installation. Check Settings or ask your operator for CSV import options.</p>
+
+<h2>Privacy</h2>
+<p>Contacts hold personal data your customers provide through support channels. Handle according to your <a href="/privacy">Privacy Policy</a> and applicable data protection laws. Delete or anonymize records when required.</p>
+
+<div class="cta-box">
+  <p><strong>Related:</strong> <a href="<%= guide_page_path('teams-labels') %>">Teams & labels</a> ·
+  <a href="<%= guide_page_path('conversations') %>">Conversations</a></p>
+</div>
