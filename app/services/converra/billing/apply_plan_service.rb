@@ -3,7 +3,7 @@
 module Converra
   module Billing
     class ApplyPlanService
-      pattr_initialize [:account!, :plan_slug!, subscription_ends_on: nil]
+      pattr_initialize [:account!, :plan_slug!, { subscription_ends_on: nil }]
 
       def perform
         plan = PlanCatalog.find(plan_slug)

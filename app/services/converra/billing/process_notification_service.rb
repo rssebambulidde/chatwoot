@@ -5,7 +5,7 @@ module Converra
     class ProcessNotificationService
       COMPLETED_STATUSES = %w[COMPLETED Completed completed].freeze
 
-      pattr_initialize [:order_tracking_id!, :merchant_reference: nil]
+      pattr_initialize [:order_tracking_id!, { merchant_reference: nil }]
 
       def perform
         payment = find_payment
