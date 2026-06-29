@@ -24,6 +24,7 @@ class DashboardController < ActionController::Base
     DISABLE_USER_PROFILE_UPDATE
     DEPLOYMENT_ENV
     INSTALLATION_PRICING_PLAN
+    CONVERRA_BILLING_ENABLED
   ].freeze
 
   before_action :set_application_pack
@@ -81,7 +82,8 @@ class DashboardController < ActionController::Base
       AZURE_APP_ID: GlobalConfigService.load('AZURE_APP_ID', ''),
       GIT_SHA: GIT_HASH,
       ALLOWED_LOGIN_METHODS: allowed_login_methods,
-      ACTIVE_PLATFORM_BANNERS: active_platform_banners
+      ACTIVE_PLATFORM_BANNERS: active_platform_banners,
+      CONVERRA_BILLING_ENABLED: Converra::Billing::PlanCatalog.enabled?
     }
   end
 

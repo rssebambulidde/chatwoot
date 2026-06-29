@@ -462,6 +462,20 @@
       "BUTTON_TXT": "Chat with us"
     },
     "NO_BILLING_USER": "Your billing account is being configured. Please refresh the page and try again.",
+    "CONVERRA": {
+      "TITLE": "Workspace plan",
+      "DESCRIPTION": "Manage your Converra subscription. Pay with Pesapal (mobile money, M-Pesa, card).",
+      "CURRENT_PLAN": "Current plan",
+      "RENEWS_ON": "Renews on",
+      "EXPIRED": "Subscription expired — you are on Starter limits until you renew.",
+      "UPGRADE_GROWTH": "Upgrade to Growth — 75,000 UGX/mo",
+      "UPGRADE_BUSINESS": "Upgrade to Business — 150,000 UGX/mo",
+      "USAGE": "Usage this month",
+      "CONVERSATIONS": "Conversations",
+      "AGENTS": "Agents",
+      "CHANNELS": "Email & messaging inboxes",
+      "VIEW_PUBLIC_PRICING": "View full pricing"
+    },
     "TOPUP": {
       "BUY_CREDITS": "Buy more credits",
       "MODAL_TITLE": "Buy AI Credits",

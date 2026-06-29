@@ -27,7 +27,7 @@ class LegalController < ApplicationController
     troubleshooting
   ].freeze
 
-  helper_method :legal_site_url, :guide_page_active?
+  helper_method :legal_site_url, :guide_page_active?, :converra_plans, :converra_billing_enabled?
 
   def home; end
 
@@ -38,6 +38,10 @@ class LegalController < ApplicationController
   def privacy; end
 
   def terms; end
+
+  def pricing
+    @payment_notice = params[:payment]
+  end
 
   def guide
     @guide_page = 'index'
@@ -63,5 +67,13 @@ class LegalController < ApplicationController
 
   def guide_page_active?(page)
     @guide_page == page
+  end
+
+  def converra_plans
+    Converra::Billing::PlanCatalog.plans
+  end
+
+  def converra_billing_enabled?
+    Converra::Billing::PlanCatalog.enabled?
   end
 end

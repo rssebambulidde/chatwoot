@@ -46,6 +46,10 @@ Rails.application.routes.draw do
   get '/guide', to: 'legal#guide', as: :guide
   get '/guide/:page', to: 'legal#guide_page', as: :guide_page
   get '/docs', to: redirect('/guide')
+  get '/pricing', to: 'legal#pricing', as: :pricing
+  get '/billing/payment/callback', to: 'billing/payment#callback', as: :billing_payment_callback
+  post '/webhooks/pesapal', to: 'webhooks/pesapal#process_payload'
+  get '/webhooks/pesapal', to: 'webhooks/pesapal#process_payload'
   get '/api', to: 'api#index'
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
@@ -55,6 +59,8 @@ Rails.application.routes.draw do
         member do
           post :update_active_at
           get :cache_keys
+          get 'converra_billing/status', to: 'accounts/converra_billing#status'
+          post 'converra_billing/checkout', to: 'accounts/converra_billing#checkout'
         end
 
         scope module: :accounts do

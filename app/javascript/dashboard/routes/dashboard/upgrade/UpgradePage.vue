@@ -27,6 +27,9 @@ const { isEnterprise } = useConfig();
 const { isAdmin } = useAdmin();
 
 const isOnChatwootCloud = useMapGetter('globalConfig/isOnChatwootCloud');
+const isConverraBillingEnabled = useMapGetter(
+  'globalConfig/isConverraBillingEnabled'
+);
 
 const testLimit = ({ allowed, consumed }) => {
   return consumed > allowed;
@@ -84,16 +87,28 @@ const isLimitExceeded = computed(() => {
 });
 
 const shouldShowUpgradePage = computed(() => {
-  // Skip upgrade page in Billing, Inbox, and Agent pages
   if (props.bypassUpgradePage) return false;
-  if (!isOnChatwootCloud.value) return false;
+  if (!isOnChatwootCloud.value && !isConverraBillingEnabled.value) return false;
   if (isTrialAccount.value) return false;
   return isLimitExceeded.value;
 });
 
 const fetchLimits = () => {
+  if (isConverraBillingEnabled.value) {
+    store.dispatch('accounts/converraLimits');
+    return;
+  }
   store.dispatch('accounts/limits');
 };
+
+onMounted(() => {
+  if (
+    isEnterprise &&
+    (isOnChatwootCloud.value || isConverraBillingEnabled.value)
+  ) {
+    fetchLimits();
+  }
+});
 
 const routeToBilling = () => {
   router.push({
@@ -101,12 +116,6 @@ const routeToBilling = () => {
     params: { accountId: accountId.value },
   });
 };
-
-onMounted(() => {
-  if (isEnterprise) {
-    fetchLimits();
-  }
-});
 
 defineExpose({ shouldShowUpgradePage });
 </script>

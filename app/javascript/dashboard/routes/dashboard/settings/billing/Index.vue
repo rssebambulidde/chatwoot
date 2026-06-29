@@ -18,6 +18,9 @@ import ButtonV4 from 'next/button/Button.vue';
 
 const router = useRouter();
 const { currentAccount, isOnChatwootCloud } = useAccount();
+const isConverraBillingEnabled = useMapGetter(
+  'globalConfig/isConverraBillingEnabled'
+);
 const {
   captainEnabled,
   captainLimits,
@@ -31,20 +34,20 @@ const uiFlags = useMapGetter('accounts/getUIFlags');
 const store = useStore();
 
 const BILLING_REFRESH_ATTEMPTED = 'billing_refresh_attempted';
-
-// State for handling refresh attempts and loading
 const isWaitingForBilling = ref(false);
 const purchaseCreditsModalRef = ref(null);
+const isCheckoutLoading = ref(false);
 
-const customAttributes = computed(() => {
-  return currentAccount.value.custom_attributes || {};
-});
+const customAttributes = computed(
+  () => currentAccount.value.custom_attributes || {}
+);
 
-/**
- * Computed property for plan name
- * @returns {string|undefined}
- */
+const converraPlan = computed(() => currentAccount.value.converraPlan || {});
+
 const planName = computed(() => {
+  if (isConverraBillingEnabled.value) {
+    return converraPlan.value.name || customAttributes.value.converra_plan_name;
+  }
   return customAttributes.value.plan_name;
 });
 
@@ -53,73 +56,82 @@ const canPurchaseCredits = computed(() => {
   return plan && plan !== 'hacker';
 });
 
-/**
- * Computed property for subscribed quantity
- * @returns {number|undefined}
- */
-const subscribedQuantity = computed(() => {
-  return customAttributes.value.subscribed_quantity;
-});
+const subscribedQuantity = computed(
+  () => customAttributes.value.subscribed_quantity
+);
 
 const subscriptionRenewsOn = computed(() => {
-  if (!customAttributes.value.subscription_ends_on) return '';
-  const endDate = new Date(customAttributes.value.subscription_ends_on);
-  // return date as 12 Jan, 2034
-  return format(endDate, 'dd MMM, yyyy');
+  const endsOn =
+    converraPlan.value.subscription_ends_on ||
+    customAttributes.value.subscription_ends_on;
+  if (!endsOn) return '';
+  return format(new Date(endsOn), 'dd MMM, yyyy');
 });
 
-/**
- * Computed property indicating if user has a billing plan
- * @returns {boolean}
- */
 const hasABillingPlan = computed(() => {
+  if (isConverraBillingEnabled.value) return true;
   return !!planName.value;
 });
 
+const converraLimits = computed(() => currentAccount.value.limits || {});
+
+const showConverraBilling = computed(
+  () => isConverraBillingEnabled.value && !isOnChatwootCloud.value
+);
+
 const fetchAccountDetails = async () => {
+  if (showConverraBilling.value) {
+    await store.dispatch('accounts/converraLimits');
+    fetchLimits();
+    return;
+  }
+
   if (!hasABillingPlan.value) {
     await store.dispatch('accounts/subscription');
   }
-  // Always fetch limits for billing page to show credit usage
   fetchLimits();
 };
 
 const handleBillingPageLogic = async () => {
-  // If self-hosted, redirect to dashboard
-  if (!isOnChatwootCloud.value) {
+  if (!isOnChatwootCloud.value && !isConverraBillingEnabled.value) {
     router.push({ name: 'home' });
     return;
   }
 
-  // Check if we've already attempted a refresh for billing setup
-  const billingRefreshAttempted = sessionStorage.get(BILLING_REFRESH_ATTEMPTED);
+  if (showConverraBilling.value) {
+    await fetchAccountDetails();
+    return;
+  }
 
-  // If cloud user, fetch account details first
+  const billingRefreshAttempted = sessionStorage.get(BILLING_REFRESH_ATTEMPTED);
   await fetchAccountDetails();
 
-  // If still no billing plan after fetch
   if (!hasABillingPlan.value) {
-    // If we haven't attempted refresh yet, do it once
     if (!billingRefreshAttempted) {
       isWaitingForBilling.value = true;
       sessionStorage.set(BILLING_REFRESH_ATTEMPTED, true);
-
       setTimeout(() => {
         window.location.reload();
       }, 5000);
     } else {
-      // We've already tried refreshing, so just show the no billing message
-      // Clear the flag for future visits
       sessionStorage.remove(BILLING_REFRESH_ATTEMPTED);
     }
   } else {
-    // Billing plan found, clear any existing refresh flag
     sessionStorage.remove(BILLING_REFRESH_ATTEMPTED);
   }
 };
 
 const onClickBillingPortal = () => {
   store.dispatch('accounts/checkout');
+};
+
+const onConverraCheckout = async planSlug => {
+  isCheckoutLoading.value = true;
+  try {
+    await store.dispatch('accounts/converraCheckout', planSlug);
+  } catch (error) {
+    isCheckoutLoading.value = false;
+  }
 };
 
 const onToggleChatWindow = () => {
@@ -133,7 +145,6 @@ const openPurchaseCreditsModal = () => {
 };
 
 const handleTopupSuccess = () => {
-  // Refresh limits to show updated credit balance
   fetchLimits();
 };
 
@@ -154,13 +165,99 @@ onMounted(handleBillingPageLogic);
     <template #header>
       <BaseSettingsHeader
         :title="$t('BILLING_SETTINGS.TITLE')"
-        :description="$t('BILLING_SETTINGS.DESCRIPTION')"
+        :description="
+          showConverraBilling
+            ? $t('BILLING_SETTINGS.CONVERRA.DESCRIPTION')
+            : $t('BILLING_SETTINGS.DESCRIPTION')
+        "
         :link-text="$t('BILLING_SETTINGS.VIEW_PRICING')"
         feature-name="billing"
       />
     </template>
     <template #body>
-      <section class="grid gap-4">
+      <section v-if="showConverraBilling" class="grid gap-4">
+        <BillingCard
+          :title="$t('BILLING_SETTINGS.CONVERRA.TITLE')"
+          :description="$t('BILLING_SETTINGS.CONVERRA.DESCRIPTION')"
+        >
+          <div
+            class="grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-2 divide-x divide-n-weak"
+          >
+            <DetailItem
+              :label="$t('BILLING_SETTINGS.CONVERRA.CURRENT_PLAN')"
+              :value="planName"
+            />
+            <DetailItem
+              v-if="subscriptionRenewsOn"
+              :label="$t('BILLING_SETTINGS.CONVERRA.RENEWS_ON')"
+              :value="subscriptionRenewsOn"
+            />
+          </div>
+          <p
+            v-if="converraPlan.subscription_active === false"
+            class="px-5 pt-3 text-sm text-n-ruby-11"
+          >
+            {{ $t('BILLING_SETTINGS.CONVERRA.EXPIRED') }}
+          </p>
+          <div class="flex flex-wrap gap-2 px-5 pt-4">
+            <ButtonV4
+              sm
+              solid
+              blue
+              :is-loading="isCheckoutLoading"
+              @click="onConverraCheckout('growth')"
+            >
+              {{ $t('BILLING_SETTINGS.CONVERRA.UPGRADE_GROWTH') }}
+            </ButtonV4>
+            <ButtonV4
+              sm
+              solid
+              slate
+              :is-loading="isCheckoutLoading"
+              @click="onConverraCheckout('business')"
+            >
+              {{ $t('BILLING_SETTINGS.CONVERRA.UPGRADE_BUSINESS') }}
+            </ButtonV4>
+            <a
+              href="/pricing"
+              class="inline-flex items-center px-3 text-sm font-medium text-n-brand"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {{ $t('BILLING_SETTINGS.CONVERRA.VIEW_PUBLIC_PRICING') }}
+            </a>
+          </div>
+        </BillingCard>
+
+        <BillingCard
+          :title="$t('BILLING_SETTINGS.CONVERRA.USAGE')"
+          :description="$t('BILLING_SETTINGS.CONVERRA.DESCRIPTION')"
+        >
+          <div v-if="converraLimits.conversation" class="px-5">
+            <BillingMeter
+              :title="$t('BILLING_SETTINGS.CONVERRA.CONVERSATIONS')"
+              :total-count="converraLimits.conversation.allowed"
+              :consumed="converraLimits.conversation.consumed"
+            />
+          </div>
+          <div v-if="converraLimits.agents" class="px-5">
+            <BillingMeter
+              :title="$t('BILLING_SETTINGS.CONVERRA.AGENTS')"
+              :total-count="converraLimits.agents.allowed"
+              :consumed="converraLimits.agents.consumed"
+            />
+          </div>
+          <div v-if="converraLimits.non_web_inboxes" class="px-5">
+            <BillingMeter
+              :title="$t('BILLING_SETTINGS.CONVERRA.CHANNELS')"
+              :total-count="converraLimits.non_web_inboxes.allowed"
+              :consumed="converraLimits.non_web_inboxes.consumed"
+            />
+          </div>
+        </BillingCard>
+      </section>
+
+      <section v-else class="grid gap-4">
         <BillingCard
           :title="$t('BILLING_SETTINGS.MANAGE_SUBSCRIPTION.TITLE')"
           :description="$t('BILLING_SETTINGS.MANAGE_SUBSCRIPTION.DESCRIPTION')"
@@ -260,6 +357,7 @@ onMounted(handleBillingPageLogic);
         </BillingHeader>
       </section>
       <PurchaseCreditsModal
+        v-if="!showConverraBilling"
         ref="purchaseCreditsModalRef"
         @success="handleTopupSuccess"
       />

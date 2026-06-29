@@ -1,0 +1,105 @@
+# frozen_string_literal: true
+
+module Converra
+  module Billing
+    class LimitService
+      pattr_initialize [:account!]
+
+      def plan
+        @plan ||= PlanCatalog.find(current_plan_slug) || PlanCatalog.find('starter')
+      end
+
+      def current_plan_slug
+        slug = account.custom_attributes['plan_name'].presence || 'starter'
+        return downgrade_to_starter! if paid_plan_expired?(slug)
+
+        slug
+      end
+
+      def subscription_active?
+        return true if plan['price_ugx'].to_i.zero?
+
+        subscription_ends_on.present? && subscription_ends_on > Time.current
+      end
+
+      def subscription_ends_on
+        value = account.custom_attributes['subscription_ends_on']
+        return if value.blank?
+
+        Time.zone.parse(value)
+      end
+
+      def paid_plan_expired?(slug)
+        plan = PlanCatalog.find(slug)
+        return false if plan.blank? || plan['price_ugx'].to_i.zero?
+
+        subscription_ends_on.present? && subscription_ends_on <= Time.current
+      end
+
+      def downgrade_to_starter!
+        Converra::Billing::ApplyPlanService.new(account: account, plan_slug: 'starter', subscription_ends_on: nil).perform
+        account.reload
+        'starter'
+      end
+
+      def conversations_this_month
+        account.conversations.where('created_at > ?', 30.days.ago).count
+      end
+
+      def conversations_allowed
+        account.custom_attributes['conversations_monthly_limit'].presence ||
+          plan['conversations_monthly'] ||
+          ChatwootApp.max_limit
+      end
+
+      def conversation_limit_exceeded?
+        return false unless PlanCatalog.enabled?
+        return false unless subscription_active?
+
+        conversations_this_month >= conversations_allowed.to_i
+      end
+
+      def non_web_inboxes_allowed
+        account.custom_attributes['non_web_inboxes_limit'].presence ||
+          plan['non_web_inboxes'] ||
+          ChatwootApp.max_limit
+      end
+
+      def non_web_inboxes_count
+        account.inboxes.where.not(channel_type: Channel::WebWidget.to_s).count
+      end
+
+      def non_web_inbox_limit_exceeded?
+        return false unless PlanCatalog.enabled?
+        return false unless subscription_active?
+
+        non_web_inboxes_count >= non_web_inboxes_allowed.to_i
+      end
+
+      def limits_payload
+        {
+          'plan' => {
+            'slug' => current_plan_slug,
+            'name' => plan['name'],
+            'price_ugx' => plan['price_ugx'],
+            'subscription_active' => subscription_active?,
+            'subscription_ends_on' => account.custom_attributes['subscription_ends_on']
+          },
+          'conversation' => {
+            'allowed' => conversations_allowed.to_i,
+            'consumed' => conversations_this_month
+          },
+          'non_web_inboxes' => {
+            'allowed' => non_web_inboxes_allowed.to_i,
+            'consumed' => non_web_inboxes_count
+          },
+          'agents' => {
+            'allowed' => account.usage_limits[:agents],
+            'consumed' => account.users.count
+          },
+          'captain' => account.usage_limits[:captain]
+        }
+      end
+    end
+  end
+end

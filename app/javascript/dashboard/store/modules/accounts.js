@@ -4,6 +4,7 @@ import AccountAPI from '../../api/account';
 import OnboardingAPI from '../../api/onboarding';
 import { differenceInDays } from 'date-fns';
 import EnterpriseAccountAPI from '../../api/enterprise/account';
+import ConverraBillingAPI from '../../api/converraBilling';
 import { throwErrorMessage } from '../utils/api';
 import { getLanguageDirection } from 'dashboard/components/widgets/conversation/advancedFilterItems/languages';
 
@@ -162,6 +163,32 @@ export const actions = {
     } finally {
       commit(types.default.SET_ACCOUNT_UI_FLAG, { isFetchingLimits: false });
     }
+  },
+
+  converraLimits: async ({ commit }) => {
+    commit(types.default.SET_ACCOUNT_UI_FLAG, { isFetchingLimits: true });
+    try {
+      const response = await ConverraBillingAPI.getStatus();
+      commit(types.default.SET_ACCOUNT_LIMITS, {
+        id: response.data.id,
+        limits: {
+          conversation: response.data.limits.conversation,
+          non_web_inboxes: response.data.limits.non_web_inboxes,
+          agents: response.data.limits.agents,
+        },
+        converraPlan: response.data.limits.plan,
+        converraPlans: response.data.plans,
+      });
+    } catch (error) {
+      // silent error
+    } finally {
+      commit(types.default.SET_ACCOUNT_UI_FLAG, { isFetchingLimits: false });
+    }
+  },
+
+  converraCheckout: async (_ctx, planSlug) => {
+    const response = await ConverraBillingAPI.checkout(planSlug);
+    window.location = response.data.redirect_url;
   },
 
   getCacheKeys: async () => {
