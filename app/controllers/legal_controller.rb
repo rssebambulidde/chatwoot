@@ -47,7 +47,7 @@ class LegalController < ApplicationController
 
   def guide
     @guide_page = 'index'
-    render 'guide/index', layout: 'guide'
+    render 'legal/guide/index', layout: 'guide'
   end
 
   def guide_page
@@ -58,7 +58,7 @@ class LegalController < ApplicationController
     end
 
     @guide_page = page
-    render "guide/#{page}", layout: 'guide'
+    render "legal/guide/#{page}", layout: 'guide'
   end
 
   private
