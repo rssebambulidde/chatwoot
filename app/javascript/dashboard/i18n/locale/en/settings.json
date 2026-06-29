@@ -466,16 +466,48 @@
       "TITLE": "Workspace plan",
       "DESCRIPTION": "Manage your Converra subscription. Pay with Pesapal (mobile money, M-Pesa, card).",
       "CURRENT_PLAN": "Current plan",
+      "CURRENT_BADGE": "Current",
       "RENEWS_ON": "Renews on",
       "EXPIRED": "Subscription expired — you are on Starter limits until you renew.",
-      "UPGRADE_GROWTH": "Upgrade to Growth — 75,000 UGX/mo",
-      "UPGRADE_BUSINESS": "Upgrade to Business — 150,000 UGX/mo",
+      "UPGRADE_GROWTH": "Upgrade to Growth",
+      "UPGRADE_BUSINESS": "Upgrade to Business",
+      "RENEW_PLAN": "Renew plan",
+      "SCHEDULE_DOWNGRADE": "Cancel at period end",
+      "DOWNGRADE_SCHEDULED": "Subscription will move to Starter when the current period ends.",
+      "CANCEL_SCHEDULED": "Cancellation scheduled — your workspace will move to Starter when the current period ends.",
+      "OVER_LIMIT": "This workspace exceeds your current plan limits. Upgrade to add more agents or channels.",
+      "SANDBOX_BANNER": "Pesapal sandbox mode is active — payments are for testing only.",
+      "PAYMENT_SUCCESS": "Payment received. Your plan is updating now.",
+      "PAYMENT_CANCELLED": "Payment was cancelled. You can try again when ready.",
+      "INTERVAL_MONTHLY": "Monthly",
+      "INTERVAL_ANNUAL": "Annual",
       "USAGE": "Usage this month",
       "USAGE_DESCRIPTION": "Track workspace usage against your current plan limits.",
       "CONVERSATIONS": "Conversations",
       "AGENTS": "Agents",
       "CHANNELS": "Email & messaging inboxes",
-      "VIEW_PUBLIC_PRICING": "View full pricing"
+      "VIEW_PUBLIC_PRICING": "View full pricing",
+      "BANNER": {
+        "ACTION": "View billing",
+        "CONVERSATIONS": "You have used {consumed} of {allowed} conversations this month.",
+        "AGENTS": "You have {consumed} of {allowed} agents on your plan.",
+        "CHANNELS": "You have {consumed} of {allowed} email and messaging inboxes."
+      },
+      "COMPARE": {
+        "TITLE": "Compare plans",
+        "DESCRIPTION": "See what each plan includes before you upgrade.",
+        "PRICE": "Monthly price",
+        "ANNUAL": "Annual price"
+      },
+      "PAYMENTS": {
+        "TITLE": "Recent payments",
+        "DESCRIPTION": "Your latest Pesapal transactions for this workspace.",
+        "EMPTY": "No payments yet.",
+        "DATE": "Date",
+        "PLAN": "Plan",
+        "AMOUNT": "Amount",
+        "STATUS": "Status"
+      }
     },
     "TOPUP": {
       "BUY_CREDITS": "Buy more credits",

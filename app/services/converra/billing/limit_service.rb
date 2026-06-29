@@ -100,22 +100,64 @@ module Converra
             'name' => plan['name'],
             'price_ugx' => plan['price_ugx'],
             'subscription_active' => subscription_active?,
-            'subscription_ends_on' => account.custom_attributes['subscription_ends_on']
+            'subscription_ends_on' => account.custom_attributes['subscription_ends_on'],
+            'cancel_at_period_end' => cancel_at_period_end?
           },
-          'conversation' => {
-            'allowed' => conversations_allowed.to_i,
-            'consumed' => conversations_this_month
-          },
-          'non_web_inboxes' => {
-            'allowed' => non_web_inboxes_allowed.to_i,
-            'consumed' => non_web_inboxes_count
-          },
-          'agents' => {
-            'allowed' => agents_allowed.to_i,
-            'consumed' => account.users.count
-          },
-          'captain' => account.usage_limits[:captain]
+          'conversation' => meter_payload(conversations_allowed.to_i, conversations_this_month),
+          'non_web_inboxes' => meter_payload(non_web_inboxes_allowed.to_i, non_web_inboxes_count),
+          'agents' => meter_payload(agents_allowed.to_i, account.users.count),
+          'captain' => captain_payload,
+          'over_limit' => over_limit?,
+          'usage_warnings' => usage_warnings
         }
+      end
+
+      def over_limit?
+        over_limit_agents? || over_limit_non_web_inboxes? || over_limit_conversations?
+      end
+
+      def usage_warnings
+        warnings = []
+        warnings << 'conversation' if usage_warning?(conversations_this_month, conversations_allowed.to_i)
+        warnings << 'agents' if usage_warning?(account.users.count, agents_allowed.to_i)
+        warnings << 'non_web_inboxes' if usage_warning?(non_web_inboxes_count, non_web_inboxes_allowed.to_i)
+        warnings
+      end
+
+      def cancel_at_period_end?
+        ActiveModel::Type::Boolean.new.cast(account.custom_attributes['cancel_at_period_end'])
+      end
+
+      private
+
+      def meter_payload(allowed, consumed)
+        { 'allowed' => allowed, 'consumed' => consumed }
+      end
+
+      def captain_payload
+        captain = account.usage_limits[:captain] || {}
+        {
+          'responses' => captain[:responses],
+          'documents' => captain[:documents]
+        }
+      end
+
+      def usage_warning?(consumed, allowed)
+        return false if allowed.to_i.zero?
+
+        consumed.to_f / allowed >= 0.8
+      end
+
+      def over_limit_agents?
+        account.users.count > agents_allowed.to_i
+      end
+
+      def over_limit_non_web_inboxes?
+        non_web_inboxes_count > non_web_inboxes_allowed.to_i
+      end
+
+      def over_limit_conversations?
+        conversations_this_month > conversations_allowed.to_i
       end
     end
   end

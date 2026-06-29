@@ -10,28 +10,34 @@
 </p>
 
 <% if @payment_notice == 'success' %>
-  <p style="padding:1rem;background:#ecfdf5;border:1px solid #86efac;border-radius:0.5rem;margin-bottom:1.25rem;">
-    <strong>Payment received.</strong> Your plan will update shortly. Refresh the app or open
-    <strong>Settings → Billing</strong> to confirm.
+  <p class="notice notice-success">
+    <strong>Payment received.</strong> Your plan will update shortly. Open
+    <strong>Settings → Billing</strong> in the app to confirm.
   </p>
 <% elsif @payment_notice == 'cancelled' %>
-  <p style="padding:1rem;background:#fef2f2;border:1px solid #fecaca;border-radius:0.5rem;margin-bottom:1.25rem;">
+  <p class="notice notice-error">
     Payment was cancelled. You can try again when ready.
   </p>
 <% end %>
 
 <div class="guide-card-grid">
   <% converra_plans.each do |slug, plan| %>
-    <div class="guide-card" style="cursor:default;background:#fff;">
+    <div class="guide-card pricing-card">
       <strong><%= plan['name'] %></strong>
-      <span style="display:block;margin:0.5rem 0 0.75rem;font-size:1.25rem;color:#0f172a;font-weight:700;">
+      <span class="pricing-price">
         <% if plan['price_ugx'].to_i.zero? %>
           Free
         <% else %>
-          <%= number_with_delimiter(plan['price_ugx']) %> UGX<span style="font-size:0.875rem;font-weight:500;color:#64748b;">/mo</span>
+          <%= number_with_delimiter(plan['price_ugx']) %> UGX<span class="pricing-interval">/mo</span>
         <% end %>
       </span>
-      <ul style="font-size:0.875rem;color:#475569;padding-left:1rem;margin:0 0 1rem;">
+      <% if plan['annual_price_ugx'].to_i.positive? %>
+        <p class="pricing-annual">
+          or <%= number_with_delimiter(plan['annual_price_ugx']) %> UGX/yr
+          <span class="pricing-save">(save 2 months)</span>
+        </p>
+      <% end %>
+      <ul class="pricing-features">
         <li><%= plan.dig('limits', 'agents') %> agent<%= plan.dig('limits', 'agents').to_i == 1 ? '' : 's' %></li>
         <li><%= plan.dig('limits', 'inboxes') %> inbox<%= plan.dig('limits', 'inboxes').to_i == 1 ? '' : 'es' %></li>
         <li><%= number_with_delimiter(plan['conversations_monthly']) %> conversations / month</li>
@@ -45,11 +51,11 @@
         <% end %>
       </ul>
       <% if plan['price_ugx'].to_i.zero? %>
-        <a href="/app/auth/signup" style="font-weight:600;">Get started free</a>
+        <a href="/app/auth/signup" class="pricing-link">Get started free</a>
       <% elsif converra_billing_enabled? %>
-        <a href="/app/login" style="font-weight:600;">Sign in to subscribe</a>
+        <a href="/app/login" class="pricing-link">Sign in to subscribe</a>
       <% else %>
-        <a href="mailto:info@samabrains.com" style="font-weight:600;">Contact sales</a>
+        <a href="mailto:info@samabrains.com" class="pricing-link">Contact sales</a>
       <% end %>
     </div>
   <% end %>
@@ -59,7 +65,7 @@
 <ol>
   <li><a href="/app/auth/signup">Create a workspace</a> — you start on the free <strong>Starter</strong> plan.</li>
   <li>Sign in as admin and open <strong>Settings → Billing</strong>.</li>
-  <li>Choose <strong>Growth</strong> or <strong>Business</strong> and pay with Pesapal.</li>
+  <li>Choose <strong>Growth</strong> or <strong>Business</strong> and pay with Pesapal (monthly or annual).</li>
   <li>Your limits and features update automatically after payment.</li>
 </ol>
 

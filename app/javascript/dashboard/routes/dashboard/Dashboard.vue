@@ -22,6 +22,7 @@ const FloatingCallWidget = defineAsyncComponent(
 
 import CopilotLauncher from 'dashboard/components-next/copilot/CopilotLauncher.vue';
 import CopilotContainer from 'dashboard/components/copilot/CopilotContainer.vue';
+import ConverraBillingUsageBanner from 'dashboard/routes/dashboard/settings/billing/components/ConverraBillingUsageBanner.vue';
 
 import MobileSidebarLauncher from 'dashboard/components-next/sidebar/MobileSidebarLauncher.vue';
 import { useCallsStore } from 'dashboard/stores/calls';
@@ -37,6 +38,7 @@ export default {
     CopilotContainer,
     FloatingCallWidget,
     MobileSidebarLauncher,
+    ConverraBillingUsageBanner,
   },
   setup() {
     const upgradePageRef = ref(null);
@@ -154,6 +156,7 @@ export default {
         />
       </UpgradePage>
       <template v-if="!showUpgradePage">
+        <ConverraBillingUsageBanner />
         <router-view />
         <CommandBar />
         <CopilotLauncher />

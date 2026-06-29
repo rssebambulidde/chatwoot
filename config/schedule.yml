@@ -8,6 +8,11 @@ converra_billing_downgrade_expired_plans_job:
   class: 'Converra::Billing::DowngradeExpiredPlansJob'
   queue: scheduled_jobs
 
+converra_billing_renewal_reminder_job:
+  cron: '0 8 * * *'
+  class: 'Converra::Billing::RenewalReminderJob'
+  queue: scheduled_jobs
+
 # executed daily at 0000 UTC
 # schedules daily deferred jobs at stable times for each installation
 internal_check_new_versions_job:

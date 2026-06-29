@@ -3,7 +3,7 @@
 module Converra
   module Billing
     class ApplyPlanService
-      pattr_initialize [:account!, :plan_slug!, { subscription_ends_on: nil }]
+      pattr_initialize [:account!, :plan_slug!, { subscription_ends_on: nil, clear_cancel_at_period_end: false }]
 
       def perform
         plan = PlanCatalog.find(plan_slug)
@@ -13,16 +13,19 @@ module Converra
         account.enable_features(*plan['features']) if plan['features'].present?
 
         ends_on = subscription_ends_on || default_subscription_ends_on(plan)
+        attributes = account.custom_attributes.merge(
+          'plan_name' => plan_slug.to_s,
+          'converra_plan_name' => plan['name'],
+          'subscribed_quantity' => plan.dig('limits', 'agents'),
+          'subscription_ends_on' => ends_on&.iso8601,
+          'conversations_monthly_limit' => plan['conversations_monthly'],
+          'non_web_inboxes_limit' => plan['non_web_inboxes']
+        )
+        attributes = attributes.except('cancel_at_period_end', 'renewal_reminder_sent_at') if clear_cancel_at_period_end
+
         account.update!(
           limits: plan['limits'].stringify_keys,
-          custom_attributes: account.custom_attributes.merge(
-            'plan_name' => plan_slug.to_s,
-            'converra_plan_name' => plan['name'],
-            'subscribed_quantity' => plan.dig('limits', 'agents'),
-            'subscription_ends_on' => ends_on&.iso8601,
-            'conversations_monthly_limit' => plan['conversations_monthly'],
-            'non_web_inboxes_limit' => plan['non_web_inboxes']
-          )
+          custom_attributes: attributes
         )
         account
       end

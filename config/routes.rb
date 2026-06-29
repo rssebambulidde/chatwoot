@@ -64,6 +64,8 @@ Rails.application.routes.draw do
         scope module: :accounts do
           get 'converra_billing/status', to: 'converra_billing#status'
           post 'converra_billing/checkout', to: 'converra_billing#checkout'
+          get 'converra_billing/payments', to: 'converra_billing#payments'
+          post 'converra_billing/schedule_downgrade', to: 'converra_billing#schedule_downgrade'
           namespace :actions do
             resource :contact_merge, only: [:create]
           end
@@ -705,6 +707,7 @@ Rails.application.routes.draw do
       resources :platform_apps, only: [:index, :new, :create, :show, :edit, :update, :destroy]
       resources :platform_banners
       resource :instance_status, only: [:show]
+      resource :converra_billing, only: [:show], controller: 'converra_billing'
 
       resource :settings, only: [:show] do
         get :refresh, on: :collection

@@ -10,8 +10,19 @@ class ConverraBillingAPI extends ApiClient {
     return axios.get(`${this.url}/status`);
   }
 
-  checkout(planSlug) {
-    return axios.post(`${this.url}/checkout`, { plan_slug: planSlug });
+  getPayments() {
+    return axios.get(`${this.url}/payments`);
+  }
+
+  checkout(planSlug, billingInterval = 'monthly') {
+    return axios.post(`${this.url}/checkout`, {
+      plan_slug: planSlug,
+      billing_interval: billingInterval,
+    });
+  }
+
+  scheduleDowngrade() {
+    return axios.post(`${this.url}/schedule_downgrade`);
   }
 }
 

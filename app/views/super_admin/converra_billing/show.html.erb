@@ -1,0 +1,54 @@
+<% content_for(:title) do %>
+  Converra Billing
+<% end %>
+
+<div class="max-w-5xl">
+  <h1 class="text-2xl font-semibold mb-2">Converra Billing</h1>
+  <p class="text-slate-600 mb-6">
+    Pesapal environment: <strong><%= @stats[:pesapal_env] %></strong>
+    · Estimated MRR: <strong><%= number_with_delimiter(@stats[:mrr_ugx]) %> UGX</strong>
+    · Failed payments (30d): <strong><%= @stats[:failed_payments_count] %></strong>
+  </p>
+
+  <h2 class="text-lg font-medium mb-3">Accounts by plan</h2>
+  <table class="w-full mb-8 text-sm border border-slate-200">
+    <thead class="bg-slate-50">
+      <tr>
+        <th class="text-left p-3">Plan</th>
+        <th class="text-left p-3">Accounts</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @stats[:accounts_by_plan].each do |plan, count| %>
+        <tr class="border-t border-slate-200">
+          <td class="p-3 capitalize"><%= plan %></td>
+          <td class="p-3"><%= count %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <h2 class="text-lg font-medium mb-3">Recent payments</h2>
+  <table class="w-full text-sm border border-slate-200">
+    <thead class="bg-slate-50">
+      <tr>
+        <th class="text-left p-3">Account</th>
+        <th class="text-left p-3">Plan</th>
+        <th class="text-left p-3">Amount</th>
+        <th class="text-left p-3">Status</th>
+        <th class="text-left p-3">Completed</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @stats[:recent_payments].each do |payment| %>
+        <tr class="border-t border-slate-200">
+          <td class="p-3"><%= payment[:account_name] %></td>
+          <td class="p-3"><%= payment[:plan_slug] %> (<%= payment[:billing_interval] %>)</td>
+          <td class="p-3"><%= number_with_delimiter(payment[:amount]) %> <%= payment[:currency] %></td>
+          <td class="p-3 capitalize"><%= payment[:status] %></td>
+          <td class="p-3"><%= payment[:completed_at]&.strftime('%d %b %Y') || '—' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

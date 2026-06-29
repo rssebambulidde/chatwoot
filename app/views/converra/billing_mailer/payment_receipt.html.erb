@@ -1,0 +1,12 @@
+<p>Hello,</p>
+
+<p>Thank you for your payment. Your <strong><%= @plan&.dig('name') || @payment.plan_slug %></strong> plan for <strong><%= @account.name %></strong> is now active.</p>
+
+<p>
+  Amount: <strong><%= number_with_delimiter(@payment.amount) %> <%= @payment.currency %></strong>
+  (<%= @payment.billing_interval == 'annual' ? 'annual' : 'monthly' %>)
+</p>
+
+<p>
+  <a href="<%= @billing_url %>">Open billing settings</a> to view your plan and usage.
+</p>

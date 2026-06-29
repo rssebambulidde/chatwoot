@@ -175,9 +175,13 @@ export const actions = {
           conversation: response.data.limits.conversation,
           non_web_inboxes: response.data.limits.non_web_inboxes,
           agents: response.data.limits.agents,
+          captain: response.data.limits.captain,
+          over_limit: response.data.limits.over_limit,
+          usage_warnings: response.data.limits.usage_warnings,
         },
         converraPlan: response.data.limits.plan,
         converraPlans: response.data.plans,
+        converraBillingMeta: response.data.billing_meta,
       });
     } catch (error) {
       // silent error
@@ -186,10 +190,31 @@ export const actions = {
     }
   },
 
-  converraCheckout: async (_ctx, planSlug) => {
+  converraPayments: async ({ commit, rootState }) => {
+    const response = await ConverraBillingAPI.getPayments();
+    const accountId = Number(rootState.route?.params?.accountId);
+    commit(types.default.SET_ACCOUNT_LIMITS, {
+      id: accountId,
+      converraPayments: response.data.payments,
+    });
+  },
+
+  converraCheckout: async (_ctx, { planSlug, billingInterval = 'monthly' }) => {
     try {
-      const response = await ConverraBillingAPI.checkout(planSlug);
+      const response = await ConverraBillingAPI.checkout(
+        planSlug,
+        billingInterval
+      );
       window.location = response.data.redirect_url;
+    } catch (error) {
+      throwErrorMessage(error);
+      throw error;
+    }
+  },
+
+  converraScheduleDowngrade: async () => {
+    try {
+      await ConverraBillingAPI.scheduleDowngrade();
     } catch (error) {
       throwErrorMessage(error);
       throw error;

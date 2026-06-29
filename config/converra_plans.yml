@@ -14,6 +14,7 @@ starter:
 growth:
   name: Growth
   price_ugx: 75000
+  annual_price_ugx: 750000
   limits:
     agents: 5
     inboxes: 5
@@ -36,6 +37,7 @@ growth:
 business:
   name: Business
   price_ugx: 150000
+  annual_price_ugx: 1500000
   limits:
     agents: 15
     inboxes: 15

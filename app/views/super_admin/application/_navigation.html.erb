@@ -32,6 +32,9 @@ as defined by the routes in the `admin/` namespace
 
     <ul class="my-4">
       <%= render partial: "nav_item", locals: { icon: 'icon-grid-line', url: super_admin_root_url, label: 'Dashboard' } %>
+      <% if Converra::Billing::PlanCatalog.enabled? %>
+        <%= render partial: "nav_item", locals: { icon: 'icon-bank-card-line', url: super_admin_converra_billing_path, label: 'Converra Billing' } %>
+      <% end %>
       <% Administrate::Namespace.new(namespace).resources.each do |resource| %>
         <% next if ["account_users", "access_tokens", "installation_configs", "dashboard", "devise/sessions", "app_configs", "instance_statuses", "settings", "push_diagnostics"].include?  resource.resource %>
         <% next if resource.resource == "platform_banners" && !ChatwootApp.chatwoot_cloud? %>

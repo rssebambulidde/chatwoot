@@ -21,11 +21,18 @@ module Converra
         ApplyPlanService.new(
           account: payment.account,
           plan_slug: payment.plan_slug,
-          subscription_ends_on: 1.month.from_now
+          subscription_ends_on: subscription_ends_on_for(payment),
+          clear_cancel_at_period_end: true
         ).perform
+        Converra::Billing::PaymentReceiptJob.perform_later(payment.id)
+        payment
       end
 
       private
+
+      def subscription_ends_on_for(payment)
+        payment.billing_interval == 'annual' ? 1.year.from_now : 1.month.from_now
+      end
 
       def find_payment
         payment = ConverraPlanPayment.find_by(order_tracking_id: order_tracking_id)

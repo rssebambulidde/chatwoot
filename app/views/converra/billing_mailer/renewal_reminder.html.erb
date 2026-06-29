@@ -1,0 +1,7 @@
+<p>Hello,</p>
+
+<p>Your <strong><%= @plan&.dig('name') %></strong> plan for <strong><%= @account.name %></strong> renews on <strong><%= @renewal_date %></strong>.</p>
+
+<p>
+  <a href="<%= @billing_url %>">Open billing settings</a> to renew with Pesapal and avoid moving back to Starter limits.
+</p>
