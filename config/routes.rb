@@ -59,11 +59,11 @@ Rails.application.routes.draw do
         member do
           post :update_active_at
           get :cache_keys
-          get 'converra_billing/status', to: 'accounts/converra_billing#status'
-          post 'converra_billing/checkout', to: 'accounts/converra_billing#checkout'
         end
 
         scope module: :accounts do
+          get 'converra_billing/status', to: 'converra_billing#status'
+          post 'converra_billing/checkout', to: 'converra_billing#checkout'
           namespace :actions do
             resource :contact_merge, only: [:create]
           end

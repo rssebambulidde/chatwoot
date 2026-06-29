@@ -187,8 +187,13 @@ export const actions = {
   },
 
   converraCheckout: async (_ctx, planSlug) => {
-    const response = await ConverraBillingAPI.checkout(planSlug);
-    window.location = response.data.redirect_url;
+    try {
+      const response = await ConverraBillingAPI.checkout(planSlug);
+      window.location = response.data.redirect_url;
+    } catch (error) {
+      throwErrorMessage(error);
+      throw error;
+    }
   },
 
   getCacheKeys: async () => {
