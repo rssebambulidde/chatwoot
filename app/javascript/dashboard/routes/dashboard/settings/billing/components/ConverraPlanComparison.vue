@@ -90,26 +90,26 @@ const formatPrice = (amount, suffix = '/mo') => {
         </tr>
         <tr class="border-t border-n-weak">
           <td class="py-3 pr-4 text-n-slate-11">
-            {{ $t('BILLING_SETTINGS.CONVERRA.CHANNELS') }}
+            {{ $t('BILLING_SETTINGS.CONVERRA.COMPARE.FEATURES') }}
           </td>
           <td
             v-for="plan in orderedPlans"
-            :key="`${plan.slug}-channels`"
+            :key="`${plan.slug}-features`"
             class="py-3 px-3"
           >
-            {{ plan.non_web_inboxes }}
+            {{ $t('BILLING_SETTINGS.CONVERRA.COMPARE.FEATURES_INCLUDED') }}
           </td>
         </tr>
         <tr class="border-t border-n-weak">
           <td class="py-3 pr-4 text-n-slate-11">
-            {{ $t('BILLING_SETTINGS.CONVERRA.CONVERSATIONS') }}
+            {{ $t('BILLING_SETTINGS.CONVERRA.COMPARE.COPILOT') }}
           </td>
           <td
             v-for="plan in orderedPlans"
-            :key="`${plan.slug}-conv`"
+            :key="`${plan.slug}-copilot`"
             class="py-3 px-3"
           >
-            {{ Number(plan.conversations_monthly).toLocaleString() }}
+            {{ Number(plan.limits?.captain_responses || 0).toLocaleString() }}
           </td>
         </tr>
       </tbody>

@@ -109,13 +109,27 @@ const showSandboxBanner = computed(
   () => converraBillingMeta.value.pesapal_env === 'sandbox'
 );
 
+const showSubscriptionLapsedBanner = computed(
+  () =>
+    converraLimits.value.subscription_lapsed === true &&
+    converraLimits.value.over_limit === true
+);
+
 const showOverLimitBanner = computed(
-  () => converraLimits.value.over_limit === true
+  () =>
+    converraLimits.value.over_limit === true &&
+    !showSubscriptionLapsedBanner.value
 );
 
 const showCancelNotice = computed(
   () => converraBillingMeta.value.cancel_at_period_end === true
 );
+
+const captainResponsesResetsOn = computed(() => {
+  const resetsOn = converraLimits.value.captain_responses_resets_on;
+  if (!resetsOn) return '';
+  return format(new Date(resetsOn), 'dd MMM, yyyy');
+});
 
 const captainResponseLimits = computed(() => {
   const responses = converraLimits.value.captain?.responses;
@@ -281,6 +295,9 @@ onMounted(handleBillingPageLogic);
         <Banner v-if="showSandboxBanner" color="amber" class="mx-1">
           {{ $t('BILLING_SETTINGS.CONVERRA.SANDBOX_BANNER') }}
         </Banner>
+        <Banner v-if="showSubscriptionLapsedBanner" color="ruby" class="mx-1">
+          {{ $t('BILLING_SETTINGS.CONVERRA.SUBSCRIPTION_LAPSED') }}
+        </Banner>
         <Banner v-if="showOverLimitBanner" color="ruby" class="mx-1">
           {{ $t('BILLING_SETTINGS.CONVERRA.OVER_LIMIT') }}
         </Banner>
@@ -401,13 +418,6 @@ onMounted(handleBillingPageLogic);
           :title="$t('BILLING_SETTINGS.CONVERRA.USAGE')"
           :description="$t('BILLING_SETTINGS.CONVERRA.USAGE_DESCRIPTION')"
         >
-          <div v-if="converraLimits.conversation" class="px-5 pb-4">
-            <BillingMeter
-              :title="$t('BILLING_SETTINGS.CONVERRA.CONVERSATIONS')"
-              :total-count="converraLimits.conversation.allowed"
-              :consumed="converraLimits.conversation.consumed"
-            />
-          </div>
           <div v-if="converraLimits.agents" class="px-5 pb-4">
             <BillingMeter
               :title="$t('BILLING_SETTINGS.CONVERRA.AGENTS')"
@@ -415,18 +425,21 @@ onMounted(handleBillingPageLogic);
               :consumed="converraLimits.agents.consumed"
             />
           </div>
-          <div v-if="converraLimits.non_web_inboxes" class="px-5 pb-4">
-            <BillingMeter
-              :title="$t('BILLING_SETTINGS.CONVERRA.CHANNELS')"
-              :total-count="converraLimits.non_web_inboxes.allowed"
-              :consumed="converraLimits.non_web_inboxes.consumed"
-            />
-          </div>
           <div v-if="captainResponseLimits" class="px-5 pb-4">
             <BillingMeter
               :title="$t('BILLING_SETTINGS.CAPTAIN.RESPONSES')"
               v-bind="captainResponseLimits"
             />
+            <p
+              v-if="captainResponsesResetsOn"
+              class="pt-2 text-sm text-n-slate-11"
+            >
+              {{
+                $t('BILLING_SETTINGS.CONVERRA.COPILOT_RESETS_ON', {
+                  date: captainResponsesResetsOn,
+                })
+              }}
+            </p>
           </div>
           <div v-if="captainDocumentLimits" class="px-5 pb-4">
             <BillingMeter

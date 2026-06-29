@@ -42,65 +42,15 @@ module Converra
         'starter'
       end
 
-      def conversations_this_month
-        account.conversations.where('created_at > ?', 30.days.ago).count
-      end
-
-      def conversations_allowed
-        account.custom_attributes['conversations_monthly_limit'].presence ||
-          plan['conversations_monthly'] ||
-          ChatwootApp.max_limit
-      end
-
-      def conversation_limit_exceeded?
-        return false unless PlanCatalog.enabled?
-        return false unless subscription_active?
-
-        conversations_this_month >= conversations_allowed.to_i
-      end
-
-      def non_web_inboxes_allowed
-        account.custom_attributes['non_web_inboxes_limit'].presence ||
-          plan['non_web_inboxes'] ||
-          ChatwootApp.max_limit
-      end
-
-      def non_web_inboxes_count
-        account.inboxes.where.not(channel_type: Channel::WebWidget.to_s).count
-      end
-
-      def non_web_inbox_limit_exceeded?
-        return false unless PlanCatalog.enabled?
-        return false unless subscription_active?
-
-        non_web_inboxes_count >= non_web_inboxes_allowed.to_i
-      end
-
-      def inbox_limit_exceeded?
-        return false unless PlanCatalog.enabled?
-        return false unless subscription_active?
-
-        account.inboxes.count >= account.usage_limits[:inboxes].to_i
-      end
-
       def agent_limit_exceeded?
         return false unless PlanCatalog.enabled?
 
         account.users.count >= agents_allowed.to_i
       end
 
-      def non_web_inbox_blocked?(channel_type)
-        return false unless PlanCatalog.enabled?
-        return false unless subscription_active?
-        return false if channel_type.blank?
-        return false if channel_type.to_s.in?([Channel::WebWidget.to_s, 'web_widget'])
-
-        non_web_inbox_limit_exceeded?
-      end
-
       def sync_plan_limits!
         return unless PlanCatalog.enabled?
-        return if account.limits.is_a?(Hash) && account.limits['agents'].present? && !plan_features_out_of_sync?
+        return if account.limits.is_a?(Hash) && account.limits['agents'].present? && !plan_out_of_sync?
 
         ApplyPlanService.new(
           account: account,
@@ -126,29 +76,42 @@ module Converra
             'subscription_ends_on' => account.custom_attributes['subscription_ends_on'],
             'cancel_at_period_end' => cancel_at_period_end?
           },
-          'conversation' => meter_payload(conversations_allowed.to_i, conversations_this_month),
-          'non_web_inboxes' => meter_payload(non_web_inboxes_allowed.to_i, non_web_inboxes_count),
           'agents' => meter_payload(agents_allowed.to_i, account.users.count),
           'captain' => captain_payload,
+          'captain_responses_resets_on' => captain_responses_resets_on&.iso8601,
+          'subscription_lapsed' => subscription_lapsed?,
           'over_limit' => over_limit?,
           'usage_warnings' => usage_warnings
         }
       end
 
       def over_limit?
-        over_limit_agents? || over_limit_non_web_inboxes? || over_limit_conversations?
+        over_limit_agents? || over_limit_captain_responses?
       end
 
       def usage_warnings
         warnings = []
-        warnings << 'conversation' if usage_warning?(conversations_this_month, conversations_allowed.to_i)
+        warnings << 'subscription_lapsed_agents' if subscription_lapsed? && over_limit_agents?
         warnings << 'agents' if usage_warning?(account.users.count, agents_allowed.to_i)
-        warnings << 'non_web_inboxes' if usage_warning?(non_web_inboxes_count, non_web_inboxes_allowed.to_i)
+        warnings << 'captain_responses' if captain_response_warning?
         warnings
       end
 
       def cancel_at_period_end?
         ActiveModel::Type::Boolean.new.cast(account.custom_attributes['cancel_at_period_end'])
+      end
+
+      def subscription_lapsed?
+        account.custom_attributes['subscription_lapsed_at'].present?
+      end
+
+      def captain_responses_resets_on
+        period_start = account.custom_attributes[ResetCaptainUsageService::PERIOD_START_KEY]
+        return if period_start.blank?
+
+        Time.zone.parse(period_start) + 1.month
+      rescue ArgumentError, TypeError
+        nil
       end
 
       private
@@ -175,18 +138,32 @@ module Converra
         account.users.count > agents_allowed.to_i
       end
 
-      def over_limit_non_web_inboxes?
-        non_web_inboxes_count > non_web_inboxes_allowed.to_i
+      def over_limit_captain_responses?
+        responses = account.usage_limits.dig(:captain, :responses)
+        return false if responses.blank?
+
+        responses[:consumed].to_i > responses[:total_count].to_i
       end
 
-      def over_limit_conversations?
-        conversations_this_month > conversations_allowed.to_i
+      def captain_response_warning?
+        responses = account.usage_limits.dig(:captain, :responses)
+        return false if responses.blank?
+
+        usage_warning?(responses[:consumed].to_i, responses[:total_count].to_i)
+      end
+
+      def plan_out_of_sync?
+        plan_features_out_of_sync? || plan_limits_out_of_sync?
       end
 
       def plan_features_out_of_sync?
-        plan_features = plan['features'] || []
-        PlanCatalog::PREMIUM_FEATURES.any? do |feature|
-          account.feature_enabled?(feature) != plan_features.include?(feature)
+        PlanCatalog::PREMIUM_FEATURES.any? { |feature| !account.feature_enabled?(feature) }
+      end
+
+      def plan_limits_out_of_sync?
+        plan_limits = plan['limits'] || {}
+        %w[agents captain_responses captain_documents].any? do |key|
+          account.limits[key].to_i != plan_limits[key].to_i
         end
       end
     end

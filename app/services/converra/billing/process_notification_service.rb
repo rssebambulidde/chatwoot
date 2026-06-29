@@ -24,6 +24,7 @@ module Converra
           subscription_ends_on: subscription_ends_on_for(payment),
           clear_cancel_at_period_end: true
         ).perform
+        ResetCaptainUsageService.new(account: payment.account.reload).perform
         Converra::Billing::PaymentReceiptJob.perform_later(payment.id)
         payment
       end

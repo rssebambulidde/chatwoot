@@ -33,9 +33,14 @@ class Api::V1::Accounts::Captain::CopilotThreadsController < Api::V1::Accounts::
     if Current.account.usage_limits[:captain][:responses][:current_available].positive?
       copilot_message.enqueue_response_job(copilot_thread_params[:conversation_id], Current.user.id)
     else
+      limit_message = if Converra::Billing::PlanCatalog.enabled?
+                        I18n.t('converra_billing.copilot_limit')
+                      else
+                        I18n.t('captain.copilot_limit')
+                      end
       copilot_message.copilot_thread.copilot_messages.create!(
         message_type: :assistant,
-        message: { content: I18n.t('captain.copilot_limit') }
+        message: { content: limit_message }
       )
     end
   end

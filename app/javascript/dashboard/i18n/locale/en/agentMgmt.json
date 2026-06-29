@@ -10,6 +10,11 @@
       "AGENT": "Agent"
     },
     "COUNT": "{n} agent | {n} agents",
+    "LIMIT": {
+      "SEATS": "{consumed} of {allowed} agents on your plan",
+      "AT_CAPACITY": "Agent limit reached. Upgrade on Billing to add more agents.",
+      "OVER_LIMIT_NOTICE": "This workspace has more agents than your plan allows. Remove agents or upgrade on Billing to use the inbox again."
+    },
     "LIST": {
       "404": "There are no agents associated to this account",
       "TITLE": "Manage agents in your team",

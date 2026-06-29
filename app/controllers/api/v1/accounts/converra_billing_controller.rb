@@ -69,10 +69,7 @@ class Api::V1::Accounts::ConverraBillingController < Api::V1::Accounts::BaseCont
         name: plan['name'],
         price_ugx: plan['price_ugx'],
         annual_price_ugx: plan['annual_price_ugx'],
-        limits: plan['limits'],
-        conversations_monthly: plan['conversations_monthly'],
-        non_web_inboxes: plan['non_web_inboxes'],
-        features: plan['features']
+        limits: plan['limits']
       }
     end
   end

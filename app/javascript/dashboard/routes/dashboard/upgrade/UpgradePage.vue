@@ -50,6 +50,31 @@ const limitExceededMessage = computed(() => {
   const account = currentAccount.value;
   if (!account?.limits) return '';
 
+  if (isConverraBillingEnabled.value) {
+    const { agents, captain } = account.limits;
+    const responses = captain?.responses;
+
+    if (account.limits.subscription_lapsed && testLimit(agents)) {
+      return t('BILLING_SETTINGS.CONVERRA.SUBSCRIPTION_LAPSED');
+    }
+
+    if (agents && testLimit(agents)) {
+      return t('GENERAL_SETTINGS.LIMIT_MESSAGES.AGENTS', {
+        allowedAgents: agents.allowed,
+      });
+    }
+    if (
+      responses &&
+      testLimit({
+        allowed: responses.total_count,
+        consumed: responses.consumed,
+      })
+    ) {
+      return t('BILLING_SETTINGS.CONVERRA.COPILOT_OVER_LIMIT');
+    }
+    return t('BILLING_SETTINGS.CONVERRA.OVER_LIMIT');
+  }
+
   const {
     conversation,
     non_web_inboxes: nonWebInboxes,
@@ -75,6 +100,10 @@ const isLimitExceeded = computed(() => {
   const account = currentAccount.value;
   if (!account?.limits) return false;
 
+  if (isConverraBillingEnabled.value) {
+    return account.limits.over_limit === true;
+  }
+
   const {
     conversation,
     non_web_inboxes: nonWebInboxes,
@@ -89,7 +118,7 @@ const isLimitExceeded = computed(() => {
 const shouldShowUpgradePage = computed(() => {
   if (props.bypassUpgradePage) return false;
   if (!isOnChatwootCloud.value && !isConverraBillingEnabled.value) return false;
-  if (isTrialAccount.value) return false;
+  if (isTrialAccount.value && !isConverraBillingEnabled.value) return false;
   return isLimitExceeded.value;
 });
 

@@ -1,6 +1,6 @@
 module Enterprise::Captain::BaseTaskService
   def perform
-    return { error: I18n.t('captain.copilot_limit'), error_code: 429 } if counts_toward_usage? && !responses_available?
+    return { error: copilot_limit_message, error_code: 429 } if counts_toward_usage? && !responses_available?
 
     unless captain_tasks_enabled?
       return { error: I18n.t('captain.upgrade') } if ChatwootApp.chatwoot_cloud? || converra_billing_enabled?
@@ -23,6 +23,14 @@ module Enterprise::Captain::BaseTaskService
 
   def converra_billing_enabled?
     defined?(Converra::Billing::PlanCatalog) && Converra::Billing::PlanCatalog.enabled?
+  end
+
+  def copilot_limit_message
+    if converra_billing_enabled?
+      I18n.t('converra_billing.copilot_limit')
+    else
+      I18n.t('captain.copilot_limit')
+    end
   end
 
   def successful_result?(result)

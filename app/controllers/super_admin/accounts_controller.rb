@@ -76,12 +76,20 @@ class SuperAdmin::AccountsController < SuperAdmin::ApplicationController
       return
     end
 
+    current_plan = Converra::Billing::PlanCatalog.find(current_plan_slug)
+    old_copilot_limit = current_plan&.dig('limits', 'captain_responses').to_i
+    new_copilot_limit = plan.dig('limits', 'captain_responses').to_i
+
     Converra::Billing::ApplyPlanService.new(
       account: requested_resource,
       plan_slug: plan_slug,
       subscription_ends_on: subscription_ends_on_for(plan),
       clear_cancel_at_period_end: true
     ).perform
+
+    if new_copilot_limit > old_copilot_limit
+      Converra::Billing::ResetCaptainUsageService.new(account: requested_resource.reload).perform
+    end
 
     redirect_back(
       fallback_location: [namespace, requested_resource],

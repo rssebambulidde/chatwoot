@@ -172,10 +172,11 @@ export const actions = {
       commit(types.default.SET_ACCOUNT_LIMITS, {
         id: response.data.id,
         limits: {
-          conversation: response.data.limits.conversation,
-          non_web_inboxes: response.data.limits.non_web_inboxes,
           agents: response.data.limits.agents,
           captain: response.data.limits.captain,
+          captain_responses_resets_on:
+            response.data.limits.captain_responses_resets_on,
+          subscription_lapsed: response.data.limits.subscription_lapsed,
           over_limit: response.data.limits.over_limit,
           usage_warnings: response.data.limits.usage_warnings,
         },

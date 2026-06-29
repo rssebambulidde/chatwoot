@@ -9,16 +9,25 @@ import {
   useStore,
   useMapGetter,
 } from 'dashboard/composables/store';
+import { useAccount } from 'dashboard/composables/useAccount';
+import { useRouter } from 'vue-router';
 
 import AddAgent from './AddAgent.vue';
 import EditAgent from './EditAgent.vue';
 import BaseSettingsHeader from '../components/BaseSettingsHeader.vue';
 import SettingsLayout from '../SettingsLayout.vue';
 import Button from 'dashboard/components-next/button/Button.vue';
+import Banner from 'dashboard/components-next/banner/Banner.vue';
 
 const getters = useStoreGetters();
 const store = useStore();
+const router = useRouter();
 const { t } = useI18n();
+const { accountId, currentAccount } = useAccount();
+const isConverraBillingEnabled = useMapGetter(
+  'globalConfig/isConverraBillingEnabled'
+);
+const isOnChatwootCloud = useMapGetter('globalConfig/isOnChatwootCloud');
 
 const loading = ref({});
 const showAddPopup = ref(false);
@@ -50,10 +59,48 @@ const uiFlags = computed(() => getters['agents/getUIFlags'].value);
 const currentUserId = computed(() => getters.getCurrentUserID.value);
 const customRoles = useMapGetter('customRole/getCustomRoles');
 
+const showConverraAgentLimits = computed(
+  () => isConverraBillingEnabled.value && !isOnChatwootCloud.value
+);
+
+const converraAgentLimits = computed(
+  () => currentAccount.value?.limits?.agents
+);
+
+const agentSeatsLabel = computed(() => {
+  const limits = converraAgentLimits.value;
+  if (!limits?.allowed) return '';
+  return t('AGENT_MGMT.LIMIT.SEATS', {
+    consumed: limits.consumed,
+    allowed: limits.allowed,
+  });
+});
+
+const isAgentLimitReached = computed(() => {
+  const limits = converraAgentLimits.value;
+  if (!limits?.allowed) return false;
+  return limits.consumed >= limits.allowed;
+});
+
+const showAgentOverLimitNotice = computed(
+  () =>
+    showConverraAgentLimits.value && currentAccount.value?.limits?.over_limit
+);
+
 onMounted(() => {
   store.dispatch('agents/get');
   store.dispatch('customRole/getCustomRole');
+  if (showConverraAgentLimits.value) {
+    store.dispatch('accounts/converraLimits');
+  }
 });
+
+const openBilling = () => {
+  router.push({
+    name: 'billing_settings_index',
+    params: { accountId: accountId.value },
+  });
+};
 
 const findCustomRole = agent =>
   customRoles.value.find(role => role.id === agent.custom_role_id);
@@ -107,6 +154,10 @@ const showAlertMessage = message => {
 };
 
 const openAddPopup = () => {
+  if (isAgentLimitReached.value) {
+    useAlert(t('AGENT_MGMT.LIMIT.AT_CAPACITY'));
+    return;
+  }
   showAddPopup.value = true;
 };
 const hideAddPopup = () => {
@@ -162,19 +213,40 @@ const confirmDeletion = () => {
       >
         <template v-if="agentList?.length" #count>
           <span class="text-body-main text-n-slate-11">
-            {{ $t('AGENT_MGMT.COUNT', { n: agentList.length }) }}
+            <template v-if="showConverraAgentLimits && agentSeatsLabel">
+              {{ agentSeatsLabel }}
+            </template>
+            <template v-else>
+              {{ $t('AGENT_MGMT.COUNT', { n: agentList.length }) }}
+            </template>
           </span>
         </template>
         <template #actions>
           <Button
             :label="$t('AGENT_MGMT.HEADER_BTN_TXT')"
             size="sm"
+            :disabled="isAgentLimitReached"
             @click="openAddPopup"
           />
         </template>
       </BaseSettingsHeader>
     </template>
     <template #body>
+      <Banner
+        v-if="showAgentOverLimitNotice"
+        color="amber"
+        :action-label="$t('BILLING_SETTINGS.CONVERRA.BANNER.ACTION')"
+        class="mb-4"
+        @action="openBilling"
+      >
+        {{ $t('AGENT_MGMT.LIMIT.OVER_LIMIT_NOTICE') }}
+      </Banner>
+      <p
+        v-else-if="showConverraAgentLimits && isAgentLimitReached"
+        class="mb-4 text-sm text-n-slate-11"
+      >
+        {{ $t('AGENT_MGMT.LIMIT.AT_CAPACITY') }}
+      </p>
       <span
         v-if="!filteredAgentList.length && searchQuery"
         class="flex-1 flex items-center justify-center py-20 text-center text-body-main !text-base text-n-slate-11"

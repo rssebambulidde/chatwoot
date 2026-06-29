@@ -12,11 +12,22 @@ module Converra
           plan = PlanCatalog.find(account.custom_attributes['plan_name'])
           next if plan.blank? || plan['price_ugx'].to_i.zero?
 
-          ApplyPlanService.new(account: account, plan_slug: 'starter', subscription_ends_on: nil).perform
+          downgrade_account!(account, plan)
         end
       end
 
       private
+
+      def downgrade_account!(account, plan)
+        ApplyPlanService.new(account: account, plan_slug: 'starter', subscription_ends_on: nil).perform
+        account.reload.update!(
+          custom_attributes: account.custom_attributes.merge(
+            'subscription_lapsed_at' => Time.current.iso8601,
+            'converra_previous_plan_name' => plan['name']
+          )
+        )
+        Converra::BillingMailer.subscription_lapsed(account: account).deliver_later
+      end
 
       def subscription_active?(account)
         LimitService.new(account: account).subscription_active?

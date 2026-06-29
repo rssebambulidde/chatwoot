@@ -39,16 +39,8 @@
       <% end %>
       <ul class="pricing-features">
         <li><%= plan.dig('limits', 'agents') %> agent<%= plan.dig('limits', 'agents').to_i == 1 ? '' : 's' %></li>
-        <li><%= plan.dig('limits', 'inboxes') %> inbox<%= plan.dig('limits', 'inboxes').to_i == 1 ? '' : 'es' %></li>
-        <li><%= number_with_delimiter(plan['conversations_monthly']) %> conversations / month</li>
-        <% if plan['non_web_inboxes'].to_i.zero? %>
-          <li>Website chat only</li>
-        <% else %>
-          <li>Email &amp; messaging channels</li>
-        <% end %>
-        <% if plan.dig('limits', 'captain_responses').to_i.positive? %>
-          <li><%= plan.dig('limits', 'captain_responses') %> Captain AI replies / month</li>
-        <% end %>
+        <li>All channels &amp; features included</li>
+        <li><%= number_with_delimiter(plan.dig('limits', 'captain_responses')) %> Copilot replies / month (resets monthly)</li>
       </ul>
       <% if plan['price_ugx'].to_i.zero? %>
         <a href="/app/auth/signup" class="pricing-link">Get started free</a>
@@ -66,7 +58,7 @@
   <li><a href="/app/auth/signup">Create a workspace</a> — you start on the free <strong>Starter</strong> plan.</li>
   <li>Sign in as admin and open <strong>Settings → Billing</strong>.</li>
   <li>Choose <strong>Growth</strong> or <strong>Business</strong> and pay with Pesapal (monthly or annual).</li>
-  <li>Your limits and features update automatically after payment.</li>
+  <li>Your agent seats and Copilot allowance update automatically after payment.</li>
 </ol>
 
 <p>

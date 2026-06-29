@@ -1,15 +1,12 @@
 # Converra workspace plans (UGX per month). Applied via Converra::Billing::ApplyPlanService.
+# Seat-based pricing: all plans include full product access; limits are agents + Copilot fair-use.
 starter:
   name: Starter
   price_ugx: 0
   limits:
     agents: 1
-    inboxes: 1
-    captain_responses: 0
-    captain_documents: 0
-  conversations_monthly: 300
-  non_web_inboxes: 0
-  features: []
+    captain_responses: 50
+    captain_documents: 50
 
 growth:
   name: Growth
@@ -17,23 +14,8 @@ growth:
   annual_price_ugx: 750000
   limits:
     agents: 5
-    inboxes: 5
-    captain_responses: 200
-    captain_documents: 10
-  conversations_monthly: 3000
-  non_web_inboxes: 3
-  features:
-    - inbound_emails
-    - help_center
-    - campaigns
-    - team_management
-    - channel_facebook
-    - channel_email
-    - channel_instagram
-    - channel_tiktok
-    - captain_integration
-    - captain_tasks
-    - linear_integration
+    captain_responses: 500
+    captain_documents: 100
 
 business:
   name: Business
@@ -41,31 +23,5 @@ business:
   annual_price_ugx: 1500000
   limits:
     agents: 15
-    inboxes: 15
-    captain_responses: 1000
-    captain_documents: 50
-  conversations_monthly: 15000
-  non_web_inboxes: 10
-  features:
-    - inbound_emails
-    - help_center
-    - campaigns
-    - team_management
-    - channel_facebook
-    - channel_email
-    - channel_instagram
-    - channel_tiktok
-    - captain_integration
-    - captain_tasks
-    - advanced_search_indexing
-    - advanced_search
-    - linear_integration
-    - channel_voice
-    - sla
-    - custom_roles
-    - csat_review_notes
-    - conversation_required_attributes
-    - advanced_assignment
-    - custom_tools
-    - companies
-    - audit_logs
+    captain_responses: 2000
+    captain_documents: 500

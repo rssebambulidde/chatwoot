@@ -8,6 +8,11 @@ converra_billing_downgrade_expired_plans_job:
   class: 'Converra::Billing::DowngradeExpiredPlansJob'
   queue: scheduled_jobs
 
+converra_billing_reset_captain_usage_job:
+  cron: '0 1 * * *'
+  class: 'Converra::Billing::ResetExpiredCaptainUsageJob'
+  queue: scheduled_jobs
+
 converra_billing_renewal_reminder_job:
   cron: '0 8 * * *'
   class: 'Converra::Billing::RenewalReminderJob'

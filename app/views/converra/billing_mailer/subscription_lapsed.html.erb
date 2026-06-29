@@ -1,0 +1,20 @@
+<p>Hello,</p>
+
+<p>
+  Your paid plan<% if @previous_plan_name.present? %> (<strong><%= @previous_plan_name %></strong>)<% end %>
+  for <strong><%= @account.name %></strong> has ended. The workspace is now on the free <strong>Starter</strong> plan.
+</p>
+
+<% if @agents_count > @agent_limit %>
+  <p>
+    You currently have <strong><%= @agents_count %></strong> agents, but Starter allows
+    <strong><%= @agent_limit %></strong>.
+    Remove extra agents or renew on Billing to keep using the inbox.
+  </p>
+<% else %>
+  <p>Renew on Billing to restore your previous plan limits.</p>
+<% end %>
+
+<p>
+  <a href="<%= @billing_url %>">Open billing settings</a>
+</p>

@@ -19,48 +19,42 @@ const isOnChatwootCloud = useMapGetter('globalConfig/isOnChatwootCloud');
 const accountLimits = computed(() => currentAccount.value?.limits || {});
 
 const warningMessage = computed(() => {
+  const warnings = accountLimits.value.usage_warnings || [];
+  const { agents, captain } = accountLimits.value;
+  const responses = captain?.responses;
+
+  if (warnings.includes('subscription_lapsed_agents')) {
+    return t('BILLING_SETTINGS.CONVERRA.BANNER.SUBSCRIPTION_LAPSED');
+  }
+
   if (accountLimits.value.over_limit) {
-    const warnings = accountLimits.value.usage_warnings || [];
-    if (
-      warnings.includes('agents') ||
-      accountLimits.value.agents?.consumed > accountLimits.value.agents?.allowed
-    ) {
+    if (warnings.includes('agents') || agents?.consumed > agents?.allowed) {
       return t('BILLING_SETTINGS.CONVERRA.BANNER.AGENTS', {
-        consumed: accountLimits.value.agents?.consumed,
-        allowed: accountLimits.value.agents?.allowed,
+        consumed: agents?.consumed,
+        allowed: agents?.allowed,
       });
     }
-    if (warnings.includes('conversation')) {
-      return t('BILLING_SETTINGS.CONVERRA.BANNER.CONVERSATIONS', {
-        consumed: accountLimits.value.conversation?.consumed,
-        allowed: accountLimits.value.conversation?.allowed,
-      });
-    }
-    if (warnings.includes('non_web_inboxes')) {
-      return t('BILLING_SETTINGS.CONVERRA.BANNER.CHANNELS', {
-        consumed: accountLimits.value.non_web_inboxes?.consumed,
-        allowed: accountLimits.value.non_web_inboxes?.allowed,
+    if (
+      warnings.includes('captain_responses') ||
+      responses?.consumed > responses?.total_count
+    ) {
+      return t('BILLING_SETTINGS.CONVERRA.BANNER.COPILOT', {
+        consumed: responses?.consumed,
+        allowed: responses?.total_count,
       });
     }
   }
 
-  const warnings = accountLimits.value.usage_warnings || [];
-  if (warnings.includes('conversation')) {
-    return t('BILLING_SETTINGS.CONVERRA.BANNER.CONVERSATIONS', {
-      consumed: accountLimits.value.conversation?.consumed,
-      allowed: accountLimits.value.conversation?.allowed,
-    });
-  }
   if (warnings.includes('agents')) {
     return t('BILLING_SETTINGS.CONVERRA.BANNER.AGENTS', {
-      consumed: accountLimits.value.agents?.consumed,
-      allowed: accountLimits.value.agents?.allowed,
+      consumed: agents?.consumed,
+      allowed: agents?.allowed,
     });
   }
-  if (warnings.includes('non_web_inboxes')) {
-    return t('BILLING_SETTINGS.CONVERRA.BANNER.CHANNELS', {
-      consumed: accountLimits.value.non_web_inboxes?.consumed,
-      allowed: accountLimits.value.non_web_inboxes?.allowed,
+  if (warnings.includes('captain_responses')) {
+    return t('BILLING_SETTINGS.CONVERRA.BANNER.COPILOT', {
+      consumed: responses?.consumed,
+      allowed: responses?.total_count,
     });
   }
   return '';
@@ -68,6 +62,12 @@ const warningMessage = computed(() => {
 
 const showBanner = computed(() => {
   if (!isConverraBillingEnabled.value || isOnChatwootCloud.value) return false;
+  if (
+    accountLimits.value.subscription_lapsed &&
+    accountLimits.value.over_limit
+  ) {
+    return true;
+  }
   if (accountLimits.value.over_limit) return true;
   return (accountLimits.value.usage_warnings || []).length > 0;
 });

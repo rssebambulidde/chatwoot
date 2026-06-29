@@ -13,6 +13,19 @@ class Converra::BillingMailer < ApplicationMailer
     )
   end
 
+  def subscription_lapsed(account:)
+    @account = account
+    @previous_plan_name = account.custom_attributes['converra_previous_plan_name']
+    @agents_count = account.users.count
+    @agent_limit = account.limits['agents'].to_i
+    @billing_url = "#{frontend_url}/app/accounts/#{@account.id}/settings/billing"
+
+    mail(
+      to: administrator_emails(account),
+      subject: "Your #{installation_name} subscription has ended"
+    )
+  end
+
   def renewal_reminder(account:)
     @account = account
     @plan = Converra::Billing::PlanCatalog.find(account.custom_attributes['plan_name'])
