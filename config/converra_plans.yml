@@ -32,6 +32,7 @@ growth:
     - channel_instagram
     - channel_tiktok
     - captain_integration
+    - captain_tasks
     - linear_integration
 
 business:
@@ -55,6 +56,7 @@ business:
     - channel_instagram
     - channel_tiktok
     - captain_integration
+    - captain_tasks
     - advanced_search_indexing
     - advanced_search
     - linear_integration

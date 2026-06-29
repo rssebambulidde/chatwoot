@@ -77,7 +77,8 @@ module Converra
       end
 
       def sync_plan_limits!
-        return if account.limits.is_a?(Hash) && account.limits['agents'].present?
+        return unless PlanCatalog.enabled?
+        return if account.limits.is_a?(Hash) && account.limits['agents'].present? && !plan_features_out_of_sync?
 
         ApplyPlanService.new(
           account: account,
@@ -158,6 +159,11 @@ module Converra
 
       def over_limit_conversations?
         conversations_this_month > conversations_allowed.to_i
+      end
+
+      def plan_features_out_of_sync?
+        captain_allowed = plan.dig('limits', 'captain_responses').to_i.positive?
+        account.feature_enabled?('captain_tasks') != captain_allowed
       end
     end
   end

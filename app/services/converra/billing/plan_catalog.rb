@@ -5,7 +5,8 @@ module Converra
     class PlanCatalog
       PREMIUM_FEATURES = %w[
         inbound_emails help_center campaigns team_management channel_facebook channel_email
-        channel_instagram channel_tiktok captain_integration advanced_search_indexing advanced_search
+        channel_instagram channel_tiktok captain_integration captain_integration_v2 captain_tasks
+        captain_document_auto_sync advanced_search_indexing advanced_search
         linear_integration channel_voice sla custom_roles csat_review_notes conversation_required_attributes
         advanced_assignment custom_tools companies audit_logs disable_branding saml
       ].freeze

@@ -43,7 +43,11 @@ module Branding
 
       set_installation_plan!
       enable_saas_mode!
-      enable_features_on_all_accounts!
+      if converra_billing_enabled?
+        reconcile_billing_accounts!
+      else
+        enable_features_on_all_accounts!
+      end
       clear_premium_warning!
       GlobalConfig.clear_cache
     end
@@ -62,12 +66,35 @@ module Branding
       Account.find_each { |account| enable_features_for_account!(account) }
     end
 
+    def reconcile_billing_accounts!
+      Account.find_each { |account| reconcile_billing_account!(account) }
+    end
+
     def enable_features_for_account!(account)
       return unless ChatwootApp.enterprise?
       return if ChatwootApp.chatwoot_cloud?
+      return reconcile_billing_account!(account) if converra_billing_enabled?
 
       account.enable_features!(*ENTERPRISE_FEATURES)
       account.save!
+    end
+
+    def reconcile_billing_account!(account)
+      plan_slug = account.custom_attributes['plan_name'].presence || 'starter'
+      ends_on = account.custom_attributes['subscription_ends_on']
+      parsed_ends_on = ends_on.present? ? Time.zone.parse(ends_on) : nil
+
+      Converra::Billing::ApplyPlanService.new(
+        account: account,
+        plan_slug: plan_slug,
+        subscription_ends_on: parsed_ends_on
+      ).perform
+    rescue StandardError => e
+      Rails.logger.error("Failed to reconcile Converra plan for account #{account.id}: #{e.message}")
+    end
+
+    def converra_billing_enabled?
+      defined?(Converra::Billing::PlanCatalog) && Converra::Billing::PlanCatalog.enabled?
     end
 
     def clear_premium_warning!

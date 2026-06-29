@@ -5,6 +5,8 @@ Rails.application.config.to_prepare do
     after_create_commit :unlock_enterprise_features_for_saas_account
 
     def unlock_enterprise_features_for_saas_account
+      return if defined?(Converra::Billing::PlanCatalog) && Converra::Billing::PlanCatalog.enabled?
+
       Branding::EnterpriseUnlock.enable_features_for_account!(self)
     end
   end
