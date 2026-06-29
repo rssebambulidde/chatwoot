@@ -231,7 +231,7 @@ onMounted(handleBillingPageLogic);
 
         <BillingCard
           :title="$t('BILLING_SETTINGS.CONVERRA.USAGE')"
-          :description="$t('BILLING_SETTINGS.CONVERRA.DESCRIPTION')"
+          :description="$t('BILLING_SETTINGS.CONVERRA.USAGE_DESCRIPTION')"
         >
           <div v-if="converraLimits.conversation" class="px-5">
             <BillingMeter

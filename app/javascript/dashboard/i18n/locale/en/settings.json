@@ -471,6 +471,7 @@
       "UPGRADE_GROWTH": "Upgrade to Growth — 75,000 UGX/mo",
       "UPGRADE_BUSINESS": "Upgrade to Business — 150,000 UGX/mo",
       "USAGE": "Usage this month",
+      "USAGE_DESCRIPTION": "Track workspace usage against your current plan limits.",
       "CONVERSATIONS": "Conversations",
       "AGENTS": "Agents",
       "CHANNELS": "Email & messaging inboxes",

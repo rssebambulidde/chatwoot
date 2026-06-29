@@ -76,7 +76,24 @@ module Converra
         non_web_inboxes_count >= non_web_inboxes_allowed.to_i
       end
 
+      def sync_plan_limits!
+        return if account.limits.is_a?(Hash) && account.limits['agents'].present?
+
+        ApplyPlanService.new(
+          account: account,
+          plan_slug: current_plan_slug,
+          subscription_ends_on: subscription_ends_on
+        ).perform
+        account.reload
+        @plan = nil
+      end
+
+      def agents_allowed
+        account.limits['agents'].presence || plan.dig('limits', 'agents') || account.usage_limits[:agents]
+      end
+
       def limits_payload
+        sync_plan_limits!
         {
           'plan' => {
             'slug' => current_plan_slug,
@@ -94,7 +111,7 @@ module Converra
             'consumed' => non_web_inboxes_count
           },
           'agents' => {
-            'allowed' => account.usage_limits[:agents],
+            'allowed' => agents_allowed.to_i,
             'consumed' => account.users.count
           },
           'captain' => account.usage_limits[:captain]
