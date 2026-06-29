@@ -1,4 +1,6 @@
 class LegalController < ApplicationController
+  include ActionView::Helpers::NumberHelper
+
   layout 'legal'
 
   GUIDE_PAGES = %w[
@@ -71,6 +73,9 @@ class LegalController < ApplicationController
 
   def converra_plans
     Converra::Billing::PlanCatalog.plans
+  rescue StandardError => e
+    Rails.logger.error("Failed to load Converra plans: #{e.message}")
+    {}
   end
 
   def converra_billing_enabled?

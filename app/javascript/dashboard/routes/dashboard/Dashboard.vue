@@ -143,11 +143,12 @@ export default {
     />
 
     <main
-      class="flex flex-1 h-full w-full min-h-0 px-0 overflow-hidden bg-n-surface-1"
+      class="flex flex-1 flex-col h-full w-full min-h-0 px-0 overflow-hidden bg-n-surface-1"
     >
       <UpgradePage
         v-show="showUpgradePage"
         ref="upgradePageRef"
+        class="flex flex-1 min-h-0 min-w-0"
         :bypass-upgrade-page="bypassUpgradePage"
       >
         <MobileSidebarLauncher
@@ -155,18 +156,23 @@ export default {
           @toggle="toggleMobileSidebar"
         />
       </UpgradePage>
-      <template v-if="!showUpgradePage">
+      <div
+        v-if="!showUpgradePage"
+        class="relative flex flex-1 flex-col min-h-0 min-w-0 overflow-hidden"
+      >
         <ConverraBillingUsageBanner />
-        <router-view />
-        <CommandBar />
-        <CopilotLauncher />
-        <MobileSidebarLauncher
-          :is-mobile-sidebar-open="isMobileSidebarOpen"
-          @toggle="toggleMobileSidebar"
-        />
-        <CopilotContainer />
-        <FloatingCallWidget v-if="hasActiveCall || hasIncomingCall" />
-      </template>
+        <div class="relative flex flex-1 min-h-0 min-w-0 overflow-hidden">
+          <router-view />
+          <CommandBar />
+          <CopilotLauncher />
+          <MobileSidebarLauncher
+            :is-mobile-sidebar-open="isMobileSidebarOpen"
+            @toggle="toggleMobileSidebar"
+          />
+          <CopilotContainer />
+          <FloatingCallWidget v-if="hasActiveCall || hasIncomingCall" />
+        </div>
+      </div>
       <AddAccountModal
         :show="showCreateAccountModal"
         @close-account-create-modal="closeCreateAccountModal"

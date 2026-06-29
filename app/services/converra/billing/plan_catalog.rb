@@ -36,6 +36,8 @@ module Converra
 
         def load_plans
           path = Rails.root.join('config/converra_plans.yml')
+          return {} unless File.exist?(path)
+
           YAML.safe_load(File.read(path)) || {}
         end
       end

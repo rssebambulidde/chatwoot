@@ -35,6 +35,8 @@ module Converra
       end
 
       def recent_payments
+        return [] unless ConverraPlanPayment.table_exists?
+
         ConverraPlanPayment.includes(:account).order(created_at: :desc).limit(10).map do |payment|
           {
             id: payment.id,
@@ -50,6 +52,8 @@ module Converra
       end
 
       def failed_payments_count
+        return 0 unless ConverraPlanPayment.table_exists?
+
         ConverraPlanPayment.failed.where('created_at > ?', 30.days.ago).count
       end
     end

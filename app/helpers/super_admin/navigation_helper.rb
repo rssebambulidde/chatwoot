@@ -13,4 +13,8 @@ module SuperAdmin::NavigationHelper
 
     general_feature + features.to_a
   end
+
+  def sidekiq_web_url
+    '/monitoring/sidekiq'
+  end
 end

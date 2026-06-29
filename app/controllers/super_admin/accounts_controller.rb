@@ -57,6 +57,40 @@ class SuperAdmin::AccountsController < SuperAdmin::ApplicationController
     # rubocop:enable Rails/I18nLocaleTexts
   end
 
+  def change_plan
+    unless Converra::Billing::PlanCatalog.enabled?
+      redirect_back(fallback_location: [namespace, requested_resource], alert: 'Converra billing is not enabled')
+      return
+    end
+
+    plan_slug = params[:plan_slug].to_s
+    current_plan_slug = requested_resource.custom_attributes['plan_name'].presence || 'starter'
+    if plan_slug == current_plan_slug
+      redirect_back(fallback_location: [namespace, requested_resource], notice: 'Account is already on this plan')
+      return
+    end
+
+    plan = Converra::Billing::PlanCatalog.find(plan_slug)
+    if plan.blank?
+      redirect_back(fallback_location: [namespace, requested_resource], alert: "Unknown plan: #{plan_slug}")
+      return
+    end
+
+    Converra::Billing::ApplyPlanService.new(
+      account: requested_resource,
+      plan_slug: plan_slug,
+      subscription_ends_on: subscription_ends_on_for(plan),
+      clear_cancel_at_period_end: true
+    ).perform
+
+    redirect_back(
+      fallback_location: [namespace, requested_resource],
+      notice: "Account plan changed to #{plan['name']}"
+    )
+  rescue ArgumentError => e
+    redirect_back(fallback_location: [namespace, requested_resource], alert: e.message)
+  end
+
   def destroy
     account = Account.find(params[:id])
 
@@ -64,6 +98,26 @@ class SuperAdmin::AccountsController < SuperAdmin::ApplicationController
     # rubocop:disable Rails/I18nLocaleTexts
     redirect_back(fallback_location: [namespace, requested_resource], notice: 'Account deletion is in progress.')
     # rubocop:enable Rails/I18nLocaleTexts
+  end
+
+  private
+
+  def subscription_ends_on_for(plan)
+    return nil if plan['price_ugx'].to_i.zero?
+
+    custom = params[:subscription_ends_on].presence
+    if custom.present?
+      parsed = Time.zone.parse(custom)
+      return parsed.end_of_day if parsed.present?
+    end
+
+    existing = requested_resource.custom_attributes['subscription_ends_on']
+    if existing.present?
+      parsed = Time.zone.parse(existing)
+      return parsed if parsed > Time.current
+    end
+
+    1.month.from_now
   end
 end
 

@@ -1,0 +1,75 @@
+<% if Converra::Billing::PlanCatalog.enabled? %>
+  <% current_plan_slug = page.resource.custom_attributes['plan_name'].presence || 'starter' %>
+  <% current_plan = Converra::Billing::PlanCatalog.find(current_plan_slug) %>
+  <% renewal_on = page.resource.custom_attributes['subscription_ends_on'] %>
+  <% parsed_renewal_on = renewal_on.present? ? Time.zone.parse(renewal_on) : nil %>
+  <section class="main-content__body">
+    <hr/>
+    <%= form_for([:change_plan, namespace, page.resource], method: :post, html: { class: 'form' }) do |f| %>
+      <div class="form-actions">
+        <div class="pb-3">
+          <p>
+            Current plan:
+            <strong><%= current_plan&.dig('name') || current_plan_slug.humanize %></strong>
+            <% if parsed_renewal_on.present? %>
+              · Renews <%= parsed_renewal_on.strftime('%d %b %Y') %>
+            <% end %>
+          </p>
+          <p class="text-slate-600">
+            Change this account to another Converra plan. This updates limits and features immediately and does not charge Pesapal.
+          </p>
+        </div>
+
+        <div class="field-unit field-unit--select field-unit--required pb-3">
+          <div class="field-unit__label">
+            <label for="plan_slug">New plan</label>
+          </div>
+          <div class="field-unit__field">
+            <select id="plan_slug" name="plan_slug" required>
+              <% Converra::Billing::PlanCatalog.plans.each do |slug, plan| %>
+                <option value="<%= slug %>" <%= 'selected' if slug == current_plan_slug %>>
+                  <%= plan['name'] %> (<%= number_with_delimiter(plan['price_ugx']) %> UGX/mo)
+                </option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+
+        <div class="field-unit field-unit--string pb-3" id="renewal-date-field">
+          <div class="field-unit__label">
+            <label for="subscription_ends_on">Renewal date (optional)</label>
+          </div>
+          <div class="field-unit__field">
+            <input
+              id="subscription_ends_on"
+              name="subscription_ends_on"
+              type="date"
+              value="<%= parsed_renewal_on&.strftime('%Y-%m-%d') %>"
+            />
+          </div>
+          <p class="text-slate-600 text-sm mt-1">
+            For paid plans only. Leave blank to keep a future renewal date or default to one month from today.
+          </p>
+        </div>
+
+        <%= f.submit 'Change plan' %>
+      </div>
+    <% end %>
+  </section>
+
+  <script>
+    (function () {
+      const planSelect = document.getElementById('plan_slug');
+      const renewalField = document.getElementById('renewal-date-field');
+      const paidPlans = <%= raw Converra::Billing::PlanCatalog.plans.select { |_slug, plan| plan['price_ugx'].to_i.positive? }.keys.to_json %>;
+
+      function toggleRenewalField() {
+        if (!planSelect || !renewalField) return;
+        renewalField.style.display = paidPlans.includes(planSelect.value) ? 'block' : 'none';
+      }
+
+      planSelect?.addEventListener('change', toggleRenewalField);
+      toggleRenewalField();
+    })();
+  </script>
+<% end %>
