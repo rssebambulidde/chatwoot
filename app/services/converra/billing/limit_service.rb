@@ -76,6 +76,28 @@ module Converra
         non_web_inboxes_count >= non_web_inboxes_allowed.to_i
       end
 
+      def inbox_limit_exceeded?
+        return false unless PlanCatalog.enabled?
+        return false unless subscription_active?
+
+        account.inboxes.count >= account.usage_limits[:inboxes].to_i
+      end
+
+      def agent_limit_exceeded?
+        return false unless PlanCatalog.enabled?
+
+        account.users.count >= agents_allowed.to_i
+      end
+
+      def non_web_inbox_blocked?(channel_type)
+        return false unless PlanCatalog.enabled?
+        return false unless subscription_active?
+        return false if channel_type.blank?
+        return false if channel_type.to_s.in?([Channel::WebWidget.to_s, 'web_widget'])
+
+        non_web_inbox_limit_exceeded?
+      end
+
       def sync_plan_limits!
         return unless PlanCatalog.enabled?
         return if account.limits.is_a?(Hash) && account.limits['agents'].present? && !plan_features_out_of_sync?
@@ -162,8 +184,10 @@ module Converra
       end
 
       def plan_features_out_of_sync?
-        captain_allowed = plan.dig('limits', 'captain_responses').to_i.positive?
-        account.feature_enabled?('captain_tasks') != captain_allowed
+        plan_features = plan['features'] || []
+        PlanCatalog::PREMIUM_FEATURES.any? do |feature|
+          account.feature_enabled?(feature) != plan_features.include?(feature)
+        end
       end
     end
   end
