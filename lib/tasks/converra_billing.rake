@@ -13,5 +13,14 @@ namespace :converra do
       Converra::Billing::ResetExpiredCaptainUsageService.new.perform
       puts 'Converra billing: captain usage reset complete'
     end
+
+    desc 'Reconcile plan features and limits for all workspaces (Converra billing)'
+    task reconcile_plans: :environment do
+      raise 'Converra billing is not enabled' unless Converra::Billing::PlanCatalog.enabled?
+
+      count = Account.count
+      Branding::EnterpriseUnlock.reconcile_billing_accounts!
+      puts "Converra billing: reconciled #{count} account(s)"
+    end
   end
 end
