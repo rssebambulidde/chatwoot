@@ -59,6 +59,17 @@
   <li>Threading by subject and participants</li>
 </ul>
 
+<h2>Custom reply domain and support email</h2>
+<p>Every workspace can brand outbound email:</p>
+<ol>
+  <li>Enable inbound email on your installation (required for custom domain)</li>
+  <li><strong>Settings → Account settings → General</strong></li>
+  <li>Set <strong>Custom domain</strong> to your mail domain (e.g. <code>yourcompany.com</code>)</li>
+  <li>Set <strong>Support email</strong> (e.g. <code>Support &lt;support@yourcompany.com&gt;</code>)</li>
+  <li>Configure SPF, DKIM, and MX with your DNS provider so replies deliver reliably</li>
+</ol>
+<p>Without DNS, use the default installation mail domain until your operator or host configures custom inbound email.</p>
+
 <h2>Best practices</h2>
 <ul>
   <li>Use a dedicated support@ address, not personal mail</li>

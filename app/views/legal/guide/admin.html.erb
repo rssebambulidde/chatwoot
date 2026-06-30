@@ -21,7 +21,7 @@
   <li><strong>Macros</strong> — multi-step agent actions</li>
   <li><strong>Canned responses</strong> — reply snippets</li>
   <li><strong>Integrations</strong> — Slack, webhooks, apps — <a href="<%= guide_page_path('integrations') %>">Integrations guide</a></li>
-  <li><strong>Audit logs</strong> — who changed what (Enterprise / plan-dependent)</li>
+  <li><strong>Audit logs</strong> — who changed what</li>
   <li><strong>Custom roles</strong> — fine-grained permissions — <a href="<%= guide_page_path('security-roles') %>">Security & roles</a></li>
   <li><strong>SLA</strong> — response time policies — <a href="<%= guide_page_path('sla-workflow') %>">SLA & workflow</a></li>
   <li><strong>Conversation workflow</strong> — resolve rules, auto-assignment</li>
@@ -31,11 +31,12 @@
 
 <h2>Account settings</h2>
 <ul>
-  <li>Workspace name and support email</li>
-  <li>Account locale and timezone</li>
+  <li>Workspace name and locale</li>
+  <li><strong>Custom domain</strong> — inbound email reply domain (requires DNS; see <a href="<%= guide_page_path('channel-email') %>">Email channels</a>)</li>
+  <li><strong>Support email</strong> — custom sender address for conversation emails</li>
   <li>Auto-resolve duration (optional)</li>
-  <li>Feature flags visible to your plan</li>
 </ul>
+<p>All plans include the same features; billing limits agent seats and monthly Copilot usage. See <a href="<%= pricing_path %>">Pricing</a>.</p>
 
 <h2>Manage agents</h2>
 <ol>
@@ -59,7 +60,7 @@
 <p>Review agent actions: settings changes, conversation exports, login events. Useful for compliance and debugging permission issues.</p>
 
 <h2>Billing</h2>
-<p>On hosted plans, <strong>Settings → Billing</strong> shows subscription, seats, and Captain credits. Self-hosted operators manage billing outside the app.</p>
+<p>On <%= installation_brand_name %>, <strong>Settings → Billing</strong> shows your plan (Starter, Growth, or Business), agent seat usage, Copilot allowance, and Pesapal payment history. Upgrade to add more agents; all plans include the same product features.</p>
 
 <h2>Admin onboarding checklist</h2>
 <ol>

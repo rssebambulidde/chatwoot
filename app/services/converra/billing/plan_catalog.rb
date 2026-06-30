@@ -9,6 +9,8 @@ module Converra
         captain_document_auto_sync advanced_search_indexing advanced_search
         linear_integration channel_voice sla custom_roles csat_review_notes conversation_required_attributes
         advanced_assignment custom_tools companies audit_logs disable_branding saml
+        custom_reply_domain custom_reply_email crm_integration email_continuity_on_api_channel
+        whatsapp_campaign
       ].freeze
 
       class << self
