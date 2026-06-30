@@ -45,6 +45,10 @@ class LegalController < ApplicationController
     @payment_notice = params[:payment]
   end
 
+  def favicon
+    redirect_to helpers.installation_logo_thumbnail_url, allow_other_host: true
+  end
+
   def guide
     @guide_page = 'index'
     render 'legal/guide/index', layout: 'guide'

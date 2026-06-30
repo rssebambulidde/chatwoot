@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   get '/guide/:page', to: 'legal#guide_page', as: :guide_page
   get '/docs', to: redirect('/guide')
   get '/pricing', to: 'legal#pricing', as: :pricing
+  get '/favicon.ico', to: 'legal#favicon'
   get '/billing/payment/callback', to: 'billing/payment#callback', as: :billing_payment_callback
   post '/webhooks/pesapal', to: 'webhooks/pesapal#process_payload'
   get '/webhooks/pesapal', to: 'webhooks/pesapal#process_payload'

@@ -1,0 +1,4 @@
+<% favicon_url = installation_logo_thumbnail_url %>
+<% favicon_type = favicon_url.to_s.end_with?('.svg') ? 'image/svg+xml' : 'image/png' %>
+<link rel="icon" href="<%= favicon_url %>" type="<%= favicon_type %>">
+<link rel="apple-touch-icon" href="<%= favicon_url %>">
