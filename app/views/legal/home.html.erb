@@ -1,106 +1,227 @@
-<% content_for :title do %><%= installation_brand_name %> — Customer Support Platform<% end %>
+<% content_for :landing_page, true %>
+<% content_for :title do %><%= installation_brand_name %> — One inbox for every customer channel<% end %>
 <% content_for :meta_description do %>
-  <%= installation_brand_name %> is a business customer support application by SamaBrains Solutions. Teams connect Gmail,
-  social messaging, and website chat to manage customer conversations in one workspace.
+  <%= installation_brand_name %> by SamaBrains Solutions unifies WhatsApp, email, website chat, and social messaging in one workspace — with Captain AI, automations, and local Pesapal billing in UGX.
 <% end %>
 
-<section class="hero">
-  <p class="eyebrow">Customer support application</p>
-  <h1><%= installation_brand_name %></h1>
-  <p class="lead">
-    <strong><%= installation_brand_name %></strong> is a software application that helps businesses and support teams
-    manage customer conversations from email, live chat, and social messaging channels in one shared workspace.
+<section class="landing-hero">
+  <div class="landing-hero-glow" aria-hidden="true"></div>
+  <p class="landing-eyebrow">Customer support platform · Built for African businesses</p>
+  <h1 class="landing-hero-title">Every customer message.<br>One calm workspace.</h1>
+  <p class="landing-hero-lead">
+    <strong><%= installation_brand_name %></strong> brings WhatsApp, email, live chat, and social DMs together so your team can reply faster,
+    collaborate clearly, and never lose context — with AI that learns from your own help content.
   </p>
+  <div class="landing-hero-actions">
+    <a href="/app/auth/signup" class="landing-btn landing-btn-primary">Start free — Starter plan</a>
+    <a href="<%= pricing_path %>" class="landing-btn landing-btn-secondary">View pricing</a>
+  </div>
+  <p class="landing-hero-note">No credit card for Starter · Pay with Pesapal on upgrade · Operated by SamaBrains Solutions</p>
 </section>
 
-<section>
-  <h2>What this application does</h2>
-  <p>
-    <%= installation_brand_name %> lets organizations connect communication channels—such as
-    <strong>Gmail</strong>, <strong>Facebook Messenger</strong>, <strong>Instagram</strong>, and
-    <strong>website chat</strong>—so agents can read incoming customer messages, assign conversations,
-    collaborate with teammates, and send replies without switching between tools.
-  </p>
-  <p>
-    This application is intended for <strong>businesses and their authorized staff</strong>. It is not a consumer
-    social network or personal email client.
-  </p>
+<section class="landing-channels" aria-label="Supported channels">
+  <p class="landing-section-label">Connect where your customers already are</p>
+  <div class="landing-channel-row">
+    <span class="landing-channel-pill">WhatsApp</span>
+    <span class="landing-channel-pill">Gmail &amp; email</span>
+    <span class="landing-channel-pill">Website chat</span>
+    <span class="landing-channel-pill">Messenger &amp; Instagram</span>
+    <span class="landing-channel-pill">SMS &amp; API</span>
+    <span class="landing-channel-pill">Help Center</span>
+  </div>
 </section>
 
-<section>
-  <h2>How <%= installation_brand_name %> uses Google user data</h2>
-  <p>
-    When a workspace administrator chooses to connect a <strong>Gmail inbox</strong>, <%= installation_brand_name %>
-    requests permission through Google OAuth to access that mailbox so agents can:
-  </p>
-  <ul>
-    <li>Read incoming customer support emails through the connected Gmail inbox</li>
-    <li>Send email replies to customers on behalf of the connected inbox</li>
-    <li>Display message content inside the <%= installation_brand_name %> workspace for support workflows</li>
-  </ul>
-  <p>
-    We use Google user data <strong>only</strong> to provide these inbox features for the account that authorized
-    access. We do not use Gmail data for advertising, sell it to third parties, or use it for purposes unrelated to
-    customer support. Users can revoke <%= installation_brand_name %>'s access at any time in
-    <a href="https://myaccount.google.com/permissions" rel="noopener noreferrer">Google Account permissions</a>.
-  </p>
-  <p>
-  Optional <strong>Sign in with Google</strong> uses Google only to authenticate workspace users (email and basic
-  profile). It does not grant mailbox access unless the user separately connects a Gmail inbox.
-  </p>
+<section class="landing-section">
+  <div class="landing-section-head">
+    <h2>The problem we solve</h2>
+    <p>Customers message you everywhere. Your team shouldn’t chase threads across five different apps.</p>
+  </div>
+  <div class="landing-card-grid landing-card-grid-3">
+    <article class="landing-card">
+      <span class="landing-card-icon landing-card-icon-blue" aria-hidden="true">◎</span>
+      <h3>Scattered conversations</h3>
+      <p>Email in Gmail, orders on WhatsApp, questions on Instagram — no shared history or ownership.</p>
+    </article>
+    <article class="landing-card">
+      <span class="landing-card-icon landing-card-icon-violet" aria-hidden="true">↻</span>
+      <h3>Slow, inconsistent replies</h3>
+      <p>Messages get missed, handoffs are messy, and customers repeat themselves on every channel.</p>
+    </article>
+    <article class="landing-card">
+      <span class="landing-card-icon landing-card-icon-emerald" aria-hidden="true">✓</span>
+      <h3>One workspace for your team</h3>
+      <p><%= installation_brand_name %> unifies channels, assigns owners, tracks SLAs, and keeps every reply in context.</p>
+    </article>
+  </div>
 </section>
 
-<section>
-  <h2>Key features</h2>
-  <ul>
-    <li>Unified inbox for customer conversations across channels</li>
-    <li>Team assignment, notes, and conversation history</li>
-    <li>Gmail inbox connection for inbound and outbound support email</li>
-    <li>Social messaging integrations (e.g. Messenger, Instagram) where enabled</li>
-    <li>Embeddable website chat widget for your visitors</li>
-    <li>Captain AI, campaigns (including WhatsApp templates), CRM integrations, and Help Center on every plan</li>
-  </ul>
+<section class="landing-section landing-section-alt">
+  <div class="landing-section-head">
+    <h2>Everything included on every plan</h2>
+    <p>Starter, Growth, and Business all ship the full product. You scale by <strong>agent seats</strong> and monthly <strong>Copilot</strong> usage — not locked features.</p>
+  </div>
+  <div class="landing-card-grid landing-card-grid-2">
+    <article class="landing-feature">
+      <h3>Unified inbox</h3>
+      <p>Assign, label, note, and search conversations across every connected channel.</p>
+    </article>
+    <article class="landing-feature">
+      <h3>Captain AI</h3>
+      <p>Auto-reply from your documents and FAQs; Copilot drafts for agents. <a href="<%= guide_page_path('captain') %>">Learn how Captain works</a>.</p>
+    </article>
+    <article class="landing-feature">
+      <h3>Campaigns</h3>
+      <p>Proactive outreach on website chat, SMS, and WhatsApp templates.</p>
+    </article>
+    <article class="landing-feature">
+      <h3>Automations &amp; SLA</h3>
+      <p>Rules, macros, canned responses, and response-time policies.</p>
+    </article>
+    <article class="landing-feature">
+      <h3>Help Center</h3>
+      <p>Publish articles customers can search — and feed Captain the same knowledge.</p>
+    </article>
+    <article class="landing-feature">
+      <h3>Reports &amp; CRM</h3>
+      <p>Contacts, companies, CSAT, agent performance, and integrations like LeadSquared.</p>
+    </article>
+  </div>
 </section>
 
-<section>
-  <h2>Privacy and terms</h2>
-  <p>
-    We describe how we collect, use, and protect data in our
-    <a href="<%= "#{legal_site_url}/privacy" %>">Privacy Policy</a>
-    and <a href="<%= "#{legal_site_url}/terms" %>">Terms of Service</a>.
-    The privacy policy URL configured for this application matches the link on this page.
-  </p>
+<section class="landing-section">
+  <div class="landing-section-head">
+    <h2>How it works</h2>
+    <p>Go live in an afternoon — start small, add channels as you grow.</p>
+  </div>
+  <ol class="landing-steps">
+    <li>
+      <span class="landing-step-num">1</span>
+      <div>
+        <strong>Create your workspace</strong>
+        <p><a href="/app/auth/signup">Sign up free</a> on Starter. Invite agents from Settings → Agents.</p>
+      </div>
+    </li>
+    <li>
+      <span class="landing-step-num">2</span>
+      <div>
+        <strong>Connect your channels</strong>
+        <p>Add WhatsApp, Gmail, website widget, or social inboxes. See the <a href="<%= guide_path %>">User Guide</a>.</p>
+      </div>
+    </li>
+    <li>
+      <span class="landing-step-num">3</span>
+      <div>
+        <strong>Reply with confidence</strong>
+        <p>Let Captain handle first-line questions, then hand off to humans when it matters.</p>
+      </div>
+    </li>
+  </ol>
 </section>
 
-<section>
-  <h2>Documentation</h2>
-  <p>
-    The <a href="<%= guide_path %>">User Guide</a> covers every feature: conversations, all channel types,
-    Captain AI, automations, campaigns, reports, Help Center, integrations, and troubleshooting.
-    No login required.
-  </p>
-  <p>
-    See <a href="<%= pricing_path %>">Pricing</a> for Starter (free), Growth (75,000 UGX/mo), and Business (150,000 UGX/mo) plans.
-  </p>
+<section class="landing-section landing-ai-band">
+  <div class="landing-ai-inner">
+    <div>
+      <p class="landing-section-label">Captain AI</p>
+      <h2>AI that answers from <em>your</em> knowledge — not guesswork</h2>
+      <p>Upload docs and URLs, approve FAQs, connect Captain to WhatsApp or web chat, and hand off to your team when the issue needs a human.</p>
+      <a href="<%= guide_page_path('captain') %>" class="landing-link-arrow">Captain setup guide →</a>
+    </div>
+    <ul class="landing-ai-list">
+      <li>Documents → auto-generated searchable FAQs</li>
+      <li>Scenarios for billing, sales, and support flows</li>
+      <li>Custom tools to call your APIs</li>
+      <li>Copilot sidebar for agent draft replies</li>
+    </ul>
+  </div>
 </section>
 
-<section>
-  <h2>Get started</h2>
-  <p>
-    New to <%= installation_brand_name %>?
-    Read the <a href="<%= guide_path %>">User Guide</a> for signup, workspace setup, and channel connection steps.
-  </p>
-  <p>
-    <a href="/app/login">Sign in</a> to an existing workspace or
-    <a href="/app/auth/signup">create a new workspace</a> if registration is enabled on this installation.
-  </p>
+<% if converra_plans.present? %>
+<section class="landing-section" id="pricing">
+  <div class="landing-section-head">
+    <h2>Simple pricing in UGX</h2>
+    <p>Start free. Upgrade when you need more agents or Copilot capacity. Pay with Pesapal — mobile money, M-Pesa, and cards.</p>
+  </div>
+  <div class="landing-pricing-grid">
+    <% converra_plans.each do |slug, plan| %>
+      <article class="landing-price-card<%= ' landing-price-card-featured' if slug == 'growth' %>">
+        <% if slug == 'growth' %><span class="landing-price-badge">Popular</span><% end %>
+        <h3><%= plan['name'] %></h3>
+        <p class="landing-price-amount">
+          <% if plan['price_ugx'].to_i.zero? %>
+            Free
+          <% else %>
+            <%= number_with_delimiter(plan['price_ugx']) %> <span>UGX/mo</span>
+          <% end %>
+        </p>
+        <ul>
+          <li><%= plan.dig('limits', 'agents') %> agent<%= plan.dig('limits', 'agents').to_i == 1 ? '' : 's' %></li>
+          <li><%= number_with_delimiter(plan.dig('limits', 'captain_responses')) %> Copilot replies / month</li>
+          <li>All channels &amp; features</li>
+        </ul>
+        <% if plan['price_ugx'].to_i.zero? %>
+          <a href="/app/auth/signup" class="landing-btn landing-btn-primary landing-btn-block">Get started</a>
+        <% else %>
+          <a href="/app/login" class="landing-btn landing-btn-secondary landing-btn-block">Sign in to upgrade</a>
+        <% end %>
+      </article>
+    <% end %>
+  </div>
+  <p class="landing-pricing-foot"><a href="<%= pricing_path %>">Full pricing details →</a></p>
+</section>
+<% end %>
+
+<section class="landing-section">
+  <div class="landing-section-head">
+    <h2>Built for teams like yours</h2>
+  </div>
+  <div class="landing-audience">
+    <span>E-commerce &amp; retail</span>
+    <span>SaaS &amp; tech startups</span>
+    <span>Professional services</span>
+    <span>Hospitality &amp; local business</span>
+    <span>NGOs &amp; memberships</span>
+    <span>Solo founders on Starter</span>
+  </div>
 </section>
 
-<section>
-  <h2>Contact</h2>
-  <p>
-    <strong>SamaBrains Solutions</strong> (operator of <%= installation_brand_name %>)<br>
-    Email: <a href="mailto:info@samabrains.com">info@samabrains.com</a><br>
-    Website: <a href="<%= legal_site_url %>"><%= legal_site_url.sub(%r{^https?://}, '') %></a>
-  </p>
+<section class="landing-section landing-trust">
+  <div class="landing-section-head">
+    <h2>Trust &amp; privacy</h2>
+  </div>
+  <div class="landing-trust-grid">
+    <article class="landing-card landing-card-compact">
+      <h3>Google &amp; Gmail</h3>
+      <p>When you connect Gmail, <%= installation_brand_name %> uses OAuth only to read and send support email for that inbox — not for ads or unrelated purposes. Revoke access anytime in <a href="https://myaccount.google.com/permissions" rel="noopener noreferrer">Google Account permissions</a>.</p>
+    </article>
+    <article class="landing-card landing-card-compact">
+      <h3>Policies</h3>
+      <p>Read our <a href="<%= "#{legal_site_url}/privacy" %>">Privacy Policy</a> and <a href="<%= "#{legal_site_url}/terms" %>">Terms of Service</a>. For businesses and authorized staff — not a consumer social network.</p>
+    </article>
+    <article class="landing-card landing-card-compact">
+      <h3>Operator</h3>
+      <p><strong>SamaBrains Solutions</strong><br>
+      <a href="mailto:info@samabrains.com">info@samabrains.com</a><br>
+      <a href="<%= legal_site_url %>"><%= legal_site_url.sub(%r{^https?://}, '') %></a></p>
+    </article>
+  </div>
 </section>
+
+<section class="landing-cta-band">
+  <h2>Ready to stop juggling inboxes?</h2>
+  <p>Join teams using <%= installation_brand_name %> to support customers on WhatsApp, email, and chat — from one place.</p>
+  <div class="landing-hero-actions">
+    <a href="/app/auth/signup" class="landing-btn landing-btn-primary">Create free workspace</a>
+    <a href="<%= guide_path %>" class="landing-btn landing-btn-ghost">Read the User Guide</a>
+  </div>
+</section>
+
+<footer class="landing-footer">
+  <nav aria-label="Footer">
+    <a href="<%= guide_path %>">User Guide</a>
+    <a href="<%= pricing_path %>">Pricing</a>
+    <a href="<%= "#{legal_site_url}/privacy" %>">Privacy</a>
+    <a href="<%= "#{legal_site_url}/terms" %>">Terms</a>
+    <a href="mailto:info@samabrains.com">Contact</a>
+  </nav>
+  <p>© <%= Time.current.year %> SamaBrains Solutions · <%= installation_brand_name %></p>
+</footer>

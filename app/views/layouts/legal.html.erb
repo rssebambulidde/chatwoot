@@ -129,9 +129,397 @@
       }
       .notice-success { background: #ecfdf5; border: 1px solid #86efac; }
       .notice-error { background: #fef2f2; border: 1px solid #fecaca; }
+
+      /* Landing page */
+      body.is-landing { background: #fff; }
+      body.is-landing .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        backdrop-filter: blur(12px);
+        background: rgba(255, 255, 255, 0.92);
+      }
+      body.is-landing .site-header-inner { max-width: 72rem; }
+      body.is-landing .site-nav a.landing-nav-cta {
+        background: #2563eb;
+        color: #fff !important;
+        padding: 0.4rem 0.875rem;
+        border-radius: 0.5rem;
+        text-decoration: none;
+      }
+      body.is-landing .site-nav a.landing-nav-cta:hover {
+        background: #1d4ed8;
+        text-decoration: none;
+      }
+      .landing-main {
+        max-width: 72rem;
+        margin: 0 auto;
+        padding: 0 1.5rem 4rem;
+      }
+      .landing-hero {
+        position: relative;
+        padding: 3.5rem 0 3rem;
+        text-align: center;
+      }
+      .landing-hero-glow {
+        position: absolute;
+        inset: -2rem 10% auto;
+        height: 18rem;
+        background: radial-gradient(ellipse at center, rgba(37, 99, 235, 0.12), transparent 70%);
+        pointer-events: none;
+      }
+      .landing-eyebrow, .landing-section-label {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #2563eb;
+        margin-bottom: 0.75rem;
+      }
+      .landing-hero-title {
+        font-size: clamp(2rem, 5vw, 3.25rem);
+        font-weight: 800;
+        line-height: 1.1;
+        letter-spacing: -0.03em;
+        color: #0f172a;
+        margin-bottom: 1rem;
+        max-width: 18ch;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .landing-hero-lead {
+        font-size: 1.125rem;
+        color: #475569;
+        max-width: 42rem;
+        margin: 0 auto 1.75rem;
+        line-height: 1.65;
+      }
+      .landing-hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      .landing-hero-note {
+        font-size: 0.8125rem;
+        color: #64748b;
+      }
+      .landing-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.75rem 1.25rem;
+        border-radius: 0.625rem;
+        font-size: 0.9375rem;
+        font-weight: 600;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition: background 0.15s, border-color 0.15s, color 0.15s;
+      }
+      .landing-btn-primary {
+        background: #2563eb;
+        color: #fff;
+      }
+      .landing-btn-primary:hover { background: #1d4ed8; color: #fff; }
+      .landing-btn-secondary {
+        background: #fff;
+        color: #0f172a;
+        border-color: #cbd5e1;
+      }
+      .landing-btn-secondary:hover { background: #f8fafc; color: #0f172a; }
+      .landing-btn-ghost {
+        background: rgba(255, 255, 255, 0.12);
+        color: #fff;
+        border-color: rgba(255, 255, 255, 0.35);
+      }
+      .landing-btn-ghost:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+      .landing-btn-block { width: 100%; }
+      .landing-channels {
+        text-align: center;
+        padding-bottom: 3rem;
+        border-bottom: 1px solid #e2e8f0;
+        margin-bottom: 3rem;
+      }
+      .landing-channel-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+      .landing-channel-pill {
+        font-size: 0.8125rem;
+        font-weight: 500;
+        color: #334155;
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        padding: 0.35rem 0.75rem;
+        border-radius: 999px;
+      }
+      .landing-section { margin-bottom: 4rem; }
+      .landing-section-alt {
+        background: #f8fafc;
+        border-radius: 1rem;
+        padding: 2.5rem 1.5rem;
+        border: 1px solid #e2e8f0;
+      }
+      .landing-section-head {
+        text-align: center;
+        max-width: 40rem;
+        margin: 0 auto 2rem;
+      }
+      .landing-section-head h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        margin-bottom: 0.5rem;
+      }
+      .landing-section-head p { color: #64748b; margin-bottom: 0; }
+      .landing-card-grid {
+        display: grid;
+        gap: 1.25rem;
+      }
+      .landing-card-grid-3 { grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+      .landing-card-grid-2 { grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr)); }
+      .landing-card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.875rem;
+        padding: 1.5rem;
+      }
+      .landing-card h3 {
+        font-size: 1.0625rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: #0f172a;
+      }
+      .landing-card p { margin-bottom: 0; color: #64748b; font-size: 0.9375rem; }
+      .landing-card-compact h3 { font-size: 1rem; }
+      .landing-card-icon {
+        display: inline-flex;
+        width: 2.25rem;
+        height: 2.25rem;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+      }
+      .landing-card-icon-blue { background: #dbeafe; color: #1d4ed8; }
+      .landing-card-icon-violet { background: #ede9fe; color: #6d28d9; }
+      .landing-card-icon-emerald { background: #d1fae5; color: #047857; }
+      .landing-feature {
+        padding: 1.25rem 0;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      .landing-feature:last-child { border-bottom: none; }
+      .landing-feature h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        margin-bottom: 0.35rem;
+        color: #0f172a;
+      }
+      .landing-feature p { margin-bottom: 0; font-size: 0.9375rem; color: #64748b; }
+      .landing-steps {
+        list-style: none;
+        padding: 0;
+        max-width: 36rem;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      .landing-steps li {
+        display: flex;
+        gap: 1rem;
+        align-items: flex-start;
+        margin: 0;
+      }
+      .landing-step-num {
+        flex-shrink: 0;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 999px;
+        background: #2563eb;
+        color: #fff;
+        font-size: 0.875rem;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .landing-steps strong { display: block; color: #0f172a; margin-bottom: 0.25rem; }
+      .landing-steps p { margin: 0; font-size: 0.9375rem; color: #64748b; }
+      .landing-ai-band {
+        background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+        border-radius: 1rem;
+        padding: 2.5rem 1.5rem;
+        color: #e2e8f0;
+      }
+      .landing-ai-inner {
+        display: grid;
+        gap: 2rem;
+        align-items: start;
+      }
+      @media (min-width: 48rem) {
+        .landing-ai-inner { grid-template-columns: 1.2fr 1fr; }
+      }
+      .landing-ai-band h2 {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.75rem;
+        letter-spacing: -0.02em;
+      }
+      .landing-ai-band h2 em { font-style: normal; color: #93c5fd; }
+      .landing-ai-band p { color: #cbd5e1; margin-bottom: 1rem; }
+      .landing-ai-band .landing-section-label { color: #93c5fd; }
+      .landing-link-arrow {
+        color: #93c5fd;
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .landing-link-arrow:hover { text-decoration: underline; }
+      .landing-ai-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+      .landing-ai-list li {
+        padding: 0.5rem 0 0.5rem 1.25rem;
+        position: relative;
+        font-size: 0.9375rem;
+        color: #e2e8f0;
+        margin: 0;
+      }
+      .landing-ai-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.85rem;
+        width: 0.375rem;
+        height: 0.375rem;
+        border-radius: 999px;
+        background: #60a5fa;
+      }
+      .landing-pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+        gap: 1.25rem;
+      }
+      .landing-price-card {
+        position: relative;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.875rem;
+        padding: 1.5rem;
+        text-align: center;
+      }
+      .landing-price-card-featured {
+        border-color: #2563eb;
+        box-shadow: 0 8px 30px rgba(37, 99, 235, 0.12);
+      }
+      .landing-price-badge {
+        position: absolute;
+        top: -0.625rem;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #2563eb;
+        color: #fff;
+        font-size: 0.6875rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding: 0.2rem 0.6rem;
+        border-radius: 999px;
+      }
+      .landing-price-card h3 {
+        font-size: 1.125rem;
+        margin-bottom: 0.5rem;
+        color: #0f172a;
+      }
+      .landing-price-amount {
+        font-size: 1.75rem;
+        font-weight: 800;
+        color: #0f172a;
+        margin-bottom: 1rem;
+      }
+      .landing-price-amount span {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: #64748b;
+      }
+      .landing-price-card ul {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 1.25rem;
+        text-align: left;
+        font-size: 0.875rem;
+        color: #475569;
+      }
+      .landing-price-card li {
+        padding: 0.35rem 0;
+        margin: 0;
+        border-bottom: 1px solid #f1f5f9;
+      }
+      .landing-pricing-foot { text-align: center; margin-top: 1.25rem; font-size: 0.9375rem; }
+      .landing-audience {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        justify-content: center;
+      }
+      .landing-audience span {
+        font-size: 0.875rem;
+        padding: 0.5rem 1rem;
+        border-radius: 999px;
+        background: #eff6ff;
+        color: #1e40af;
+        border: 1px solid #bfdbfe;
+      }
+      .landing-trust-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+        gap: 1rem;
+      }
+      .landing-cta-band {
+        text-align: center;
+        background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+        color: #fff;
+        border-radius: 1rem;
+        padding: 3rem 1.5rem;
+        margin-bottom: 3rem;
+      }
+      .landing-cta-band h2 {
+        font-size: 1.75rem;
+        font-weight: 700;
+        color: #fff;
+        margin-bottom: 0.5rem;
+      }
+      .landing-cta-band p {
+        color: #dbeafe;
+        max-width: 32rem;
+        margin: 0 auto 1.5rem;
+      }
+      .landing-footer {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid #e2e8f0;
+        font-size: 0.875rem;
+        color: #64748b;
+      }
+      .landing-footer nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.25rem;
+        justify-content: center;
+        margin-bottom: 1rem;
+      }
+      .landing-footer a { font-weight: 500; }
+      .landing-footer p { margin: 0; }
     </style>
   </head>
-  <body>
+  <body class="<%= 'is-landing' if content_for?(:landing_page) %>">
     <header class="site-header">
       <div class="site-header-inner">
         <a class="brand" href="/">
@@ -140,14 +528,16 @@
         <nav class="site-nav" aria-label="Site">
           <a href="<%= guide_path %>">User Guide</a>
           <a href="<%= pricing_path %>">Pricing</a>
-          <a href="<%= "#{legal_site_url}/privacy" %>">Privacy Policy</a>
-          <a href="<%= "#{legal_site_url}/terms" %>">Terms of Service</a>
-          <a href="/app/auth/signup">Sign up</a>
+          <% unless content_for?(:landing_page) %>
+            <a href="<%= "#{legal_site_url}/privacy" %>">Privacy Policy</a>
+            <a href="<%= "#{legal_site_url}/terms" %>">Terms of Service</a>
+          <% end %>
           <a href="/app/login">Sign in</a>
+          <a href="/app/auth/signup" class="<%= 'landing-nav-cta' if content_for?(:landing_page) %>">Sign up</a>
         </nav>
       </div>
     </header>
-    <main class="container">
+    <main class="<%= content_for?(:landing_page) ? 'landing-main' : 'container' %>">
       <%= yield %>
     </main>
   </body>
