@@ -56,6 +56,18 @@ export default {
     whatsappAppId() {
       return window.chatwootConfig?.whatsappAppId;
     },
+    identityValidationDocsUrl() {
+      const isCustomBranded =
+        window.globalConfig?.installationName &&
+        window.globalConfig.installationName !== 'Chatwoot';
+      const base = window.chatwootConfig?.hostURL?.replace(/\/$/, '') || '';
+
+      if (isCustomBranded && base) {
+        return `${base}/guide/channel-website#identity-validation`;
+      }
+
+      return 'https://www.chatwoot.com/docs/product/channels/live-chat/sdk/identity-validation/';
+    },
     isForwardingEnabled() {
       return !!this.inbox.forwarding_enabled;
     },
@@ -275,7 +287,7 @@ export default {
             <a
               target="_blank"
               rel="noopener noreferrer"
-              href="https://www.chatwoot.com/docs/product/channels/live-chat/sdk/identity-validation/"
+              :href="identityValidationDocsUrl"
               class="text-n-blue-11 hover:underline text-label-small"
             >
               {{

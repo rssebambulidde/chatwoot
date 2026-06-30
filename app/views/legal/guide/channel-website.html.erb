@@ -48,6 +48,38 @@
 <h2>Proactive campaigns</h2>
 <p>Trigger chat messages based on URL or time on site via <a href="<%= guide_page_path('campaigns') %>">Live chat campaigns</a>.</p>
 
+<h2 id="identity-validation">Identity validation</h2>
+<p>
+  Identity validation helps keep conversations private and prevents users from impersonating someone else.
+  Enable it by generating an HMAC token with the <strong>Secret Key</strong> shown under inbox
+  <strong>Settings → Configuration → Identity Validation</strong>.
+</p>
+<p>Generate HMAC-SHA256 using your user <code>identifier</code> and the secret key, then pass the hash when identifying users via the widget SDK.</p>
+
+<h3>JavaScript (Node.js)</h3>
+<pre><code>const crypto = require('crypto');
+
+const key = '&lt;your-secret-key&gt;';
+const message = '&lt;user-identifier&gt;';
+
+const identifierHash = crypto.createHmac('sha256', key).update(message).digest('hex');</code></pre>
+
+<h3>Ruby</h3>
+<pre><code>require 'openssl'
+
+key = '&lt;your-secret-key&gt;'
+message = '&lt;user-identifier&gt;'
+
+OpenSSL::HMAC.hexdigest('sha256', key, message)</code></pre>
+
+<h3>PHP</h3>
+<pre><code>$key = '&lt;your-secret-key&gt;';
+$message = '&lt;user-identifier&gt;';
+
+$identifier_hash = hash_hmac('sha256', $message, $key);</code></pre>
+
+<p>Pass the generated hash to the widget SDK as the <code>identifier_hash</code> when calling <code>setUser</code>. Turn on <strong>Require identity validation for all conversations</strong> to reject requests without a valid token.</p>
+
 <h2>Identity & continuity</h2>
 <p>Returning visitors are recognized via browser token when cookies are allowed. Logged-in users on your app can pass identity via the SDK <code>setUser</code> API for richer context (developer integration).</p>
 
