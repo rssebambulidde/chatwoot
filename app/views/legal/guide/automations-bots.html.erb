@@ -43,7 +43,7 @@
 </ol>
 
 <h2>Agent bots (webhook)</h2>
-<p>Unlike Captain AI, agent bots POST JSON to <strong>your URL</strong> for custom logic (Dialogflow, Rasa, internal CRM, etc.).</p>
+<p>Unlike <%= installation_captain_name %>, agent bots POST JSON to <strong>your URL</strong> for custom logic (Dialogflow, Rasa, internal CRM, etc.).</p>
 <ol>
   <li><strong>Settings → Bots → Add bot</strong></li>
   <li>Name and <strong>Outgoing URL</strong> (HTTPS endpoint)</li>
@@ -69,9 +69,9 @@
 <p><strong>Email continuity:</strong> When a contact in an API inbox has an email address, agent replies can also be sent by email so users can continue the thread outside your app. Ensure contacts include valid email addresses.</p>
 <p>See developer API docs on your installation for endpoint details.</p>
 
-<h2>Captain vs automation vs bot</h2>
+<h2><%= installation_captain_name %> vs automation vs bot</h2>
 <ul>
-  <li><strong>Captain</strong> — built-in AI, documents, Copilot — <a href="<%= guide_page_path('captain') %>">Captain guide</a></li>
+  <li><strong><%= installation_captain_name %></strong> — built-in AI, documents, Copilot — <a href="<%= guide_page_path('captain') %>"><%= installation_captain_name %> guide</a></li>
   <li><strong>Automation</strong> — if-this-then-that inside <%= installation_brand_name %></li>
   <li><strong>Agent bot</strong> — your code handles intelligence via webhook</li>
 </ul>

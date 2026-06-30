@@ -99,11 +99,11 @@
   <li>Your role may not have permission for certain settings items</li>
 </ul>
 
-<h2>Captain / Copilot not available</h2>
+<h2><%= installation_captain_name %> / Copilot not available</h2>
 <ul>
-  <li>Captain is included on all <%= installation_brand_name %> plans — see <a href="<%= guide_page_path('captain') %>">Captain AI guide</a></li>
-  <li>Admin must attach an assistant to the inbox under <strong>Captain → [Assistant] → Inboxes</strong></li>
-  <li>Monthly <strong>Copilot allowance</strong> exhausted — Captain hands off to humans; check <strong>Settings → Billing</strong> or <a href="<%= pricing_path %>">upgrade</a></li>
+  <li><%= installation_captain_name %> is included on all <%= installation_brand_name %> plans — see <a href="<%= guide_page_path('captain') %>"><%= installation_captain_name %> guide</a></li>
+  <li>Admin must attach an assistant to the inbox under <strong><%= installation_captain_name %> → [Assistant] → Inboxes</strong></li>
+  <li>Monthly <strong>Copilot allowance</strong> exhausted — <%= installation_captain_name %> hands off to humans; check <strong>Settings → Billing</strong> or <a href="<%= pricing_path %>">upgrade</a></li>
   <li>Document limits may block adding new knowledge sources</li>
 </ul>
 
@@ -195,7 +195,7 @@
       <a href="<%= guide_page_path('channel-email') %>">Email</a> ·
       <a href="<%= guide_page_path('channel-website') %>">Website</a> ·
       <a href="<%= guide_page_path('channel-whatsapp') %>">WhatsApp</a></li>
-  <li><a href="<%= guide_page_path('captain') %>">Captain</a> ·
+  <li><a href="<%= guide_page_path('captain') %>"><%= installation_captain_name %></a> ·
       <a href="<%= guide_page_path('macros-canned') %>">Macros</a> ·
       <a href="<%= guide_page_path('automations-bots') %>">Automations</a> ·
       <a href="<%= guide_page_path('campaigns') %>">Campaigns</a></li>

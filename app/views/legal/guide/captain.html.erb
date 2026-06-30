@@ -1,40 +1,41 @@
-<% content_for :title do %>Captain AI | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :title do %><%= installation_captain_name %> | <%= installation_brand_name %> User Guide<% end %>
 <% content_for :meta_description do %>
-  Set up Captain assistants, documents, FAQs, scenarios, tools, inbox auto-reply, and Copilot in <%= installation_brand_name %>.
+  Set up <%= installation_captain_name %> assistants, documents, FAQs, scenarios, tools, inbox auto-reply, and Copilot in <%= installation_brand_name %>.
 <% end %>
+<% captain = installation_captain_name %>
 
-<h1>Captain AI</h1>
+<h1><%= captain %></h1>
 <p class="lead">
-  Captain helps your team answer customers faster using AI trained on your documents and approved FAQs.
+  <%= captain %> helps your team answer customers faster using AI trained on your documents and approved FAQs.
   <strong>Admins</strong> configure assistants, knowledge, and inbox connections.
   <strong>Agents</strong> use <strong>Copilot</strong> inside conversations to draft replies they review before sending.
 </p>
 
-<h2>Captain vs Copilot vs bots</h2>
+<h2><%= captain %> vs Copilot vs bots</h2>
 <ul>
-  <li><strong>Captain (auto-reply)</strong> — When an assistant is attached to an inbox, Captain can reply to customers automatically on that channel (website chat, WhatsApp, email, etc.) until it hands off to a human.</li>
+  <li><strong><%= captain %> (auto-reply)</strong> — When an assistant is attached to an inbox, <%= captain %> can reply to customers automatically on that channel (website chat, WhatsApp, email, etc.) until it hands off to a human.</li>
   <li><strong>Copilot</strong> — A sidebar inside a conversation that drafts replies for agents. Copilot assists humans; it does not send messages on its own.</li>
-  <li><strong>Agent bots</strong> — Webhook integrations under <strong>Settings → Bots</strong> that POST events to <em>your</em> server. Separate from Captain. See <a href="<%= guide_page_path('automations-bots') %>">Automations & bots</a>.</li>
+  <li><strong>Agent bots</strong> — Webhook integrations under <strong>Settings → Bots</strong> that POST events to <em>your</em> server. Separate from <%= captain %>. See <a href="<%= guide_page_path('automations-bots') %>">Automations & bots</a>.</li>
 </ul>
 
 <h2>Quick start for admins</h2>
 <ol>
-  <li>Open <strong>Captain</strong> in the left sidebar.</li>
+  <li>Open <strong><%= captain %></strong> in the left sidebar.</li>
   <li>Create or select an <strong>assistant</strong>.</li>
-  <li>Add <strong>Documents</strong> (URLs, PDFs, or help center content) so Captain has accurate answers.</li>
-  <li>Review <strong>FAQs</strong> — approve or edit question/answer pairs Captain should use.</li>
+  <li>Add <strong>Documents</strong> (URLs, PDFs, or help center content) so <%= captain %> has accurate answers.</li>
+  <li>Review <strong>FAQs</strong> — approve or edit question/answer pairs <%= captain %> should use.</li>
   <li>Optional: add <strong>Scenarios</strong> for specialized flows (billing, sales, complaints).</li>
   <li>Optional: add <strong>Tools</strong> to call your APIs or use built-in actions (labels, notes, handoff).</li>
-  <li>Under <strong>Captain → [Assistant] → Inboxes</strong>, connect the assistant to the inboxes where customers should get AI first-line replies.</li>
+  <li>Under <strong><%= captain %> → [Assistant] → Inboxes</strong>, connect the assistant to the inboxes where customers should get AI first-line replies.</li>
   <li>Test in <strong>Playground</strong> before going live.</li>
 </ol>
 
 <h2 id="documents">Documents — your knowledge base</h2>
-<p>Documents are the source material Captain learns from. They are <strong>not</strong> pasted into every reply. Instead, the system turns them into searchable FAQs.</p>
+<p>Documents are the source material <%= captain %> learns from. They are <strong>not</strong> pasted into every reply. Instead, the system turns them into searchable FAQs.</p>
 
 <h3>Adding documents</h3>
 <ol>
-  <li>Go to <strong>Captain → [Assistant] → Documents</strong>.</li>
+  <li>Go to <strong><%= captain %> → [Assistant] → Documents</strong>.</li>
   <li>Add a <strong>URL</strong> (help article, docs page, or site section), upload a <strong>PDF</strong>, or connect help center content.</li>
   <li>Wait for processing to finish (status becomes available).</li>
 </ol>
@@ -42,21 +43,21 @@
 <h3>What happens after you add a document</h3>
 <ol>
   <li><strong>Content is extracted</strong> — text is fetched from the URL or PDF.</li>
-  <li><strong>FAQs are generated</strong> — Captain creates question/answer pairs from that content.</li>
-  <li><strong>Embeddings are built</strong> — each FAQ is indexed so Captain can find relevant answers by meaning, not just keywords.</li>
+  <li><strong>FAQs are generated</strong> — <%= captain %> creates question/answer pairs from that content.</li>
+  <li><strong>Embeddings are built</strong> — each FAQ is indexed so <%= captain %> can find relevant answers by meaning, not just keywords.</li>
 </ol>
-<p>When a customer asks something, Captain <strong>searches approved FAQs</strong> for that assistant, then writes a reply based on what it finds — plus your guidelines and guardrails. If nothing matches, it should ask clarifying questions or hand off to a human rather than guess.</p>
+<p>When a customer asks something, <%= captain %> <strong>searches approved FAQs</strong> for that assistant, then writes a reply based on what it finds — plus your guidelines and guardrails. If nothing matches, it should ask clarifying questions or hand off to a human rather than guess.</p>
 
 <h3>Tips for good documents</h3>
 <ul>
   <li>Use clear, factual help content — pricing, setup steps, policies, product features.</li>
   <li>Keep documents updated when your product or policies change.</li>
   <li>Connect your <a href="<%= guide_page_path('help-center') %>">Help Center</a> so public articles stay aligned with AI answers.</li>
-  <li>You can also create or edit FAQs manually under <strong>Captain → FAQs</strong> without uploading a document.</li>
+  <li>You can also create or edit FAQs manually under <strong><%= captain %> → FAQs</strong> without uploading a document.</li>
 </ul>
 
 <h2 id="faqs">FAQs (responses)</h2>
-<p>FAQs are the question/answer pairs Captain actually searches at reply time. They may come from:</p>
+<p>FAQs are the question/answer pairs <%= captain %> actually searches at reply time. They may come from:</p>
 <ul>
   <li>Auto-generation from documents</li>
   <li>Manual entry by an admin</li>
@@ -65,7 +66,7 @@
 <p>Review pending FAQs and <strong>approve only accurate answers</strong>. Reject or edit anything incorrect before customers see AI replies based on them.</p>
 
 <h2 id="scenarios">Scenarios — specialized handling</h2>
-<p>Scenarios let Captain route certain types of requests to a focused playbook — for example <em>billing & refunds</em>, <em>sales inquiries</em>, or <em>technical support</em>. The customer does not see a “transfer”; the conversation continues naturally.</p>
+<p>Scenarios let <%= captain %> route certain types of requests to a focused playbook — for example <em>billing & refunds</em>, <em>sales inquiries</em>, or <em>technical support</em>. The customer does not see a “transfer”; the conversation continues naturally.</p>
 
 <h3>When to use scenarios</h3>
 <ul>
@@ -76,21 +77,21 @@
 
 <h3>How to add a scenario</h3>
 <ol>
-  <li>Go to <strong>Captain → [Assistant] → Scenarios</strong>.</li>
+  <li>Go to <strong><%= captain %> → [Assistant] → Scenarios</strong>.</li>
   <li>Click <strong>Create</strong> and fill in:
     <ul>
       <li><strong>Title</strong> — short name (e.g. “Refund requests”)</li>
-      <li><strong>Description</strong> — when this scenario applies (helps Captain decide to use it)</li>
+      <li><strong>Description</strong> — when this scenario applies (helps <%= captain %> decide to use it)</li>
       <li><strong>Instruction</strong> — step-by-step playbook for the AI</li>
     </ul>
   </li>
   <li>In the instruction editor, type <strong>@</strong> to insert a <strong>tool</strong> (see below). Example: add a private note, add a label, then hand off to a human.</li>
   <li>Save and test in <strong>Playground</strong>.</li>
 </ol>
-<p>Also set <strong>guidelines</strong> and <strong>guardrails</strong> under <strong>Captain → Settings</strong> for tone, topics to avoid, and when to escalate.</p>
+<p>Also set <strong>guidelines</strong> and <strong>guardrails</strong> under <strong><%= captain %> → Settings</strong> for tone, topics to avoid, and when to escalate.</p>
 
-<h2 id="tools">Tools — actions Captain can take</h2>
-<p>Tools let Captain do more than chat: look up data, add notes, label conversations, resolve tickets, or call your systems.</p>
+<h2 id="tools">Tools — actions <%= captain %> can take</h2>
+<p>Tools let <%= captain %> do more than chat: look up data, add notes, label conversations, resolve tickets, or call your systems.</p>
 
 <h3>Built-in tools (included)</h3>
 <p>These are available when editing scenario instructions (type <strong>@</strong> to pick one):</p>
@@ -105,23 +106,23 @@
 </ul>
 
 <h3>Custom HTTP tools (your APIs)</h3>
-<p>If your plan includes custom tools, admins can add them under <strong>Captain → Tools</strong>:</p>
+<p>If your plan includes custom tools, admins can add them under <strong><%= captain %> → Tools</strong>:</p>
 <ol>
   <li>Click <strong>Add new</strong>.</li>
   <li>Enter a title, description, and your API endpoint URL.</li>
   <li>Define parameters the AI should collect (e.g. order ID).</li>
   <li>Configure authentication if needed (Bearer, API key, or basic auth).</li>
   <li>Use <strong>Test</strong> to verify the endpoint, then save.</li>
-  <li>Reference the tool in a <strong>scenario instruction</strong> with <strong>@</strong> so Captain can call it during that flow.</li>
+  <li>Reference the tool in a <strong>scenario instruction</strong> with <strong>@</strong> so <%= captain %> can call it during that flow.</li>
 </ol>
 <p>Example use cases: order status lookup, CRM sync, inventory check, appointment booking.</p>
 
-<h2 id="connect-inbox">Connect Captain to an inbox (e.g. WhatsApp)</h2>
+<h2 id="connect-inbox">Connect <%= captain %> to an inbox (e.g. WhatsApp)</h2>
 <p>Attaching an assistant to an inbox turns on <strong>AI first-line replies</strong> on that channel.</p>
 
 <h3>How to connect</h3>
 <ol>
-  <li>Go to <strong>Captain → [Assistant] → Inboxes</strong>.</li>
+  <li>Go to <strong><%= captain %> → [Assistant] → Inboxes</strong>.</li>
   <li>Click <strong>Connect inbox</strong> and choose the inbox (website, WhatsApp, email, etc.).</li>
   <li>Test with a real message from that channel.</li>
 </ol>
@@ -130,17 +131,17 @@
 <ol>
   <li>Customer sends a message on the connected channel.</li>
   <li>The conversation starts in a <strong>pending</strong> (bot-handling) state.</li>
-  <li>Captain reads the thread, searches FAQs, and sends a reply as the assistant.</li>
-  <li>If Captain cannot help, hits a limit, or you configured handoff rules, it transfers to a <strong>human agent</strong> with a handoff message.</li>
+  <li><%= captain %> reads the thread, searches FAQs, and sends a reply as the assistant.</li>
+  <li>If <%= captain %> cannot help, hits a limit, or you configured handoff rules, it transfers to a <strong>human agent</strong> with a handoff message.</li>
   <li>Agents see the conversation as <strong>open</strong> and can reply normally.</li>
 </ol>
 
 <h3>WhatsApp-specific notes</h3>
 <ul>
   <li>Replies inside the <strong>24-hour session window</strong> (after the customer last messaged you) send as normal chat messages.</li>
-  <li>Outside that window, Meta often requires <strong>approved templates</strong> for outbound messages — Captain auto-replies work best when customers are actively messaging. See <a href="<%= guide_page_path('channel-whatsapp') %>">WhatsApp channels</a>.</li>
-  <li>Greeting and out-of-office templates are suppressed while Captain is handling the chat.</li>
-  <li>Idle pending conversations may be <strong>auto-resolved</strong> or <strong>handed off</strong> after about an hour, depending on your Captain settings.</li>
+  <li>Outside that window, Meta often requires <strong>approved templates</strong> for outbound messages — <%= captain %> auto-replies work best when customers are actively messaging. See <a href="<%= guide_page_path('channel-whatsapp') %>">WhatsApp channels</a>.</li>
+  <li>Greeting and out-of-office templates are suppressed while <%= captain %> is handling the chat.</li>
+  <li>Idle pending conversations may be <strong>auto-resolved</strong> or <strong>handed off</strong> after about an hour, depending on your <%= captain %> settings.</li>
 </ul>
 <p>The same inbox connection flow applies to <a href="<%= guide_page_path('channel-website') %>">website chat</a>, <a href="<%= guide_page_path('channel-email') %>">email</a>, and other supported channels.</p>
 
@@ -154,20 +155,20 @@
 <p>Copilot can search documentation and conversation context to help agents work faster. It does not replace human judgment for billing disputes, legal matters, or sensitive complaints.</p>
 
 <h2 id="limits">Copilot allowance and limits</h2>
-<p>On <%= installation_brand_name %>, every plan includes Captain. Usage is mainly metered by:</p>
+<p>On <%= installation_brand_name %>, every plan includes <%= captain %>. Usage is mainly metered by:</p>
 <ul>
-  <li><strong>Copilot responses</strong> — each Captain auto-reply or Copilot generation counts toward your monthly allowance (shown under <strong>Settings → Billing</strong>).</li>
+  <li><strong>Copilot responses</strong> — each <%= captain %> auto-reply or Copilot generation counts toward your monthly allowance (shown under <strong>Settings → Billing</strong>).</li>
   <li><strong>Agent seats</strong> — human agents you can invite; separate from Copilot.</li>
   <li><strong>Documents</strong> — storage/count limits for knowledge documents per workspace.</li>
 </ul>
-<p>When the monthly Copilot allowance is used up, Captain stops auto-replying and <strong>hands conversations to human agents</strong> on the next customer message. Upgrade your plan or wait for the monthly reset to increase allowance. See <a href="<%= pricing_path %>">Pricing</a>.</p>
+<p>When the monthly Copilot allowance is used up, <%= captain %> stops auto-replying and <strong>hands conversations to human agents</strong> on the next customer message. Upgrade your plan or wait for the monthly reset to increase allowance. See <a href="<%= pricing_path %>">Pricing</a>.</p>
 
 <h2>Handoff and escalation</h2>
-<p>Captain should transfer to a human when:</p>
+<p><%= captain %> should transfer to a human when:</p>
 <ul>
   <li>The customer asks for a person</li>
   <li>No relevant FAQ answers the question</li>
-  <li>The issue needs permissions Captain does not have (refunds, account changes, etc.)</li>
+  <li>The issue needs permissions <%= captain %> does not have (refunds, account changes, etc.)</li>
   <li>Monthly Copilot allowance is exhausted</li>
   <li>A scenario instruction ends with handoff</li>
 </ul>

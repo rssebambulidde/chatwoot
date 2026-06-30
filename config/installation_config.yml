@@ -42,6 +42,10 @@
   value: 'Converra'
   display_title: 'Brand Name'
   description: 'The name that would be used in emails and the widget'
+- name: CAPTAIN_NAME
+  value: 'Converra AI'
+  display_title: 'AI Assistant Name'
+  description: 'The product name shown in place of Captain AI across the dashboard and docs'
 - name: TERMS_URL
   value: 'https://converra.samabrains.com/terms'
   display_title: 'Terms URL'

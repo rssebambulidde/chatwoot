@@ -21,11 +21,23 @@ module BrandingHelper
     GlobalConfig.get_value('LOGO_THUMBNAIL').presence || '/brand-assets/logo_thumbnail.png'
   end
 
+  def installation_captain_name
+    GlobalConfig.get_value('CAPTAIN_NAME').presence || 'Captain'
+  end
+
+  def apply_product_branding(text)
+    Branding::TextReplacer.replace(
+      text,
+      installation_name: installation_brand_name,
+      captain_name: installation_captain_name
+    )
+  end
+
   def custom_branded_instance?
     installation_brand_name != 'Chatwoot'
   end
 
   def apply_installation_branding(text)
-    Branding::TextReplacer.replace(text, installation_name: installation_brand_name)
+    Branding::TextReplacer.replace(text, installation_name: installation_brand_name, captain_name: installation_captain_name)
   end
 end

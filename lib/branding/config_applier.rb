@@ -10,6 +10,7 @@ module Branding
       LOGO
       LOGO_DARK
       LOGO_THUMBNAIL
+      CAPTAIN_NAME
       TERMS_URL
       PRIVACY_URL
       DISPLAY_MANIFEST
@@ -30,6 +31,7 @@ module Branding
         'LOGO' => env_value('LOGO', '/brand-assets/logo.png'),
         'LOGO_DARK' => env_value('LOGO_DARK', '/brand-assets/logo_dark.png'),
         'LOGO_THUMBNAIL' => env_value('LOGO_THUMBNAIL', '/brand-assets/logo_thumbnail.png'),
+        'CAPTAIN_NAME' => env_value('CAPTAIN_NAME', default_captain_name),
         'TERMS_URL' => env_value('TERMS_URL', "#{frontend_url}/terms"),
         'PRIVACY_URL' => env_value('PRIVACY_URL', "#{frontend_url}/privacy"),
         'DISPLAY_MANIFEST' => env_value('DISPLAY_MANIFEST', 'false')
@@ -51,6 +53,12 @@ module Branding
 
     def branding_name
       env_value('INSTALLATION_NAME', env_value('BRAND_NAME', nil))
+    end
+
+    def default_captain_name
+      return branding_name if branding_name.blank?
+
+      "#{branding_name} AI"
     end
 
     def frontend_url

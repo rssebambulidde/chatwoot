@@ -50,8 +50,8 @@
 <h2>Manage inboxes</h2>
 <p>See <a href="<%= guide_page_path('channels') %>">Channels overview</a> for every channel type. After creating an inbox, always add collaborators and test inbound/outbound messages.</p>
 
-<h2>Captain (AI)</h2>
-<p>Configured from the <strong>Captain</strong> sidebar: assistants, documents, FAQs, scenarios, tools, and inbox connections. See the <a href="<%= guide_page_path('captain') %>">Captain AI guide</a> for setup steps and how auto-reply works on WhatsApp and other channels.</p>
+<h2><%= installation_captain_name %> (AI)</h2>
+<p>Configured from the <strong><%= installation_captain_name %></strong> sidebar: assistants, documents, FAQs, scenarios, tools, and inbox connections. See the <a href="<%= guide_page_path('captain') %>"><%= installation_captain_name %> guide</a> for setup steps and how auto-reply works on WhatsApp and other channels.</p>
 
 <h2>Help Center (your customers’ docs)</h2>
 <p>Separate from this User Guide. Your workspace can publish a public KB at <code>/hc/your-slug</code>. See <a href="<%= guide_page_path('help-center') %>">Help Center guide</a>.</p>
@@ -70,7 +70,7 @@
   <li>Create labels and canned responses</li>
   <li>Configure SLA and workflow if needed</li>
   <li>Enable integrations (Slack, etc.)</li>
-  <li>Set up Captain or bots if using automation</li>
+  <li>Set up <%= installation_captain_name %> or bots if using automation</li>
   <li>Publish Help Center articles for end customers (optional)</li>
 </ol>
 

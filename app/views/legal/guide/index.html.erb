@@ -1,6 +1,6 @@
 <% content_for :title do %>User Guide | <%= installation_brand_name %><% end %>
 <% content_for :meta_description do %>
-  Complete <%= installation_brand_name %> documentation: signup, conversations, channels, automation, Captain AI, reports, and troubleshooting.
+  Complete <%= installation_brand_name %> documentation: signup, conversations, channels, automation, <%= installation_captain_name %>, reports, and troubleshooting.
 <% end %>
 
 <h1><%= installation_brand_name %> User Guide</h1>
@@ -88,7 +88,7 @@
 <h2>Automation & AI</h2>
 <div class="guide-card-grid">
   <a class="guide-card" href="<%= guide_page_path('captain') %>">
-    <strong>Captain AI</strong>
+    <strong><%= installation_captain_name %></strong>
     <span>Documents, FAQs, scenarios, tools, inbox auto-reply, Copilot.</span>
   </a>
   <a class="guide-card" href="<%= guide_page_path('macros-canned') %>">

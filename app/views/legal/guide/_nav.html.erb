@@ -43,7 +43,7 @@
   <div class="guide-nav-group">
     <h3>Automation & AI</h3>
     <nav aria-label="Automation and AI">
-      <%= link_to 'Captain AI', guide_page_path('captain'), class: ('is-active' if guide_page_active?('captain')) %>
+      <%= link_to installation_captain_name, guide_page_path('captain'), class: ('is-active' if guide_page_active?('captain')) %>
       <%= link_to 'Macros & canned responses', guide_page_path('macros-canned'), class: ('is-active' if guide_page_active?('macros-canned')) %>
       <%= link_to 'Automations & bots', guide_page_path('automations-bots'), class: ('is-active' if guide_page_active?('automations-bots')) %>
       <%= link_to 'Campaigns', guide_page_path('campaigns'), class: ('is-active' if guide_page_active?('campaigns')) %>

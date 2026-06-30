@@ -1,9 +1,9 @@
 <% content_for :landing_page, true %>
 <% content_for :title do %><%= installation_brand_name %> — One inbox for every customer channel<% end %>
 <% content_for :meta_description do %>
-  <%= installation_brand_name %> by SamaBrains Solutions unifies WhatsApp, email, website chat, and social messaging in one workspace — with Captain AI, automations, and local Pesapal billing in UGX.
+  <%= installation_brand_name %> by SamaBrains Solutions unifies WhatsApp, email, website chat, and social messaging in one workspace — with <%= installation_captain_name %>, automations, and local Pesapal billing in UGX.
 <% end %>
-
+<% captain = installation_captain_name %>
 <section class="landing-hero">
   <div class="landing-hero-glow" aria-hidden="true"></div>
   <p class="landing-eyebrow">Customer support platform · Built for African businesses</p>
@@ -66,8 +66,8 @@
       <p>Assign, label, note, and search conversations across every connected channel.</p>
     </article>
     <article class="landing-feature">
-      <h3>Captain AI</h3>
-      <p>Auto-reply from your documents and FAQs; Copilot drafts for agents. <a href="<%= guide_page_path('captain') %>">Learn how Captain works</a>.</p>
+      <h3><%= installation_captain_name %></h3>
+      <p>Auto-reply from your documents and FAQs; Copilot drafts for agents. <a href="<%= guide_page_path('captain') %>">Learn how <%= installation_captain_name %> works</a>.</p>
     </article>
     <article class="landing-feature">
       <h3>Campaigns</h3>
@@ -79,7 +79,7 @@
     </article>
     <article class="landing-feature">
       <h3>Help Center</h3>
-      <p>Publish articles customers can search — and feed Captain the same knowledge.</p>
+      <p>Publish articles customers can search — and feed <%= installation_captain_name %> the same knowledge.</p>
     </article>
     <article class="landing-feature">
       <h3>Reports &amp; CRM</h3>
@@ -112,7 +112,7 @@
       <span class="landing-step-num">3</span>
       <div>
         <strong>Reply with confidence</strong>
-        <p>Let Captain handle first-line questions, then hand off to humans when it matters.</p>
+        <p>Let <%= installation_captain_name %> handle first-line questions, then hand off to humans when it matters.</p>
       </div>
     </li>
   </ol>
@@ -121,10 +121,10 @@
 <section class="landing-section landing-ai-band">
   <div class="landing-ai-inner">
     <div>
-      <p class="landing-section-label">Captain AI</p>
+      <p class="landing-section-label"><%= installation_captain_name %></p>
       <h2>AI that answers from <em>your</em> knowledge — not guesswork</h2>
-      <p>Upload docs and URLs, approve FAQs, connect Captain to WhatsApp or web chat, and hand off to your team when the issue needs a human.</p>
-      <a href="<%= guide_page_path('captain') %>" class="landing-link-arrow">Captain setup guide →</a>
+      <p>Upload docs and URLs, approve FAQs, connect <%= installation_captain_name %> to WhatsApp or web chat, and hand off to your team when the issue needs a human.</p>
+      <a href="<%= guide_page_path('captain') %>" class="landing-link-arrow"><%= installation_captain_name %> setup guide →</a>
     </div>
     <ul class="landing-ai-list">
       <li>Documents → auto-generated searchable FAQs</li>
