@@ -16,7 +16,10 @@ namespace :converra do
 
     desc 'Reconcile plan features and limits for all workspaces (Converra billing)'
     task reconcile_plans: :environment do
-      raise 'Converra billing is not enabled' unless Converra::Billing::PlanCatalog.enabled?
+      unless Converra::Billing::PlanCatalog.enabled?
+        puts 'Converra billing: skipped reconcile (billing not enabled)'
+        next
+      end
 
       count = Account.count
       Branding::EnterpriseUnlock.reconcile_billing_accounts!
