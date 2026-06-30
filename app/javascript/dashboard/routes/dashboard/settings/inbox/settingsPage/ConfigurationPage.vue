@@ -57,9 +57,9 @@ export default {
       return window.chatwootConfig?.whatsappAppId;
     },
     identityValidationDocsUrl() {
+      const installationName = window.globalConfig?.INSTALLATION_NAME;
       const isCustomBranded =
-        window.globalConfig?.installationName &&
-        window.globalConfig.installationName !== 'Chatwoot';
+        installationName && installationName !== 'Chatwoot';
       const base = window.chatwootConfig?.hostURL?.replace(/\/$/, '') || '';
 
       if (isCustomBranded && base) {
