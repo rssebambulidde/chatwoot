@@ -6,10 +6,9 @@ export const FACEBOOK_PAGE_SCOPES = [
   'pages_read_engagement',
 ];
 
-// Instagram DMs via a linked Facebook Page only (optional).
 export const INSTAGRAM_SCOPES = [
-  'instagram_business_basic',
-  'instagram_business_manage_messages',
+  'instagram_basic',
+  'instagram_manage_messages',
 ];
 
 export const buildFacebookLoginScopes = ({
