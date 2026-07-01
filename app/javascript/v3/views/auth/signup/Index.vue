@@ -5,6 +5,7 @@ import SignupForm from './components/Signup/Form.vue';
 import Testimonials from './components/Testimonials/Index.vue';
 import Spinner from 'shared/components/Spinner.vue';
 import signupBg from 'assets/images/auth/signup-bg.jpg';
+import converraSignupBg from 'assets/images/auth/converra-signup-bg.png';
 
 const store = useStore();
 
@@ -12,6 +13,9 @@ const isLoading = ref(false);
 const globalConfig = computed(() => store.getters['globalConfig/get']);
 const isAChatwootInstance = computed(
   () => globalConfig.value.installationName === 'Chatwoot'
+);
+const signupBackground = computed(() =>
+  isAChatwootInstance.value ? signupBg : converraSignupBg
 );
 
 onBeforeMount(() => {
@@ -25,18 +29,30 @@ const resizeContainers = () => {
 
 <template>
   <div
-    class="relative w-full h-full min-h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat p-4"
-    :style="{ backgroundImage: `url(${signupBg})` }"
+    class="relative w-full h-full min-h-screen flex flex-col items-center justify-center bg-cover bg-center bg-no-repeat p-4 sm:px-6 lg:px-8"
+    :style="{ backgroundImage: `url(${signupBackground})` }"
   >
     <div
-      class="absolute inset-0 bg-n-gray-12/60 dark:bg-n-gray-1/80 backdrop-blur-sm"
+      class="absolute inset-0 backdrop-blur-sm"
+      :class="
+        isAChatwootInstance
+          ? 'bg-n-gray-12/60 dark:bg-n-gray-1/80'
+          : 'bg-n-brand/70 dark:bg-n-gray-12/75'
+      "
     />
     <div
       v-show="!isLoading"
-      class="relative flex max-w-[960px] bg-white dark:bg-n-solid-2 rounded-lg outline outline-1 outline-n-container shadow-sm"
-      :class="{ 'w-auto xl:w-full': isAChatwootInstance }"
+      class="relative bg-white dark:bg-n-solid-2 outline outline-1 outline-n-container"
+      :class="
+        isAChatwootInstance
+          ? 'flex max-w-[960px] rounded-lg shadow-sm'
+          : 'w-full max-w-lg p-11 shadow sm:shadow-lg sm:rounded-lg'
+      "
     >
-      <div class="flex-1 flex items-center justify-center py-10 px-10">
+      <div
+        class="flex-1 flex items-center justify-center"
+        :class="isAChatwootInstance ? 'py-10 px-10' : ''"
+      >
         <div class="max-w-[420px] w-full">
           <div class="mb-6">
             <img
