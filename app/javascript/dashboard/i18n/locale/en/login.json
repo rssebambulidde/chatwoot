@@ -21,6 +21,10 @@
       "NO_ACCOUNT_FOUND": "We couldn't find an account for your email address."
     },
     "FORGOT_PASSWORD": "Forgot your password?",
+    "ANDROID_APP": {
+      "TITLE": "Get the Chatwoot Android app",
+      "DOWNLOAD": "Download and install on your phone"
+    },
     "CREATE_NEW_ACCOUNT": "Create a new account",
     "SUBMIT": "Login",
     "SAML": {

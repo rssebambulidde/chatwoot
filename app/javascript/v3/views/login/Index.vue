@@ -106,6 +106,12 @@ export default {
     showSamlLogin() {
       return this.allowedLoginMethods.includes('saml');
     },
+    showAndroidAppInstall() {
+      return Boolean(window.chatwootConfig?.androidAppInstallUrl);
+    },
+    androidAppInstallUrl() {
+      return window.chatwootConfig?.androidAppInstallUrl || '';
+    },
   },
   created() {
     if (this.ssoAuthToken) {
@@ -416,6 +422,32 @@ export default {
       <div v-else class="flex items-center justify-center">
         <Spinner color-scheme="primary" size="" />
       </div>
+    </section>
+
+    <section
+      v-if="showAndroidAppInstall && !sessionsLimitReached && !mfaRequired"
+      class="mt-6 sm:mx-auto sm:w-full sm:max-w-lg"
+    >
+      <a
+        :href="androidAppInstallUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-4 p-4 transition-colors bg-white rounded-lg shadow dark:bg-n-solid-2 sm:shadow-lg ring-1 ring-n-container dark:ring-n-container hover:bg-n-alpha-2 dark:hover:bg-n-alpha-2"
+      >
+        <Icon icon="i-lucide-smartphone" class="shrink-0 size-8 text-n-brand" />
+        <div class="min-w-0 text-left">
+          <p class="text-sm font-medium text-n-slate-12">
+            {{ replaceInstallationName($t('LOGIN.ANDROID_APP.TITLE')) }}
+          </p>
+          <p class="mt-1 text-sm text-n-brand">
+            {{ $t('LOGIN.ANDROID_APP.DOWNLOAD') }}
+          </p>
+        </div>
+        <Icon
+          icon="i-lucide-external-link"
+          class="shrink-0 ml-auto size-4 text-n-slate-11"
+        />
+      </a>
     </section>
   </main>
 </template>
