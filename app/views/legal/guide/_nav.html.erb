@@ -1,5 +1,8 @@
 <aside class="guide-sidebar">
-  <h2>User Guide</h2>
+  <details class="guide-sidebar-details">
+    <summary class="guide-sidebar-toggle">Browse guide topics</summary>
+    <div class="guide-sidebar-body">
+      <h2>User Guide</h2>
 
   <div class="guide-nav-group">
     <h3>For schools</h3>
@@ -74,4 +77,6 @@
       <%= link_to 'Troubleshooting', guide_page_path('troubleshooting'), class: ('is-active' if guide_page_active?('troubleshooting')) %>
     </nav>
   </div>
+    </div>
+  </details>
 </aside>
