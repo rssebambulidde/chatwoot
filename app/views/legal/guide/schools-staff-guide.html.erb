@@ -1,0 +1,183 @@
+<% content_for :title do %>Schools staff user guide | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>
+  How school staff use <%= installation_brand_name %>: reply to parents on WhatsApp, assign conversations, and use the mobile app.
+<% end %>
+
+<h1>Schools — staff user guide</h1>
+<p class="lead">
+  This guide is for <strong>front office, bursars, registrars, and teachers</strong> who reply to parents
+  using <%= installation_brand_name %> — on the web or the Converra mobile app.
+</p>
+
+<h2>Signing in</h2>
+<ol>
+  <li>Open <a href="/app/login">converra.samabrains.com/app/login</a> on a computer, or install the Android app from <a href="https://install.converra.samabrains.com/" rel="noopener noreferrer">install.converra.samabrains.com</a>.</li>
+  <li>Enter the email and password your school admin gave you.</li>
+  <li>You land on <strong>Conversations</strong> — the shared parent message inbox.</li>
+</ol>
+<p>First-time login? Your admin must invite you under <strong>Settings → Agents</strong> and add you as a collaborator on the school’s inboxes.</p>
+
+<h2>Understanding the inbox</h2>
+<p>Each row is one <strong>conversation</strong> with a parent (or guardian). Conversations can come from:</p>
+<ul>
+  <li><strong>WhatsApp</strong> — most common for schools</li>
+  <li><strong>Email</strong> — info@ or bursar@ school addresses</li>
+  <li><strong>Website chat</strong> — admission form on the school site</li>
+</ul>
+<p>All channels appear in one list so you do not switch between apps.</p>
+
+<h2>Inbox views (filters)</h2>
+<p>Use the left sidebar to focus your work:</p>
+<table class="guide-table">
+  <thead>
+    <tr><th>View</th><th>When to use it</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>All conversations</strong></td><td>See everything (usually front office only)</td></tr>
+    <tr><td><strong>Mine</strong></td><td>Only conversations assigned to you</td></tr>
+    <tr><td><strong>Unassigned</strong></td><td>New parent messages waiting for someone to pick up</td></tr>
+    <tr><td><strong>Open / Resolved</strong></td><td>Active vs finished conversations</td></tr>
+  </tbody>
+</table>
+<p>Bursars: filter <strong>Mine</strong> or label <code>fees</code>. Registrars: label <code>admissions</code>.</p>
+
+<h2>Handling a new parent message</h2>
+<ol>
+  <li>Click the conversation to open it.</li>
+  <li>Read the full thread — check if Converra AI already sent an auto-reply.</li>
+  <li><strong>Assign</strong> to yourself or the right colleague (bursar, registrar, teacher).</li>
+  <li>Add a <strong>label</strong> if needed: <code>fees</code>, <code>admissions</code>, <code>attendance</code>, etc.</li>
+  <li>Type your reply and press <strong>Send</strong>.</li>
+  <li>When finished, mark <strong>Resolved</strong> so the inbox stays tidy.</li>
+</ol>
+<p>More detail: <a href="<%= guide_page_path('conversations') %>">Conversations guide</a>.</p>
+
+<h2>Common school scenarios</h2>
+
+<h3>Fees and balances (bursar)</h3>
+<ul>
+  <li>Parent asks balance → check your records → reply with amount and payment deadline.</li>
+  <li>Parent sends bank slip photo → verify payment → confirm in WhatsApp and label <code>fees</code>.</li>
+  <li>Use canned response <strong>“How to pay fees”</strong> for payment instructions.</li>
+  <li>Do not discuss another child’s balance in the same thread — verify parent identity first.</li>
+</ul>
+
+<h3>Admissions (registrar)</h3>
+<ul>
+  <li>Send admission checklist (documents, interview date) via canned response.</li>
+  <li>Label <code>admissions</code> and keep thread open until enrolment is complete.</li>
+  <li>Link to Help Center admission article if available.</li>
+</ul>
+
+<h3>Attendance (front office / class teacher)</h3>
+<ul>
+  <li>Parent reports absence → note date and reason → notify class teacher via <strong>private note</strong>.</li>
+  <li>Reply to parent confirming the message was received.</li>
+  <li>Label <code>attendance</code>.</li>
+</ul>
+
+<h3>General enquiries (front office)</h3>
+<ul>
+  <li>School hours, location, events — use canned responses or let Converra AI handle first.</li>
+  <li>If unsure, assign to deputy head or relevant department.</li>
+</ul>
+
+<h3>Urgent matters (health, safety)</h3>
+<ul>
+  <li>Label <code>urgent</code> immediately.</li>
+  <li>Assign to senior admin or head teacher.</li>
+  <li>Do not rely on AI — reply as a human promptly.</li>
+</ul>
+
+<h2>Private notes vs replies</h2>
+<ul>
+  <li><strong>Reply</strong> — the parent sees this on WhatsApp or email.</li>
+  <li><strong>Private note</strong> — only staff see this (e.g. “Forward to Mr. Okello — P5 fees dispute”).</li>
+</ul>
+<p>Always use private notes for internal discussion about a parent.</p>
+
+<h2>Canned responses (quick replies)</h2>
+<p>Click the <strong>canned response</strong> icon when typing to insert pre-written snippets:</p>
+<ul>
+  <li>Office hours</li>
+  <li>Fee payment instructions</li>
+  <li>Admission document list</li>
+  <li>“We will reply within 24 hours”</li>
+</ul>
+<p>Your admin creates these under Settings. See <a href="<%= guide_page_path('macros-canned') %>">Macros &amp; canned responses</a>.</p>
+
+<h2>Converra AI</h2>
+<p>AI may already have answered the parent before you open the thread. When you take over:</p>
+<ul>
+  <li>Read what AI sent — correct it if wrong.</li>
+  <li>Use <strong>Copilot</strong> in the sidebar to draft a reply from school documents (optional).</li>
+  <li>Always use a human for: fee disputes, discipline, medical issues, complaints about staff.</li>
+</ul>
+<p>See <a href="<%= guide_page_path('captain') %>">Converra AI guide</a>.</p>
+
+<h2>Using the mobile app</h2>
+<ol>
+  <li>Install from <a href="https://install.converra.samabrains.com/" rel="noopener noreferrer">install.converra.samabrains.com</a>.</li>
+  <li>Sign in with the same email and password.</li>
+  <li>Allow <strong>notifications</strong> so you see new parent messages immediately.</li>
+  <li>Reply the same way as on the web — assign, label, resolve.</li>
+</ol>
+<p>The app is ideal for bursars and duty officers who are away from the front desk.</p>
+
+<h2>Professional standards</h2>
+<ul>
+  <li>Reply in a polite, professional tone — you represent the school.</li>
+  <li>Respond within your school’s target time (often same school day).</li>
+  <li>Do not share other families’ information.</li>
+  <li>Do not use personal WhatsApp for official school business.</li>
+  <li>Mark conversations <strong>Resolved</strong> when the parent’s question is answered.</li>
+</ul>
+
+<h2>When to escalate</h2>
+<p>Assign or notify senior staff for:</p>
+<ul>
+  <li>Complaints about teachers or bullying</li>
+  <li>Fee waivers or special arrangements</li>
+  <li>Medical emergencies</li>
+  <li>Media or legal enquiries</li>
+  <li>Anything you are not authorised to decide</li>
+</ul>
+
+<h2>Keyboard shortcuts &amp; tips</h2>
+<ul>
+  <li><strong>Search</strong> — find a parent by phone number or name</li>
+  <li><strong>@mention</strong> a colleague in a private note to get their attention</li>
+  <li><strong>Resolve</strong> keeps your “Open” list manageable</li>
+  <li>Check <strong>Unassigned</strong> at the start of each school day</li>
+</ul>
+<p>Full agent guide: <a href="<%= guide_page_path('agents') %>">For agents</a>.</p>
+
+<h2>Troubleshooting</h2>
+<table class="guide-table">
+  <thead>
+    <tr><th>Problem</th><th>What to do</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Cannot sign in</td><td>Check email/password; ask admin to reset your invite</td></tr>
+    <tr><td>No conversations visible</td><td>Admin must add you as inbox collaborator</td></tr>
+    <tr><td>WhatsApp message not arriving</td><td>Confirm parent messaged the <strong>official</strong> school number; see admin</td></tr>
+    <tr><td>App not notifying</td><td>Enable notifications in phone settings; stay signed in</td></tr>
+  </tbody>
+</table>
+<p>More: <a href="<%= guide_page_path('troubleshooting') %>">Troubleshooting</a> ·
+<a href="<%= guide_page_path('whatsapp-errors') %>">WhatsApp errors</a></p>
+
+<h2>Quick reference card</h2>
+<div class="guide-callout">
+  <strong>New message?</strong> Open → Assign → Label → Reply → Resolve<br>
+  <strong>Fees?</strong> Label <code>fees</code> · Assign to bursar<br>
+  <strong>Admission?</strong> Label <code>admissions</code> · Assign to registrar<br>
+  <strong>Urgent?</strong> Label <code>urgent</code> · Notify senior admin<br>
+  <strong>Need help?</strong> Private note @colleague or email info@samabrains.com
+</div>
+
+<div class="cta-box">
+  <p><strong>Admins:</strong> <a href="<%= guide_page_path('schools-setup') %>">Schools setup guide</a> ·
+  <a href="/app/login">Sign in</a> ·
+  <a href="mailto:info@samabrains.com">info@samabrains.com</a></p>
+</div>

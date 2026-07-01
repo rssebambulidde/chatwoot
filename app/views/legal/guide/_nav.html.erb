@@ -2,6 +2,14 @@
   <h2>User Guide</h2>
 
   <div class="guide-nav-group">
+    <h3>For schools</h3>
+    <nav aria-label="Schools">
+      <%= link_to 'Schools setup', guide_page_path('schools-setup'), class: ('is-active' if guide_page_active?('schools-setup')) %>
+      <%= link_to 'Schools staff guide', guide_page_path('schools-staff-guide'), class: ('is-active' if guide_page_active?('schools-staff-guide')) %>
+    </nav>
+  </div>
+
+  <div class="guide-nav-group">
     <h3>Getting started</h3>
     <nav aria-label="Getting started">
       <%= link_to 'Overview', guide_path, class: ('is-active' if guide_page_active?('index')) %>

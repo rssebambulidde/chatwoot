@@ -27,6 +27,8 @@ class LegalController < ApplicationController
     security-roles
     whatsapp-errors
     troubleshooting
+    schools-setup
+    schools-staff-guide
   ].freeze
 
   helper_method :legal_site_url, :guide_page_active?, :converra_plans, :converra_billing_enabled?

@@ -1,0 +1,219 @@
+<% content_for :title do %>Schools setup &amp; configuration | <%= installation_brand_name %> User Guide<% end %>
+<% content_for :meta_description do %>
+  Configure <%= installation_brand_name %> for schools: WhatsApp parent line, teams, labels, AI, Help Center, and staff roles.
+<% end %>
+
+<h1>Schools — setup &amp; configuration</h1>
+<p class="lead">
+  This guide is for <strong>school administrators and IT staff</strong> setting up <%= installation_brand_name %>
+  for parent communication — WhatsApp, email, website chat, and AI — at a primary or secondary school,
+  college, or training centre.
+</p>
+
+<h2>What you will configure</h2>
+<ul>
+  <li>Workspace and staff accounts (front office, bursar, registrar, teachers)</li>
+  <li>Parent-facing channels (usually <strong>WhatsApp</strong> first, then email or website chat)</li>
+  <li>Labels and teams so messages route to the right department</li>
+  <li>Converra AI trained on fee schedules, term dates, and admission documents</li>
+  <li>Help Center articles parents can search</li>
+  <li>Mobile app for staff who reply on the go</li>
+</ul>
+<p>
+  For day-to-day use by bursars and reception staff, see
+  <a href="<%= guide_page_path('schools-staff-guide') %>">Schools — staff user guide</a>.
+</p>
+
+<h2>Before you start</h2>
+<ul>
+  <li>A dedicated <strong>WhatsApp Business</strong> number for the school (not a teacher’s personal WhatsApp)</li>
+  <li>PDF or Word documents: fee structure, term calendar, admission checklist, school rules</li>
+  <li>Names and emails of staff who will be agents (bursar, registrar, front office)</li>
+  <li>Admin login to <%= installation_brand_name %> (<a href="/app/auth/signup">sign up free</a> on Starter if needed)</li>
+</ul>
+
+<h2>Step 1 — Create the school workspace</h2>
+<ol>
+  <li>Open <a href="/app/auth/signup">Sign up</a> and register with the school’s admin email (e.g. <code>admin@yourschool.ac.ug</code>).</li>
+  <li>Use the <strong>school name</strong> as the workspace name (e.g. “Green Valley Primary School”).</li>
+  <li>Sign in and complete onboarding, or go to <strong>Settings → Inboxes → Add inbox</strong>.</li>
+</ol>
+<p>See <a href="<%= guide_page_path('workspace-setup') %>">Workspace setup</a> for inviting agents and roles.</p>
+
+<h2>Step 2 — Connect WhatsApp (recommended first channel)</h2>
+<p>Most parents in East Africa contact schools on WhatsApp. Connect your school’s business number:</p>
+<ol>
+  <li><strong>Settings → Inboxes → Add inbox → WhatsApp</strong></li>
+  <li>Choose <strong>Connect with WhatsApp Business</strong> (embedded signup) when available, or <strong>manual setup</strong> with Phone number ID, WABA ID, and API token from Meta.</li>
+  <li>Name the inbox clearly, e.g. <strong>Parent WhatsApp — Main Office</strong>.</li>
+  <li>Add collaborators: front office (admin), bursar, registrar.</li>
+</ol>
+<p>Full technical steps: <a href="<%= guide_page_path('channel-whatsapp') %>">WhatsApp channel guide</a>.
+  Problems connecting? See <a href="<%= guide_page_path('whatsapp-errors') %>">WhatsApp errors</a>.</p>
+
+<div class="guide-callout">
+  <strong>Tip:</strong> Announce the official WhatsApp number on your notice board, Facebook page, and fee letters.
+  Ask parents to save it as “[School name] — Office” so they know it is official.
+</div>
+
+<h2>Step 3 — Connect email (optional)</h2>
+<p>If parents email <code>info@yourschool.ac.ug</code> or <code>bursar@yourschool.ac.ug</code>:</p>
+<ol>
+  <li><strong>Settings → Inboxes → Add inbox → Email</strong></li>
+  <li>Connect Gmail or Microsoft, or set up forwarding.</li>
+  <li>Use the same labels and teams as WhatsApp so fee emails go to the bursar.</li>
+</ol>
+<p>See <a href="<%= guide_page_path('channel-email') %>">Email channel guide</a>.</p>
+
+<h2>Step 4 — Website chat (optional)</h2>
+<p>Add a chat widget on your school website for admission enquiries:</p>
+<ol>
+  <li><strong>Settings → Inboxes → Add inbox → Website</strong></li>
+  <li>Copy the script snippet into your website template.</li>
+  <li>Set pre-chat fields: parent name, child’s class, enquiry type.</li>
+</ol>
+<p>See <a href="<%= guide_page_path('channel-website') %>">Website chat guide</a>.</p>
+
+<h2>Step 5 — Add staff agents</h2>
+<ol>
+  <li><strong>Settings → Agents → Add agent</strong> for each person who will reply to parents.</li>
+  <li>Suggested roles:
+    <ul>
+      <li><strong>Administrator</strong> — IT, head of admin, or deputy (full settings access)</li>
+      <li><strong>Agent</strong> — bursar, registrar, front office, class teachers</li>
+    </ul>
+  </li>
+  <li>Under each inbox → <strong>Collaborators</strong>, add only the staff who should see that channel.</li>
+</ol>
+<p>Recommended agent seats (Growth plan = 5 agents): front office, bursar, registrar, deputy admin, one senior teacher.</p>
+
+<h2>Step 6 — Labels for school departments</h2>
+<p>Labels help route and report on parent messages. Create these under <strong>Settings → Labels</strong>:</p>
+<table class="guide-table">
+  <thead>
+    <tr><th>Label</th><th>Colour suggestion</th><th>Used for</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>fees</code></td><td>Green</td><td>Balances, payments, bursaries, bank slips</td></tr>
+    <tr><td><code>admissions</code></td><td>Blue</td><td>New applications, interviews, documents</td></tr>
+    <tr><td><code>attendance</code></td><td>Orange</td><td>Absence, late arrival, pick-up</td></tr>
+    <tr><td><code>academics</code></td><td>Purple</td><td>Homework, exams, results (class teachers)</td></tr>
+    <tr><td><code>transport</code></td><td>Teal</td><td>Bus routes, pick-up changes</td></tr>
+    <tr><td><code>general</code></td><td>Gray</td><td>Hours, location, events</td></tr>
+    <tr><td><code>urgent</code></td><td>Red</td><td>Health, safety, escalations</td></tr>
+  </tbody>
+</table>
+<p>Details: <a href="<%= guide_page_path('teams-labels') %>">Teams &amp; labels</a>.</p>
+
+<h2>Step 7 — Teams (optional but recommended)</h2>
+<p>Create teams so conversations can be assigned by department:</p>
+<ul>
+  <li><strong>Accounts</strong> — bursar and accounts assistant</li>
+  <li><strong>Admissions</strong> — registrar and admissions officer</li>
+  <li><strong>Front office</strong> — reception and general enquiries</li>
+  <li><strong>Teachers</strong> — class teachers (only class-specific threads)</li>
+</ul>
+<p>Assign conversations manually or with automations (next step).</p>
+
+<h2>Step 8 — Automations</h2>
+<p>Save time with rules under <strong>Settings → Automation</strong>. Examples for schools:</p>
+<ul>
+  <li><strong>Keyword “fees” or “balance”</strong> → add label <code>fees</code> → assign to Accounts team</li>
+  <li><strong>Keyword “admission” or “apply”</strong> → label <code>admissions</code> → assign to Admissions team</li>
+  <li><strong>Keyword “absent” or “sick”</strong> → label <code>attendance</code> → assign to Front office</li>
+  <li><strong>Outside business hours</strong> → auto-reply: “Thank you for messaging [School]. We are closed; we will reply on the next school day.”</li>
+</ul>
+<p>See <a href="<%= guide_page_path('automations-bots') %>">Automations guide</a>.</p>
+
+<h2>Step 9 — Canned responses</h2>
+<p>Create reply snippets under <strong>Settings → Canned responses</strong>:</p>
+<ul>
+  <li>Office hours and location</li>
+  <li>How to pay fees (bank, mobile money)</li>
+  <li>Admission document checklist</li>
+  <li>“Please send payment proof as a photo in this chat”</li>
+  <li>“Your message has been forwarded to the bursar”</li>
+</ul>
+<p>See <a href="<%= guide_page_path('macros-canned') %>">Macros &amp; canned responses</a>.</p>
+
+<h2>Step 10 — Configure Converra AI</h2>
+<p>Train AI on your school’s official documents so it can answer common parent questions 24/7:</p>
+<ol>
+  <li>Go to <strong>Converra AI → Documents</strong> and upload:
+    <ul>
+      <li>Fee structure PDF</li>
+      <li>Term dates / academic calendar</li>
+      <li>Admission requirements</li>
+      <li>School rules or parent handbook</li>
+    </ul>
+  </li>
+  <li>Review auto-generated FAQs and approve accurate answers.</li>
+  <li>Under <strong>Converra AI → [Assistant] → Inboxes</strong>, attach the assistant to your WhatsApp inbox for first-line replies.</li>
+  <li>Set handoff rules: sensitive topics (discipline, health, fee disputes) should go to a human agent.</li>
+</ol>
+<p>Full guide: <a href="<%= guide_page_path('captain') %>">Converra AI setup</a>.</p>
+
+<h2>Step 11 — Help Center for parents</h2>
+<p>Publish a parent-facing FAQ portal (link from your website and WhatsApp auto-replies):</p>
+<ol>
+  <li><strong>Settings → Help Center</strong> → create a portal (e.g. “Parent information”).</li>
+  <li>Add articles: Term calendar, How to pay fees, Admission steps, Contact list, Uniform &amp; transport.</li>
+  <li>Use the same content as Converra AI documents — one source of truth.</li>
+</ol>
+<p>See <a href="<%= guide_page_path('help-center') %>">Help Center guide</a>.</p>
+
+<h2>Step 12 — Mobile app for staff</h2>
+<p>Staff who are not at a desk can install the Converra Android app:</p>
+<ol>
+  <li>Share <a href="https://install.converra.samabrains.com/" rel="noopener noreferrer">install.converra.samabrains.com</a> with agents.</li>
+  <li>Each agent signs in with their <%= installation_brand_name %> email and password.</li>
+  <li>Enable push notifications so new parent messages alert the bursar or duty officer.</li>
+</ol>
+
+<h2>Step 13 — Announce to parents</h2>
+<p>After testing, announce the new official channel:</p>
+<ul>
+  <li>Notice board and assembly announcement</li>
+  <li>Facebook / Instagram post with the WhatsApp number</li>
+  <li>Line on fee invoices: “Questions? WhatsApp [number] or email info@school…”</li>
+  <li>Ask parents <strong>not</strong> to message teachers’ personal numbers for official matters</li>
+</ul>
+
+<h2>Step 14 — SLA and reporting (optional)</h2>
+<ul>
+  <li><strong>SLA policy:</strong> e.g. first reply within 4 hours on school days — <a href="<%= guide_page_path('sla-workflow') %>">SLA guide</a></li>
+  <li><strong>Reports:</strong> weekly review of open conversations, response times, and CSAT — <a href="<%= guide_page_path('reports') %>">Reports guide</a></li>
+</ul>
+
+<h2>Configuration checklist</h2>
+<ul class="guide-checklist">
+  <li>Workspace created and admin can sign in</li>
+  <li>WhatsApp inbox connected and test message received</li>
+  <li>Agents invited (bursar, registrar, front office)</li>
+  <li>Labels created: fees, admissions, attendance, general</li>
+  <li>At least 3 canned responses added</li>
+  <li>Converra AI documents uploaded</li>
+  <li>Help Center has term dates and fee payment article</li>
+  <li>Staff installed mobile app (if using)</li>
+  <li>Parents informed of official WhatsApp number</li>
+</ul>
+
+<h2>Plans for schools</h2>
+<p>
+  <strong>Starter</strong> (free, 1 agent) suits a pilot with one receptionist.
+  Most schools use <strong>Growth</strong> (5 agents) or <strong>Business</strong> (15 agents).
+  See <a href="<%= pricing_path %>">Pricing</a> — pay with Pesapal in UGX.
+</p>
+
+<h2>Get help</h2>
+<p>
+  SamaBrains Solutions provides setup assistance for schools on pilot programmes.
+  Email <a href="mailto:info@samabrains.com">info@samabrains.com</a> or see
+  <a href="<%= guide_page_path('troubleshooting') %>">Troubleshooting</a>.
+</p>
+
+<div class="cta-box">
+  <p><strong>Next:</strong> <a href="<%= guide_page_path('schools-staff-guide') %>">Staff user guide</a> ·
+  <a href="<%= guide_page_path('channel-whatsapp') %>">WhatsApp setup</a> ·
+  <a href="/app/login">Sign in</a></p>
+</div>

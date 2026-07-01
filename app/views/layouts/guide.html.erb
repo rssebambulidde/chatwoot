@@ -161,6 +161,49 @@
       .guide-card:hover { border-color: #93c5fd; background: #eff6ff; }
       .guide-card strong { display: block; color: #0f172a; margin-bottom: 0.25rem; }
       .guide-card span { font-size: 0.875rem; color: #64748b; }
+      .guide-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.875rem;
+        margin: 1rem 0;
+      }
+      .guide-table th,
+      .guide-table td {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #e2e8f0;
+        text-align: left;
+      }
+      .guide-table thead th {
+        background: #f8fafc;
+        font-weight: 600;
+        color: #0f172a;
+      }
+      .guide-table code {
+        font-size: 0.8125rem;
+        background: #f1f5f9;
+        padding: 0.1rem 0.35rem;
+        border-radius: 0.25rem;
+      }
+      .guide-callout {
+        margin: 1.25rem 0;
+        padding: 1rem 1.25rem;
+        background: #fffbeb;
+        border: 1px solid #fcd34d;
+        border-radius: 0.5rem;
+        font-size: 0.9375rem;
+        color: #334155;
+      }
+      .guide-checklist { list-style: none; padding-left: 0; }
+      .guide-checklist li {
+        padding: 0.35rem 0 0.35rem 1.5rem;
+        position: relative;
+      }
+      .guide-checklist li::before {
+        content: '☐';
+        position: absolute;
+        left: 0;
+        color: #2563eb;
+      }
     </style>
   </head>
   <body>
