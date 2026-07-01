@@ -1,77 +1,265 @@
+<% content_for :landing_page, true %>
 <% content_for :title do %>Pricing | <%= installation_brand_name %><% end %>
 <% content_for :meta_description do %>
   <%= installation_brand_name %> plans in UGX: Starter (free), Growth, and Business. Pay with Pesapal — M-Pesa, mobile money, and cards.
 <% end %>
 
-<h1>Pricing</h1>
-<p class="lead">
-  Choose a workspace plan for <%= installation_brand_name %>. All prices are in
-  <strong>UGX per month</strong>. Pay securely with Pesapal after you sign in as a workspace admin.
-</p>
+<section class="landing-hero pricing-hero">
+  <div class="landing-hero-glow" aria-hidden="true"></div>
+  <p class="landing-eyebrow">Transparent pricing · UGX</p>
+  <h1 class="landing-hero-title">Full product on every plan.<br>Scale by team size.</h1>
+  <p class="landing-hero-lead">
+    Choose a workspace plan for <strong><%= installation_brand_name %></strong>.
+    Starter is free forever. Upgrade when you need more agents or Copilot capacity — pay securely with Pesapal after you sign in as workspace admin.
+  </p>
+  <div class="landing-hero-actions">
+    <a href="/app/auth/signup" class="landing-btn landing-btn-primary">Start free on Starter</a>
+    <a href="<%= guide_path %>" class="landing-btn landing-btn-secondary">Setup guide</a>
+  </div>
+  <p class="landing-hero-note">No credit card for Starter · Monthly or annual billing · Operated by SamaBrains Solutions</p>
+</section>
 
 <% if @payment_notice == 'success' %>
-  <p class="notice notice-success">
-    <strong>Payment received.</strong> Your plan will update shortly. Open
-    <strong>Settings → Billing</strong> in the app to confirm.
-  </p>
+  <div class="pricing-notice pricing-notice-success" role="status">
+    <strong>Payment received.</strong> Your plan will update shortly. Open <strong>Settings → Billing</strong> in the app to confirm.
+  </div>
 <% elsif @payment_notice == 'cancelled' %>
-  <p class="notice notice-error">
-    Payment was cancelled. You can try again when ready.
-  </p>
+  <div class="pricing-notice pricing-notice-error" role="alert">
+    <strong>Payment cancelled.</strong> You can try again anytime from <strong>Settings → Billing</strong>.
+  </div>
 <% end %>
 
-<h2>Included on every plan</h2>
-<p>Starter, Growth, and Business all include the full product. You only pay for <strong>agent seats</strong> and a monthly <strong>Copilot</strong> allowance. Examples of what is included:</p>
-<ul>
-  <li>All channel types (website, email, WhatsApp, social, SMS, API, voice)</li>
-  <li><%= installation_captain_name %>, Help Center, campaigns (live chat, SMS, WhatsApp templates), automations, SLA, custom roles</li>
-  <li>Custom reply domain and support email (after DNS setup)</li>
-  <li>CRM integrations (e.g. LeadSquared), API email continuity, and WhatsApp template campaigns</li>
-</ul>
-<p>See the <a href="<%= guide_path %>">User Guide</a> for setup steps.</p>
-
-<div class="guide-card-grid">
-  <% converra_plans.each do |slug, plan| %>
-    <div class="guide-card pricing-card">
-      <strong><%= plan['name'] %></strong>
-      <span class="pricing-price">
-        <% if plan['price_ugx'].to_i.zero? %>
-          Free
-        <% else %>
-          <%= number_with_delimiter(plan['price_ugx']) %> UGX<span class="pricing-interval">/mo</span>
-        <% end %>
-      </span>
-      <% if plan['annual_price_ugx'].to_i.positive? %>
-        <p class="pricing-annual">
-          or <%= number_with_delimiter(plan['annual_price_ugx']) %> UGX/yr
-          <span class="pricing-save">(save 2 months)</span>
+<% if converra_plans.present? %>
+<section class="landing-section pricing-plans-section" id="plans">
+  <div class="landing-pricing-grid pricing-plans-grid">
+    <% converra_plans.each do |slug, plan| %>
+      <article class="landing-price-card<%= ' landing-price-card-featured' if slug == 'growth' %>">
+        <% if slug == 'growth' %><span class="landing-price-badge">Most popular</span><% end %>
+        <h3><%= plan['name'] %></h3>
+        <p class="landing-price-amount">
+          <% if plan['price_ugx'].to_i.zero? %>
+            Free
+          <% else %>
+            <%= number_with_delimiter(plan['price_ugx']) %> <span>UGX/mo</span>
+          <% end %>
         </p>
-      <% end %>
-      <ul class="pricing-features">
-        <li><%= plan.dig('limits', 'agents') %> agent<%= plan.dig('limits', 'agents').to_i == 1 ? '' : 's' %></li>
-        <li>All channels &amp; features included</li>
-        <li><%= number_with_delimiter(plan.dig('limits', 'captain_responses')) %> Copilot replies / month (resets monthly)</li>
-      </ul>
-      <% if plan['price_ugx'].to_i.zero? %>
-        <a href="/app/auth/signup" class="pricing-link">Get started free</a>
-      <% elsif converra_billing_enabled? %>
-        <a href="/app/login" class="pricing-link">Sign in to subscribe</a>
-      <% else %>
-        <a href="mailto:info@samabrains.com" class="pricing-link">Contact sales</a>
-      <% end %>
+        <% if plan['annual_price_ugx'].to_i.positive? %>
+          <p class="landing-price-annual">
+            or <%= number_with_delimiter(plan['annual_price_ugx']) %> UGX/yr
+            <span class="landing-price-save">Save 2 months</span>
+          </p>
+        <% elsif plan['price_ugx'].to_i.zero? %>
+          <p class="landing-price-annual landing-price-annual-muted">Forever free · 1 workspace</p>
+        <% end %>
+        <ul class="pricing-plan-features">
+          <li><strong><%= plan.dig('limits', 'agents') %></strong> agent<%= plan.dig('limits', 'agents').to_i == 1 ? '' : 's' %></li>
+          <li><strong><%= number_with_delimiter(plan.dig('limits', 'captain_responses')) %></strong> Copilot replies / month</li>
+          <li>All channels &amp; features</li>
+          <li>Help Center &amp; automations</li>
+          <% if slug != 'starter' %>
+            <li>Annual billing available</li>
+          <% end %>
+        </ul>
+        <% if plan['price_ugx'].to_i.zero? %>
+          <a href="/app/auth/signup" class="landing-btn landing-btn-primary landing-btn-block">Get started free</a>
+        <% elsif converra_billing_enabled? %>
+          <a href="/app/login" class="landing-btn<%= slug == 'growth' ? ' landing-btn-primary' : ' landing-btn-secondary' %> landing-btn-block">Sign in to subscribe</a>
+        <% else %>
+          <a href="mailto:info@samabrains.com" class="landing-btn landing-btn-secondary landing-btn-block">Contact sales</a>
+        <% end %>
+      </article>
+    <% end %>
+  </div>
+  <div class="pricing-payment-row">
+    <p class="landing-section-label">Pay with Pesapal</p>
+    <div class="pricing-payment-pills">
+      <span>Mobile money</span>
+      <span>M-Pesa</span>
+      <span>Visa &amp; Mastercard</span>
     </div>
-  <% end %>
-</div>
+  </div>
+</section>
+<% end %>
 
-<h2>How billing works</h2>
-<ol>
-  <li><a href="/app/auth/signup">Create a workspace</a> — you start on the free <strong>Starter</strong> plan.</li>
-  <li>Sign in as admin and open <strong>Settings → Billing</strong>.</li>
-  <li>Choose <strong>Growth</strong> or <strong>Business</strong> and pay with Pesapal (monthly or annual).</li>
-  <li>Your agent seats and Copilot allowance update automatically after payment.</li>
-</ol>
+<section class="landing-section landing-section-alt">
+  <div class="landing-section-head">
+    <h2>Included on every plan</h2>
+    <p>Starter, Growth, and Business ship the same powerful toolkit. You only pay for <strong>agent seats</strong> and monthly <strong>Copilot</strong> usage — not locked features.</p>
+  </div>
+  <div class="landing-card-grid landing-card-grid-3 pricing-includes-grid">
+    <article class="landing-card">
+      <span class="landing-card-icon landing-card-icon-blue" aria-hidden="true">◎</span>
+      <h3>Every channel</h3>
+      <p>Website chat, Gmail &amp; email, WhatsApp, Messenger, Instagram, SMS, API, and voice.</p>
+    </article>
+    <article class="landing-card">
+      <span class="landing-card-icon landing-card-icon-violet" aria-hidden="true">✦</span>
+      <h3><%= installation_captain_name %></h3>
+      <p>AI auto-replies from your docs, Copilot drafts for agents, scenarios, and custom tools.</p>
+    </article>
+    <article class="landing-card">
+      <span class="landing-card-icon landing-card-icon-emerald" aria-hidden="true">↻</span>
+      <h3>Operations toolkit</h3>
+      <p>Campaigns, automations, SLA policies, macros, canned responses, and custom roles.</p>
+    </article>
+    <article class="landing-card">
+      <span class="landing-card-icon landing-card-icon-blue" aria-hidden="true">◇</span>
+      <h3>Help Center</h3>
+      <p>Publish a customer portal and feed the same knowledge to <%= installation_captain_name %>.</p>
+    </article>
+    <article class="landing-card">
+      <span class="landing-card-icon landing-card-icon-violet" aria-hidden="true">◈</span>
+      <h3>CRM &amp; reports</h3>
+      <p>Contacts, companies, CSAT, agent performance, and integrations like LeadSquared.</p>
+    </article>
+    <article class="landing-card">
+      <span class="landing-card-icon landing-card-icon-emerald" aria-hidden="true">✉</span>
+      <h3>Professional email</h3>
+      <p>Custom reply domain and support email after DNS setup, plus API email continuity.</p>
+    </article>
+  </div>
+  <p class="pricing-includes-foot">See the <a href="<%= guide_path %>">User Guide</a> for step-by-step setup.</p>
+</section>
 
-<p>
-  Questions? <a href="mailto:info@samabrains.com">info@samabrains.com</a> ·
-  <a href="<%= guide_path %>">User Guide</a>
-</p>
+<section class="landing-section">
+  <div class="landing-section-head">
+    <h2>How billing works</h2>
+    <p>Go live on Starter in minutes. Upgrade only when your team outgrows the free limits.</p>
+  </div>
+  <ol class="landing-steps">
+    <li>
+      <span class="landing-step-num">1</span>
+      <div>
+        <strong>Create a workspace</strong>
+        <p><a href="/app/auth/signup">Sign up free</a> — you start on the <strong>Starter</strong> plan automatically.</p>
+      </div>
+    </li>
+    <li>
+      <span class="landing-step-num">2</span>
+      <div>
+        <strong>Open Billing</strong>
+        <p>Sign in as admin and go to <strong>Settings → Billing</strong> in your dashboard.</p>
+      </div>
+    </li>
+    <li>
+      <span class="landing-step-num">3</span>
+      <div>
+        <strong>Choose Growth or Business</strong>
+        <p>Pick monthly or annual billing and pay with Pesapal — mobile money, M-Pesa, or card.</p>
+      </div>
+    </li>
+    <li>
+      <span class="landing-step-num">4</span>
+      <div>
+        <strong>Start supporting customers</strong>
+        <p>Agent seats and Copilot allowance update automatically after payment succeeds.</p>
+      </div>
+    </li>
+  </ol>
+</section>
+
+<section class="landing-section pricing-compare-section">
+  <div class="landing-section-head">
+    <h2>Compare plans at a glance</h2>
+  </div>
+  <div class="pricing-compare-wrap">
+    <table class="pricing-compare-table">
+      <thead>
+        <tr>
+          <th scope="col">Feature</th>
+          <% converra_plans.each do |_slug, plan| %>
+            <th scope="col"><%= plan['name'] %></th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Monthly price</th>
+          <% converra_plans.each do |_slug, plan| %>
+            <td>
+              <% if plan['price_ugx'].to_i.zero? %>
+                Free
+              <% else %>
+                <%= number_with_delimiter(plan['price_ugx']) %> UGX
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+        <tr>
+          <th scope="row">Agent seats</th>
+          <% converra_plans.each do |_slug, plan| %>
+            <td><%= plan.dig('limits', 'agents') %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <th scope="row">Copilot replies / month</th>
+          <% converra_plans.each do |_slug, plan| %>
+            <td><%= number_with_delimiter(plan.dig('limits', 'captain_responses')) %></td>
+          <% end %>
+        </tr>
+        <tr>
+          <th scope="row">All channels &amp; features</th>
+          <% converra_plans.each do |_slug, _plan| %>
+            <td><span class="pricing-check" aria-label="Included">✓</span></td>
+          <% end %>
+        </tr>
+        <tr>
+          <th scope="row">Annual billing</th>
+          <% converra_plans.each do |_slug, plan| %>
+            <td>
+              <% if plan['annual_price_ugx'].to_i.positive? %>
+                <%= number_with_delimiter(plan['annual_price_ugx']) %> UGX/yr
+              <% else %>
+                —
+              <% end %>
+            </td>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="landing-section landing-section-alt pricing-faq">
+  <div class="landing-section-head">
+    <h2>Common questions</h2>
+  </div>
+  <div class="pricing-faq-grid">
+    <article class="landing-card landing-card-compact">
+      <h3>Do I need a credit card to start?</h3>
+      <p>No. Starter is free with no credit card. You only pay when you choose Growth or Business from Settings → Billing.</p>
+    </article>
+    <article class="landing-card landing-card-compact">
+      <h3>What counts as an agent?</h3>
+      <p>Each team member with login access to reply to conversations counts toward your agent seat limit. Admins who only manage settings can be configured separately.</p>
+    </article>
+    <article class="landing-card landing-card-compact">
+      <h3>What is Copilot?</h3>
+      <p>Copilot is <%= installation_brand_name %>'s AI assistant — auto-replies and agent draft suggestions powered by <%= installation_captain_name %>. Usage resets monthly per plan.</p>
+    </article>
+    <article class="landing-card landing-card-compact">
+      <h3>Can I switch plans later?</h3>
+      <p>Yes. Upgrade or schedule a downgrade from Settings → Billing. Changes apply after payment or at the end of your billing period.</p>
+    </article>
+  </div>
+</section>
+
+<section class="landing-cta-band">
+  <h2>Ready to unify your support channels?</h2>
+  <p>Start on Starter today — connect WhatsApp, email, and chat in one workspace.</p>
+  <div class="landing-hero-actions">
+    <a href="/app/auth/signup" class="landing-btn landing-btn-primary">Create free workspace</a>
+    <a href="mailto:info@samabrains.com" class="landing-btn landing-btn-ghost">Talk to us</a>
+  </div>
+</section>
+
+<footer class="landing-footer">
+  <nav aria-label="Footer">
+    <a href="<%= guide_path %>">User Guide</a>
+    <a href="<%= pricing_path %>">Pricing</a>
+    <a href="<%= "#{legal_site_url}/privacy" %>">Privacy</a>
+    <a href="<%= "#{legal_site_url}/terms" %>">Terms</a>
+    <a href="mailto:info@samabrains.com">Contact</a>
+  </nav>
+  <p>© <%= Time.current.year %> SamaBrains Solutions · <%= installation_brand_name %></p>
+</footer>
