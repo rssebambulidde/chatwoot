@@ -2,7 +2,7 @@
 builder = "RAILPACK"
 
 [deploy]
-preDeployCommand = ["POSTGRES_STATEMENT_TIMEOUT=600s bundle exec rails db:chatwoot_prepare && bundle exec rails branding:apply && bundle exec rails converra:billing:reconcile_plans"]
+preDeployCommand = ["POSTGRES_STATEMENT_TIMEOUT=600s bundle exec rails db:chatwoot_prepare && bundle exec rails branding:apply && bundle exec rails converra:billing:reconcile_plans && bundle exec rake converra:billing:migrate_starter_trials"]
 # Health check: set only on the chatwoot web service in Railway (Settings → Deploy → /health).
 # Do NOT set on sidekiq / converra-worker — they don't serve HTTP.
 startCommand = "POSTGRES_STATEMENT_TIMEOUT=600s bundle exec rails ip_lookup:setup && if [ \"$RAILWAY_SERVICE_NAME\" = \"sidekiq\" ] || [ \"$RAILWAY_SERVICE_NAME\" = \"converra-worker\" ]; then bundle exec sidekiq -C config/sidekiq.yml; else bin/rails server -p $PORT -e $RAILS_ENV; fi"
