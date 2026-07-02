@@ -30,6 +30,14 @@ module Converra
           plans.reject { |_slug, plan| plan['price_ugx'].to_i.zero? }
         end
 
+        def paid_subscription?(plan)
+          plan.present? && plan['price_ugx'].to_i.positive?
+        end
+
+        def trial_plan?(plan)
+          plan.present? && plan['trial_days'].to_i.positive?
+        end
+
         def reload!
           @plans = nil
           plans

@@ -496,7 +496,10 @@
       "CURRENT_PLAN": "Current plan",
       "CURRENT_BADGE": "Current",
       "RENEWS_ON": "Renews on",
-      "EXPIRED": "Subscription expired — you are on Starter limits until you renew.",
+      "TRIAL_ENDS_ON": "Trial ends on",
+      "EXPIRED": "Your trial or subscription has expired — pay on Billing to continue using this workspace.",
+      "TRIAL_ACTIVE": "You are on a free trial. Subscribe before the trial ends to keep access.",
+      "SUBSCRIBE_STARTER": "Subscribe to Starter",
       "SUBSCRIPTION_LAPSED": "Your paid subscription ended. Remove extra agents or renew on Billing to keep using the inbox.",
       "COPILOT_RESETS_ON": "Copilot usage resets on {date}",
       "UPGRADE_GROWTH": "Upgrade to Growth",
@@ -520,7 +523,8 @@
         "ACTION": "View billing",
         "AGENTS": "You have {consumed} of {allowed} agents on your plan.",
         "COPILOT": "You have used {consumed} of {allowed} Copilot replies this month.",
-        "SUBSCRIPTION_LAPSED": "Your subscription ended and this workspace has more agents than Starter allows. Remove agents or renew on Billing."
+        "SUBSCRIPTION_LAPSED": "Your subscription ended and this workspace has more agents than Starter allows. Remove agents or renew on Billing.",
+        "SUBSCRIPTION_EXPIRED": "Your Starter trial or subscription has ended. Go to Billing to pay and restore access."
       },
       "COMPARE": {
         "TITLE": "Compare plans",

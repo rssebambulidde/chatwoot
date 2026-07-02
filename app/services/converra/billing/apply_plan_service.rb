@@ -40,9 +40,17 @@ module Converra
       private
 
       def default_subscription_ends_on(plan)
-        return nil if plan['price_ugx'].to_i.zero?
+        return nil unless PlanCatalog.paid_subscription?(plan)
+
+        trial_days = plan['trial_days'].to_i
+        return trial_days.days.from_now if trial_days.positive? && initial_trial_eligible?
 
         1.month.from_now
+      end
+
+      def initial_trial_eligible?
+        account.custom_attributes['subscription_ends_on'].blank? &&
+          !account.converra_plan_payments.completed.exists?
       end
     end
   end

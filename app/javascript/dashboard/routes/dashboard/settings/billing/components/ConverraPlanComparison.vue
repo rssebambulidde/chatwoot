@@ -19,9 +19,12 @@ const orderedPlans = computed(() => {
   );
 });
 
-const formatPrice = (amount, suffix = '/mo') => {
-  if (!amount) return 'Free';
-  return `${Number(amount).toLocaleString()} UGX${suffix}`;
+const formatPrice = (plan, suffix = '/mo') => {
+  if (plan.trial_days && plan.slug === 'starter') {
+    return `${Number(plan.price_ugx).toLocaleString()} UGX${suffix} (${plan.trial_days}-day trial)`;
+  }
+  if (!plan.price_ugx) return 'Free';
+  return `${Number(plan.price_ugx).toLocaleString()} UGX${suffix}`;
 };
 </script>
 
@@ -58,7 +61,7 @@ const formatPrice = (amount, suffix = '/mo') => {
             :key="`${plan.slug}-price`"
             class="py-3 px-3"
           >
-            {{ formatPrice(plan.price_ugx) }}
+            {{ formatPrice(plan) }}
           </td>
         </tr>
         <tr class="border-t border-n-weak">

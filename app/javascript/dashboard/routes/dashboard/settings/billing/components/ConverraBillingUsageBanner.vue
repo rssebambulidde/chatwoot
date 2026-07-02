@@ -23,6 +23,10 @@ const warningMessage = computed(() => {
   const { agents, captain } = accountLimits.value;
   const responses = captain?.responses;
 
+  if (warnings.includes('subscription_expired')) {
+    return t('BILLING_SETTINGS.CONVERRA.BANNER.SUBSCRIPTION_EXPIRED');
+  }
+
   if (warnings.includes('subscription_lapsed_agents')) {
     return t('BILLING_SETTINGS.CONVERRA.BANNER.SUBSCRIPTION_LAPSED');
   }
@@ -62,6 +66,11 @@ const warningMessage = computed(() => {
 
 const showBanner = computed(() => {
   if (!isConverraBillingEnabled.value || isOnChatwootCloud.value) return false;
+  if (
+    (accountLimits.value.usage_warnings || []).includes('subscription_expired')
+  ) {
+    return true;
+  }
   if (
     accountLimits.value.subscription_lapsed &&
     accountLimits.value.over_limit

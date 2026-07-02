@@ -1,7 +1,7 @@
 <% content_for :landing_page, true %>
 <% content_for :title do %>Pricing | <%= installation_brand_name %><% end %>
 <% content_for :meta_description do %>
-  <%= installation_brand_name %> plans in UGX: Starter (free), Growth, and Business. Pay with Pesapal — M-Pesa, mobile money, and cards.
+  <%= installation_brand_name %> plans in UGX: Starter (14-day trial), Growth, and Business. Pay with Pesapal — M-Pesa, mobile money, and cards.
 <% end %>
 
 <section class="landing-hero pricing-hero">
@@ -10,13 +10,13 @@
   <h1 class="landing-hero-title">Full product on every plan.<br>Scale by team size.</h1>
   <p class="landing-hero-lead">
     Choose a workspace plan for <strong><%= installation_brand_name %></strong>.
-    Starter is free forever. Upgrade when you need more agents or Copilot capacity — pay securely with Pesapal after you sign in as workspace admin.
+    Starter includes a <strong>14-day free trial</strong>, then 30,000 UGX/month. Upgrade to Growth or Business when you need more agents or Copilot capacity — pay securely with Pesapal after you sign in as workspace admin.
   </p>
   <div class="landing-hero-actions">
-    <a href="/app/auth/signup" class="landing-btn landing-btn-primary">Start free on Starter</a>
+    <a href="/app/auth/signup" class="landing-btn landing-btn-primary">Start 14-day trial</a>
     <a href="<%= guide_path %>" class="landing-btn landing-btn-secondary">Setup guide</a>
   </div>
-  <p class="landing-hero-note">No credit card for Starter · Monthly or annual billing · Operated by SamaBrains Solutions</p>
+  <p class="landing-hero-note">14-day Starter trial · Then 30,000 UGX/mo · Monthly or annual billing · Operated by SamaBrains Solutions</p>
 </section>
 
 <% if @payment_notice == 'success' %>
@@ -37,13 +37,17 @@
         <% if slug == 'growth' %><span class="landing-price-badge">Most popular</span><% end %>
         <h3><%= plan['name'] %></h3>
         <p class="landing-price-amount">
-          <% if plan['price_ugx'].to_i.zero? %>
+          <% if plan['trial_days'].to_i.positive? %>
+            <%= number_with_delimiter(plan['price_ugx']) %> <span>UGX/mo</span>
+          <% elsif plan['price_ugx'].to_i.zero? %>
             Free
           <% else %>
             <%= number_with_delimiter(plan['price_ugx']) %> <span>UGX/mo</span>
           <% end %>
         </p>
-        <% if plan['annual_price_ugx'].to_i.positive? %>
+        <% if plan['trial_days'].to_i.positive? %>
+          <p class="landing-price-annual landing-price-annual-muted"><%= plan['trial_days'] %>-day free trial · then billed monthly</p>
+        <% elsif plan['annual_price_ugx'].to_i.positive? %>
           <p class="landing-price-annual">
             or <%= number_with_delimiter(plan['annual_price_ugx']) %> UGX/yr
             <span class="landing-price-save">Save 2 months</span>
@@ -60,7 +64,9 @@
             <li>Annual billing available</li>
           <% end %>
         </ul>
-        <% if plan['price_ugx'].to_i.zero? %>
+        <% if plan['trial_days'].to_i.positive? %>
+          <a href="/app/auth/signup" class="landing-btn landing-btn-primary landing-btn-block">Start <%= plan['trial_days'] %>-day trial</a>
+        <% elsif plan['price_ugx'].to_i.zero? %>
           <a href="/app/auth/signup" class="landing-btn landing-btn-primary landing-btn-block">Get started free</a>
         <% elsif converra_billing_enabled? %>
           <a href="/app/login" class="landing-btn<%= slug == 'growth' ? ' landing-btn-primary' : ' landing-btn-secondary' %> landing-btn-block">Sign in to subscribe</a>
@@ -124,14 +130,14 @@
 <section class="landing-section">
   <div class="landing-section-head">
     <h2>How billing works</h2>
-    <p>Go live on Starter in minutes. Upgrade only when your team outgrows the free limits.</p>
+    <p>Go live on Starter in minutes with a 14-day trial. Upgrade when your team outgrows the Starter limits.</p>
   </div>
   <ol class="landing-steps">
     <li>
       <span class="landing-step-num">1</span>
       <div>
         <strong>Create a workspace</strong>
-        <p><a href="/app/auth/signup">Sign up free</a> — you start on the <strong>Starter</strong> plan automatically.</p>
+        <p><a href="/app/auth/signup">Sign up</a> — you start on the <strong>Starter</strong> plan with a 14-day trial automatically.</p>
       </div>
     </li>
     <li>
@@ -177,7 +183,10 @@
           <th scope="row">Monthly price</th>
           <% converra_plans.each do |_slug, plan| %>
             <td>
-              <% if plan['price_ugx'].to_i.zero? %>
+              <% if plan['trial_days'].to_i.positive? %>
+                <%= number_with_delimiter(plan['price_ugx']) %> UGX<br>
+                <span class="pricing-compare-note"><%= plan['trial_days'] %>-day trial</span>
+              <% elsif plan['price_ugx'].to_i.zero? %>
                 Free
               <% else %>
                 <%= number_with_delimiter(plan['price_ugx']) %> UGX
@@ -227,7 +236,7 @@
   <div class="pricing-faq-grid">
     <article class="landing-card landing-card-compact">
       <h3>Do I need a credit card to start?</h3>
-      <p>No. Starter is free with no credit card. You only pay when you choose Growth or Business from Settings → Billing.</p>
+      <p>No credit card is required to start. Starter includes a 14-day trial; after that, pay 30,000 UGX/month via Pesapal or upgrade to Growth or Business from Settings → Billing.</p>
     </article>
     <article class="landing-card landing-card-compact">
       <h3>What counts as an agent?</h3>
@@ -246,9 +255,9 @@
 
 <section class="landing-cta-band">
   <h2>Ready to unify your support channels?</h2>
-  <p>Start on Starter today — connect WhatsApp, email, and chat in one workspace.</p>
+  <p>Start your 14-day Starter trial — connect WhatsApp, email, and chat in one workspace.</p>
   <div class="landing-hero-actions">
-    <a href="/app/auth/signup" class="landing-btn landing-btn-primary">Create free workspace</a>
+    <a href="/app/auth/signup" class="landing-btn landing-btn-primary">Start 14-day trial</a>
     <a href="mailto:info@samabrains.com" class="landing-btn landing-btn-ghost">Talk to us</a>
   </div>
 </section>

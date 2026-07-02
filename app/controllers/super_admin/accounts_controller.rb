@@ -100,6 +100,26 @@ class SuperAdmin::AccountsController < SuperAdmin::ApplicationController
     redirect_back(fallback_location: [namespace, requested_resource], alert: e.message)
   end
 
+  def extend_trial
+    unless Converra::Billing::PlanCatalog.enabled?
+      redirect_back(fallback_location: [namespace, requested_resource], alert: 'Converra billing is not enabled')
+      return
+    end
+
+    Converra::Billing::ExtendTrialService.new(
+      account: requested_resource,
+      days: params[:trial_days],
+      subscription_ends_on: params[:subscription_ends_on]
+    ).perform
+
+    redirect_back(
+      fallback_location: [namespace, requested_resource],
+      notice: 'Trial extended successfully'
+    )
+  rescue Converra::Billing::ExtendTrialService::Error => e
+    redirect_back(fallback_location: [namespace, requested_resource], alert: e.message)
+  end
+
   def destroy
     account = Account.find(params[:id])
 
@@ -112,7 +132,7 @@ class SuperAdmin::AccountsController < SuperAdmin::ApplicationController
   private
 
   def subscription_ends_on_for(plan)
-    return nil if plan['price_ugx'].to_i.zero?
+    return nil unless Converra::Billing::PlanCatalog.paid_subscription?(plan)
 
     custom = params[:subscription_ends_on].presence
     if custom.present?

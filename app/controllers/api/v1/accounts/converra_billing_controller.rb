@@ -69,6 +69,7 @@ class Api::V1::Accounts::ConverraBillingController < Api::V1::Accounts::BaseCont
         name: plan['name'],
         price_ugx: plan['price_ugx'],
         annual_price_ugx: plan['annual_price_ugx'],
+        trial_days: plan['trial_days'],
         limits: plan['limits']
       }
     end

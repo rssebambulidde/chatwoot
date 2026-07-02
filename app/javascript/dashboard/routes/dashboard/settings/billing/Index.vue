@@ -99,7 +99,13 @@ const showConverraBilling = computed(
   () => isConverraBillingEnabled.value && !isOnChatwootCloud.value
 );
 
-const isPaidPlan = computed(() => currentPlanSlug.value !== 'starter');
+const isPaidPlan = computed(() => (converraPlan.value.price_ugx || 0) > 0);
+
+const isOnTrial = computed(() => converraPlan.value.on_trial === true);
+
+const canScheduleDowngrade = computed(() =>
+  ['growth', 'business'].includes(currentPlanSlug.value)
+);
 
 const isSubscriptionExpired = computed(
   () => converraPlan.value.subscription_active === false
@@ -295,6 +301,13 @@ onMounted(handleBillingPageLogic);
         <Banner v-if="showSandboxBanner" color="amber" class="mx-1">
           {{ $t('BILLING_SETTINGS.CONVERRA.SANDBOX_BANNER') }}
         </Banner>
+        <Banner
+          v-if="isOnTrial && !isSubscriptionExpired"
+          color="slate"
+          class="mx-1"
+        >
+          {{ $t('BILLING_SETTINGS.CONVERRA.TRIAL_ACTIVE') }}
+        </Banner>
         <Banner v-if="showSubscriptionLapsedBanner" color="ruby" class="mx-1">
           {{ $t('BILLING_SETTINGS.CONVERRA.SUBSCRIPTION_LAPSED') }}
         </Banner>
@@ -318,7 +331,11 @@ onMounted(handleBillingPageLogic);
             />
             <DetailItem
               v-if="subscriptionRenewsOn"
-              :label="$t('BILLING_SETTINGS.CONVERRA.RENEWS_ON')"
+              :label="
+                isOnTrial
+                  ? $t('BILLING_SETTINGS.CONVERRA.TRIAL_ENDS_ON')
+                  : $t('BILLING_SETTINGS.CONVERRA.RENEWS_ON')
+              "
               :value="subscriptionRenewsOn"
             />
           </div>
@@ -380,11 +397,15 @@ onMounted(handleBillingPageLogic);
               :is-loading="isCheckoutLoading"
               @click="onConverraCheckout(currentPlanSlug)"
             >
-              {{ $t('BILLING_SETTINGS.CONVERRA.RENEW_PLAN') }}
+              {{
+                currentPlanSlug === 'starter' && isSubscriptionExpired
+                  ? $t('BILLING_SETTINGS.CONVERRA.SUBSCRIBE_STARTER')
+                  : $t('BILLING_SETTINGS.CONVERRA.RENEW_PLAN')
+              }}
               — {{ formatPlanPrice(currentPlanSlug) }}
             </ButtonV4>
             <ButtonV4
-              v-if="isPaidPlan && !showCancelNotice"
+              v-if="canScheduleDowngrade && !showCancelNotice"
               sm
               flushed
               slate

@@ -11,13 +11,13 @@ module Converra
 
       def current_plan_slug
         slug = account.custom_attributes['plan_name'].presence || 'starter'
-        return downgrade_to_starter! if paid_plan_expired?(slug)
+        return downgrade_to_starter! if paid_plan_expired?(slug) && slug != 'starter'
 
         slug
       end
 
       def subscription_active?
-        return true if plan['price_ugx'].to_i.zero?
+        return true unless PlanCatalog.paid_subscription?(plan)
 
         subscription_ends_on.present? && subscription_ends_on > Time.current
       end
@@ -31,7 +31,7 @@ module Converra
 
       def paid_plan_expired?(slug)
         plan = PlanCatalog.find(slug)
-        return false if plan.blank? || plan['price_ugx'].to_i.zero?
+        return false unless PlanCatalog.paid_subscription?(plan)
 
         subscription_ends_on.present? && subscription_ends_on <= Time.current
       end
@@ -72,8 +72,10 @@ module Converra
             'slug' => current_plan_slug,
             'name' => plan['name'],
             'price_ugx' => plan['price_ugx'],
+            'trial_days' => plan['trial_days'],
             'subscription_active' => subscription_active?,
             'subscription_ends_on' => account.custom_attributes['subscription_ends_on'],
+            'on_trial' => on_trial?,
             'cancel_at_period_end' => cancel_at_period_end?
           },
           'agents' => meter_payload(agents_allowed.to_i, account.users.count),
@@ -91,6 +93,7 @@ module Converra
 
       def usage_warnings
         warnings = []
+        warnings << 'subscription_expired' if subscription_payment_required?
         warnings << 'subscription_lapsed_agents' if subscription_lapsed? && over_limit_agents?
         warnings << 'agents' if usage_warning?(account.users.count, agents_allowed.to_i)
         warnings << 'captain_responses' if captain_response_warning?
@@ -103,6 +106,18 @@ module Converra
 
       def subscription_lapsed?
         account.custom_attributes['subscription_lapsed_at'].present?
+      end
+
+      def subscription_payment_required?
+        PlanCatalog.paid_subscription?(plan) && !subscription_active?
+      end
+
+      def on_trial?
+        return false unless PlanCatalog.trial_plan?(plan)
+        return false unless subscription_active?
+        return false if account.converra_plan_payments.completed.where(plan_slug: current_plan_slug).exists?
+
+        true
       end
 
       def captain_responses_resets_on

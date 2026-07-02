@@ -2,7 +2,8 @@
 # Seat-based pricing: all plans include full product access; limits are agents + Copilot fair-use.
 starter:
   name: Starter
-  price_ugx: 0
+  price_ugx: 30000
+  trial_days: 14
   limits:
     agents: 1
     captain_responses: 50

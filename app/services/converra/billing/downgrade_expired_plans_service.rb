@@ -10,7 +10,7 @@ module Converra
           next if subscription_active?(account)
 
           plan = PlanCatalog.find(account.custom_attributes['plan_name'])
-          next if plan.blank? || plan['price_ugx'].to_i.zero?
+          next unless PlanCatalog.paid_subscription?(plan)
 
           downgrade_account!(account, plan)
         end
