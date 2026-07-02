@@ -3,6 +3,7 @@
 <% content_for :meta_description do %>
   <%= installation_brand_name %> plans in UGX: Starter (14-day trial), Growth, and Business. Pay with Pesapal — M-Pesa, mobile money, and cards.
 <% end %>
+<% onboarding_fee_ugx = 350_000 %>
 
 <section class="landing-hero pricing-hero">
   <div class="landing-hero-glow" aria-hidden="true"></div>
@@ -16,7 +17,7 @@
     <a href="/app/auth/signup" class="landing-btn landing-btn-primary">Start 14-day trial</a>
     <a href="<%= guide_path %>" class="landing-btn landing-btn-secondary">Setup guide</a>
   </div>
-  <p class="landing-hero-note">14-day Starter trial · Then 30,000 UGX/mo · Monthly or annual billing · Operated by SamaBrains Solutions</p>
+  <p class="landing-hero-note">14-day Starter trial · Then 30,000 UGX/mo · One-time onboarding: <%= number_with_delimiter(onboarding_fee_ugx) %> UGX · Operated by SamaBrains Solutions</p>
 </section>
 
 <% if @payment_notice == 'success' %>
@@ -28,6 +29,33 @@
     <strong>Payment cancelled.</strong> You can try again anytime from <strong>Settings → Billing</strong>.
   </div>
 <% end %>
+
+<section class="landing-section landing-section-alt">
+  <div class="landing-section-head">
+    <h2>One-time setup & training fee</h2>
+    <p>All new clients are charged a one-time onboarding fee of <strong><%= number_with_delimiter(onboarding_fee_ugx) %> UGX</strong> in addition to software subscription.</p>
+  </div>
+  <div class="landing-card-grid landing-card-grid-2">
+    <article class="landing-card landing-card-compact">
+      <h3>Included</h3>
+      <ul class="pricing-plan-features">
+        <li>Workspace and inbox configuration</li>
+        <li>WhatsApp channel setup (1 number)</li>
+        <li>Labels, basic automations, and canned responses</li>
+        <li>Admin + staff training sessions</li>
+        <li>Go-live support window</li>
+      </ul>
+    </article>
+    <article class="landing-card landing-card-compact">
+      <h3>How it is charged</h3>
+      <ul class="pricing-plan-features">
+        <li>One-time fee per new workspace</li>
+        <li>Separate from monthly/annual plan fee</li>
+        <li>Collected during onboarding</li>
+      </ul>
+    </article>
+  </div>
+</section>
 
 <% if converra_plans.present? %>
 <section class="landing-section pricing-plans-section" id="plans">
@@ -60,6 +88,7 @@
           <li><strong><%= number_with_delimiter(plan.dig('limits', 'captain_responses')) %></strong> Copilot replies / month</li>
           <li>All channels &amp; features</li>
           <li>Help Center &amp; automations</li>
+          <li>+ <%= number_with_delimiter(onboarding_fee_ugx) %> UGX one-time setup &amp; training</li>
           <% if slug != 'starter' %>
             <li>Annual billing available</li>
           <% end %>
@@ -237,6 +266,10 @@
     <article class="landing-card landing-card-compact">
       <h3>Do I need a credit card to start?</h3>
       <p>No credit card is required to start. Starter includes a 14-day trial; after that, pay 30,000 UGX/month via Pesapal or upgrade to Growth or Business from Settings → Billing.</p>
+    </article>
+    <article class="landing-card landing-card-compact">
+      <h3>Is setup included in monthly plan price?</h3>
+      <p>No. Setup and training are billed as a one-time onboarding fee of <%= number_with_delimiter(onboarding_fee_ugx) %> UGX for all new clients.</p>
     </article>
     <article class="landing-card landing-card-compact">
       <h3>What counts as an agent?</h3>
