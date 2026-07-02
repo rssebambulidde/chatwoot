@@ -28,6 +28,52 @@
 <h2>360dialog / Cloud API (manual)</h2>
 <p>Some installations support alternate providers (360dialog, manual Cloud API tokens). Follow the provider-specific fields in the inbox setup wizard if embedded signup is unavailable.</p>
 
+<h2>New client setup (no Meta Developer account yet)</h2>
+<p>
+  Use this flow when a client is starting from zero and has never created a Meta Developer account.
+  It helps them prepare the correct values for manual WhatsApp channel setup in <%= installation_brand_name %>.
+</p>
+<p>
+  Useful Meta links:
+  <a href="https://developers.facebook.com/" rel="noopener noreferrer">Meta for Developers</a> ·
+  <a href="https://developers.facebook.com/apps/" rel="noopener noreferrer">My Apps</a> ·
+  <a href="https://business.facebook.com/" rel="noopener noreferrer">Meta Business Manager</a> ·
+  <a href="https://business.facebook.com/latest/settings/system_users" rel="noopener noreferrer">System Users</a> ·
+  <a href="https://business.facebook.com/wa/manage/home/" rel="noopener noreferrer">WhatsApp Manager</a>
+</p>
+<ol>
+  <li>Open <a href="https://developers.facebook.com/" rel="noopener noreferrer">Meta for Developers</a> and click <strong>Get started</strong> to create a developer account.</li>
+  <li>Create (or open) a <strong>Meta Business Manager</strong> account at <a href="https://business.facebook.com/" rel="noopener noreferrer">business.facebook.com</a>.</li>
+  <li>In Meta Developer, open <a href="https://developers.facebook.com/apps/" rel="noopener noreferrer">My Apps</a> → <strong>Create App</strong>, choose <strong>Business</strong>, and link the app to their business account.</li>
+  <li>Add the <strong>WhatsApp</strong> product, then open <strong>WhatsApp → API Setup</strong> (or <a href="https://business.facebook.com/wa/manage/home/" rel="noopener noreferrer">WhatsApp Manager</a>).</li>
+  <li>Add and verify their real business WhatsApp number (SMS/voice code), not just the test number.</li>
+  <li>Copy the required values from Meta:
+    <ul>
+      <li><strong>Phone number</strong> (international format, e.g. <code>+2567...</code>)</li>
+      <li><strong>Phone number ID</strong></li>
+      <li><strong>WhatsApp Business Account ID</strong> (WABA ID)</li>
+    </ul>
+  </li>
+  <li>Create a long-lived <strong>System User</strong> access token in <a href="https://business.facebook.com/latest/settings/system_users" rel="noopener noreferrer">Business Settings → System Users</a> and include WhatsApp permissions; this is the <strong>API key</strong> in <%= installation_brand_name %>.</li>
+</ol>
+
+<h3>Values client should send you</h3>
+<ul>
+  <li><strong>Inbox name</strong> (example: <code>Client Name - WhatsApp</code>)</li>
+  <li><strong>Phone number</strong></li>
+  <li><strong>Phone number ID</strong></li>
+  <li><strong>Business Account ID (WABA)</strong></li>
+  <li><strong>API key</strong> (access token)</li>
+</ul>
+
+<h3>Manual setup in <%= installation_brand_name %></h3>
+<ol>
+  <li>Go to <strong>Settings → Inboxes → Add inbox → WhatsApp</strong>.</li>
+  <li>Fill all five values exactly as provided by client.</li>
+  <li>Click <strong>Create WhatsApp Channel</strong>.</li>
+  <li>Send a test inbound message to confirm the inbox receives and replies correctly.</li>
+</ol>
+
 <h2>Message templates</h2>
 <p>Outside the 24-hour customer service window, outbound messages often require <strong>approved templates</strong> in Meta WhatsApp Manager. Create templates for:</p>
 <ul>
@@ -35,7 +81,13 @@
   <li>Appointment reminders</li>
   <li>Follow-ups after resolved tickets</li>
 </ul>
-<p>Use <a href="<%= guide_page_path('campaigns') %>">WhatsApp campaigns</a> for template-based outbound sends.</p>
+<ol>
+  <li>Open <a href="https://business.facebook.com/wa/manage/home/" rel="noopener noreferrer">WhatsApp Manager</a> → <strong>Message templates</strong> → <strong>Create template</strong>.</li>
+  <li>Choose category (<strong>Utility</strong> or <strong>Marketing</strong> for most campaigns).</li>
+  <li>Add template content and placeholders (example: <code>{{1}}</code> customer name).</li>
+  <li>Submit and wait for status <strong>Approved</strong> before using in campaigns.</li>
+</ol>
+<p>After approval, use <a href="<%= guide_page_path('campaigns') %>">WhatsApp campaigns</a> to map variables, choose audience, and schedule sends.</p>
 
 <h2>Session window</h2>
 <p>When a customer messages you, a 24-hour session opens where free-form replies are allowed. After it closes, use templates for proactive outreach.</p>

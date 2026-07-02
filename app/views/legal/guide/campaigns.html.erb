@@ -37,11 +37,38 @@
 <h2>WhatsApp campaigns</h2>
 <ol>
   <li>Connect <a href="<%= guide_page_path('channel-whatsapp') %>">WhatsApp inbox</a></li>
-  <li>Ensure message <strong>template is approved</strong> in Meta WhatsApp Manager</li>
+  <li>Create and approve a WhatsApp <strong>message template</strong> in Meta first (see next section)</li>
   <li><strong>Campaigns → WhatsApp → Create</strong></li>
   <li>Map template variables and audience</li>
   <li>Schedule within Meta send limits and quality rating</li>
 </ol>
+
+<h3>Create WhatsApp templates for campaigns</h3>
+<p>
+  WhatsApp campaigns outside the 24-hour session window must use approved templates from Meta.
+  Create templates before building the campaign in <%= installation_brand_name %>.
+</p>
+<ol>
+  <li>Open <a href="https://business.facebook.com/wa/manage/home/" rel="noopener noreferrer">WhatsApp Manager</a> and select the correct WhatsApp Business Account.</li>
+  <li>Go to <strong>Message templates</strong> and click <strong>Create template</strong>.</li>
+  <li>Choose category (<strong>Utility</strong>, <strong>Marketing</strong>, or <strong>Authentication</strong>).</li>
+  <li>Add template name and language, then write header/body/footer text.</li>
+  <li>Add variables where needed (example: <code>{{1}}</code> for customer name, <code>{{2}}</code> for appointment date).</li>
+  <li>Submit for Meta approval and wait for status <strong>Approved</strong>.</li>
+</ol>
+
+<h3>Use approved templates in campaigns</h3>
+<ol>
+  <li>In <strong><%= installation_brand_name %> → Campaigns → WhatsApp → Create</strong>, choose the connected inbox.</li>
+  <li>Select the approved template name and language.</li>
+  <li>Map each template variable to campaign data (or static text).</li>
+  <li>Choose audience segment (labels, contacts, or campaign list).</li>
+  <li>Send test to your own number first, then schedule full send.</li>
+</ol>
+<p>
+  If template send fails, check status in WhatsApp Manager and review common issues in
+  <a href="<%= guide_page_path('whatsapp-errors') %>">WhatsApp errors</a>.
+</p>
 
 <h2>Compliance</h2>
 <ul>
