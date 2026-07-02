@@ -10,6 +10,18 @@
     · Failed payments (30d): <strong><%= @stats[:failed_payments_count] %></strong>
   </p>
 
+  <div class="mb-8 p-4 border border-slate-200 rounded-lg bg-slate-50">
+    <h2 class="text-lg font-medium mb-2">Starter trial migration</h2>
+    <p class="text-slate-600 text-sm mb-3">
+      Apply a 14-day trial end date to existing Starter workspaces that have no subscription end date and no completed payments.
+    </p>
+    <%= button_to 'Run migrate_starter_trials',
+                  migrate_starter_trials_super_admin_converra_billing_path,
+                  method: :post,
+                  class: 'button',
+                  data: { turbo: false, confirm: 'Apply 14-day trials to eligible Starter accounts now?' } %>
+  </div>
+
   <h2 class="text-lg font-medium mb-3">Accounts by plan</h2>
   <table class="w-full mb-8 text-sm border border-slate-200">
     <thead class="bg-slate-50">

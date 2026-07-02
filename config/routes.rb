@@ -715,7 +715,9 @@ Rails.application.routes.draw do
       resources :platform_apps, only: [:index, :new, :create, :show, :edit, :update, :destroy]
       resources :platform_banners
       resource :instance_status, only: [:show]
-      resource :converra_billing, only: [:show], controller: 'converra_billing'
+      resource :converra_billing, only: [:show], controller: 'converra_billing' do
+        post :migrate_starter_trials
+      end
 
       resource :settings, only: [:show] do
         get :refresh, on: :collection
